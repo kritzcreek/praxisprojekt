@@ -1,0 +1,113 @@
+#+name: setup
+#+BEGIN_SRC emacs-lisp :results silent :exports none
+    (unless (find "kc-report" org-latex-classes :key 'car
+                  :test 'equal))
+
+  (add-to-list 'org-latex-classes
+               '("kc-report"
+                 "\\documentclass[11pt,a4paper]{scrreprt}
+  \\usepackage[T1]{fontenc}
+  \\usepackage{fontspec}
+  \\usepackage{graphicx}
+  \\defaultfontfeatures{Mapping=tex-text}
+  \\setromanfont{Charis SIL}
+  %\\setromanfont [BoldFont={Gentium Basic Bold},
+  %               ItalicFont={Gentium Basic Italic}]{Gentium Basic}
+  \\setsansfont{Gentium Plus}
+  \\setmonofont[Scale=0.8]{DejaVu Sans Mono}
+  \\usepackage{geometry}
+        [NO-DEFAULT-PACKAGES]
+        [NO-PACKAGES]"
+                 ("\\chapter{%s}" . "\\chapter*{%s}")
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+
+    (defun org-export-latex-no-toc (depth)
+      (when depth
+        (format "%% Org-mode is exporting headings to %s levels."
+                depth)))
+    (setq org-export-latex-format-toc-function 'org-export-latex-no-toc)
+
+    (setq org-latex-pdf-process 
+    '("xelatex -interaction nonstopmode %f"
+    "xelatex -interaction nonstopmode %f")) ;; for multiple passes
+
+#+END_SRC
+
+# #+AUTHOR: Christoph Hegemann
+# #+TITLE: Verwendung eines Messaging Systems zur Entkopplung von Microservices
+#+LATEX_CLASS: kc-report
+#+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=final, titlepage=true, headsepline=true]
+# #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=true, titlepage=false, headsepline=true]
+#+LATEX_HEADER: \usepackage[normalem]{ulem}
+#+LATEX_HEADER: \usepackage{german}
+#+LATEX_HEADER: \usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \pagestyle{headings}
+
+#+BEGIN_abstract
+  Das wichtigste Prinzip in der Entwicklung einer Microservice Architektur ist,
+  dass zwischen den einzelnen Services so wenige Abhängigkeiten wie nur möglich
+  bestehen.
+  Eine weiteres grundlegendes Prinzip ist "Don't share the database". Jeder
+  Service muss also die Daten, die er benötigt um zu funktionieren, selbst
+  speichern.
+  Natürlich arbeiten die verschiedenen Services jedoch häufig auf den selben
+  Entitäten, sodass hier eine Synchronisation stattfinden muss.
+  Wie können nun also mehrere Services mit den selben Entitäten arbeiten?
+#+END_abstract
+
+* Microservice Architektur
+** Domain Driven Design - Eric Evans
+** Conways Law - Melvin Conway
+   organizations which design systems ... are constrained to produce designs
+   which are copies of the communication structures of these organizations
+** Microservice Definition
+   Ein echt /fetter/ Microservice
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+* Event Sourcing
+** Eventsourcing - Greg Young, Eric Evans
+** CQRS - Command Query Responsibility Segregation
+** Projektionen als Queries
+* Apache Kafka
+  A high-throughput distributed messaging system
+
+  - Partitionierter Commit Log
+  - Verteilt. Also mehrere Instanzen
+  [[Event Sourcing][Event Sourcing]]
+  - CAP Theorem
+    - Consistency
+    - Availability
+    - +Partition Tolerance+
+    
+* Log
+** Docker aufgesetzt
+   Mit brew cask
+** Docker Compose installiert
+** Docker image 
+   wurstmeister/kafka mittels ~docker pull wurstmeister/kafka~
+** Docker 
+   - In ~docker-compose.yaml~ ~KAFKA_ADVERTISED_HOST_NAME~ auf Rückgabe von
+     ~docker-machine ip~ setzen.
