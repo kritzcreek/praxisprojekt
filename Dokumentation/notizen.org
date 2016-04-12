@@ -1,0 +1,50 @@
+* Zeitplanung
+
+|                                       | ~Dauer  | Beginn                    | Delta | Ende            |
+|---------------------------------------+---------+---------------------------+-------+-----------------|
+| Aufsetzen Kafka Cluster               | 5 Tage  | <2016-04-11 Mo>           |       | <2016-04-15 Fr> |
+| Haskell Microservice Producer         | 5 Tage  | <2016-04-18 Mo>           |       | <2016-04-22 Fr> |
+| Haskell Microservice Consumer         | 3 Tage  | <2016-04-25 Mo>           |       | <2016-04-27 Mi> |
+| Spring Microservice Producer/Consumer | 5 Tage  | <2016-04-28 Do>           |       | <2016-05-04 Mi> |
+| Dokumentation schreiben               | 10 Tage | wann immer etwas auffällt |       | <2016-05-18 Mi> |
+| Korrektur /Abgabe                     |         |                           |       |                 |
+
+* Aufsetzen Kafka Cluster
+** Offene TODOS:
+*** TODO Kafka Cluster in Docker konfigurieren, sodass simples Skript funktioniert
+    - In ~docker-compose.yaml~ ~KAFKA_ADVERTISED_HOST_NAME~ auf Rückgabe von
+      ~docker-machine ip~ setzen.
+*** TODO Topic Schema definieren, dass verwendet werden soll
+*** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen
+** <2016-04-11 Mo>
+*** DONE Docker aufsetzen
+    CLOSED: [2016-04-12 Di 12:27]
+    Mit brew cask
+*** DONE Docker Compose installieren
+    CLOSED: [2016-04-12 Di 12:27]
+    ~brew cask install docker-compose~
+*** DONE Docker image herunterladen
+    CLOSED: [2016-04-12 Di 12:27]
+    wurstmeister/kafka mittels ~docker pull wurstmeister/kafka~
+** <2016-04-12 Di>
+*** DONE Repository und Dokumentation aufsetzen
+    CLOSED: [2016-04-12 Di 12:26]
+    Ich werde ein Git Repository unter [[https://github.com/kRITZCREEK/praxisprojekt][GitHub]] führen, in dem ich alle relevanten
+    Artefakte aufbewahre.
+
+    Die Dokumentation werde ich mit ~org-mode~ schreiben und mittels
+    latex-export mit XeLateX kompilieren.
+
+    Wenn man die Schriftarten ~Gentium Plus~, ~Charis SIL~ und ~Dejavu Mono~
+    installiert hat, lässt sich der org export mit xelatex kompilieren.
+
+* Haskell Microservice Producer
+* Haskell Microservice Consumer
+* Spring Microservice Producer/Consumer
+* Dokumentation schreiben
+** Offene TODOS:
+*** TODO Bibtex Datei anlegen
+*** TODO Abstrakt schreiben, dass den praktischen Teil einfängt
+*** TODO Bibtex Datei in org build einbauen
+*** TODO Bibtex Datei mit Referenzen befüllen
+*** TODO Titelseite erstellen
