@@ -2,3 +2,10 @@
 /Dokumentation/praxisprojekt.pdf
 /Dokumentation/praxisprojekt.tex
 /Dokumentation/auto/praxisprojekt.el
+/Dokumentation/auto/literatur.el
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+/Dokumentation/praxisprojekt.run.xml

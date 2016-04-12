@@ -31,14 +31,12 @@
     (setq org-export-latex-format-toc-function 'org-export-latex-no-toc)
 
     (setq org-latex-pdf-process 
-    '("xelatex -interaction nonstopmode %f"
-    "xelatex -interaction nonstopmode %f")) ;; for multiple passes
-
+    '("latexmk -xelatex -interaction=nonstopmode -pdf %f"))
 #+END_SRC
 
 # Einkommentiern für Titelseite
-# #+AUTHOR: Christoph Hegemann
-# #+TITLE: Verwendung eines Messaging Systems zur Entkopplung von Microservices
+#+AUTHOR: Christoph Hegemann
+#+TITLE: Verwendung eines Messaging Systems zur Entkopplung von Microservices
 #+LATEX_CLASS: kc-report
 #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=final, titlepage=true, headsepline=true]
 # #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=true, titlepage=false, headsepline=true]
@@ -47,6 +45,9 @@
 #+LATEX_HEADER: \usepackage[colorlinks=true, linkcolor=blue]{hyperref}
 #+LATEX_HEADER: \usepackage{setspace}
 #+LATEX_HEADER: \pagestyle{headings}
+#+LATEX_HEADER: \usepackage[backend=biber, style=science, backref=true]{biblatex}
+#+LATEX_HEADER: \addbibresource{literatur.bib}
+#+BIBLIOGRAPHY: literatur.bib
 
 #+BEGIN_abstract
   Das wichtigste Prinzip in der Entwicklung einer Microservice Architektur ist,
@@ -61,7 +62,7 @@
 #+END_abstract
 
 * Microservice Architektur
-** Domain Driven Design - Eric Evans
+** Domain Driven Design - Eric Evans cite:Evans-DomainDrivenDesign
 ** Conways Law - Melvin Conway
    organizations which design systems ... are constrained to produce designs
    which are copies of the communication structures of these organizations
@@ -102,3 +103,6 @@ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempo
     - Availability
     - +Partition Tolerance+
     
+
+
+\printbibliography

@@ -38,13 +38,15 @@
     Wenn man die Schriftarten ~Gentium Plus~, ~Charis SIL~ und ~Dejavu Mono~
     installiert hat, lässt sich der org export mit xelatex kompilieren.
 
+*** DONE Bibtex Datei anlegen
+    CLOSED: [2016-04-12 Di 14:00]
+*** DONE Bibtex Datei in org build einbauen
+    CLOSED: [2016-04-12 Di 14:00]
 * Haskell Microservice Producer
 * Haskell Microservice Consumer
 * Spring Microservice Producer/Consumer
 * Dokumentation schreiben
 ** Offene TODOS:
-*** TODO Bibtex Datei anlegen
 *** TODO Abstrakt schreiben, dass den praktischen Teil einfängt
-*** TODO Bibtex Datei in org build einbauen
 *** TODO Bibtex Datei mit Referenzen befüllen
 *** TODO Titelseite erstellen
