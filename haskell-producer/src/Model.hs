@@ -9,6 +9,8 @@ import           Data.Aeson
 import           Data.Aeson.TH
 import           Data.Text     (Text)
 import           Data.Time
+import           Data.UUID
+import           Data.UUID.V4
 
 newtype KundeId = KundeId Int
                   deriving (Show, Eq, FromJSON, ToJSON)
@@ -137,3 +139,6 @@ produkte =
   map mkProdukt (zip [1..] produktDaten)
   where
     mkProdukt (i, (n, p)) = Produkt (ProduktId i) n (Preis p)
+
+uuids :: IO [Text]
+uuids = mapM (const (fmap toText nextRandom)) ([0..100] :: [Int])

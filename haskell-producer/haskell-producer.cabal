@@ -23,6 +23,7 @@ library
                      , aeson
                      , text
                      , time
+                     , uuid
   default-language:    Haskell2010
 
 executable hs-producer
