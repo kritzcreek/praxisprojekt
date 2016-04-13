@@ -10,3 +10,4 @@
 *.fls
 /Dokumentation/praxisprojekt.run.xml
 .DS_Store
+/haskell-producer/.stack-work
