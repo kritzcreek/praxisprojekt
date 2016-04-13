@@ -9,3 +9,4 @@
 *.fdb_latexmk
 *.fls
 /Dokumentation/praxisprojekt.run.xml
+.DS_Store
