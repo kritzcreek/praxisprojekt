@@ -20,7 +20,7 @@
 *** DONE Docker aufsetzen                                   :Aufsetzen_Kafka:
     CLOSED: [2016-04-12 Tue 16:25]
     Guide: https://docs.docker.com/mac/step_one/
-    
+
 ** <2016-04-12 Di>
 *** DONE Repository und Dokumentation aufsetzen               :Dokumentation:
     CLOSED: [2016-04-12 Di 12:26]
@@ -51,7 +51,7 @@
 *** DONE Docker image anwerfen                              :Aufsetzen_Kafka:
     CLOSED: [2016-04-13 Wed 09:27]
 
-    Guide:http://wurstmeister.github.io/kafka-docker/ 
+    Guide:http://wurstmeister.github.io/kafka-docker/
 
 #+BEGIN_SRC sh
     git clone git@github.com:wurstmeister/kafka-docker.git
@@ -62,7 +62,7 @@
     docker-compose up
     # In a second Docker shell
     docker-compose scale kafka=2
-    docker-compose ps 
+    docker-compose ps
     #          Name                        Command               State                          Ports
     # ----------------------------------------------------------------------------------------------------------------------
     # kafkadocker_kafka_1       start-kafka.sh                   Up      0.0.0.0:32769->9092/tcp
@@ -76,7 +76,7 @@
     # https://index.docker.io/v1/repositories/wurstmeister/kafka/images. You may
     # want to check your internet connection or if you are behind a proxy.
 
-    # http://stackoverflow.com/questions/31990757/network-timed-out-while-trying-to-connect-to-https-index-docker-io 
+    # http://stackoverflow.com/questions/31990757/network-timed-out-while-trying-to-connect-to-https-index-docker-io
     docker-machine restart default
     eval $(docker-machine env default)
     docker-machine regenerate-certs default
@@ -87,10 +87,10 @@
 
     $KAFKA_HOME/bin/kafka-topics.sh --describe --topic topic --zookeeper $ZK
     # Topic:topic	PartitionCount:4	ReplicationFactor:2	Configs:
-    # 	Topic: topic	Partition: 0	Leader: 1001	Replicas: 1001,1002	Isr: 1001,1002
-    # 	Topic: topic	Partition: 1	Leader: 1002	Replicas: 1002,1001	Isr: 1002,1001
-    # 	Topic: topic	Partition: 2	Leader: 1001	Replicas: 1001,1002	Isr: 1001,1002
-    # 	Topic: topic	Partition: 3	Leader: 1002	Replicas: 1002,1001	Isr: 1002,1001
+    #   Topic: topic	Partition: 0	Leader: 1001	Replicas: 1001,1002	Isr: 1001,1002
+    #   Topic: topic	Partition: 1	Leader: 1002	Replicas: 1002,1001	Isr: 1002,1001
+    #   Topic: topic	Partition: 2	Leader: 1001	Replicas: 1001,1002	Isr: 1001,1002
+    #   Topic: topic	Partition: 3	Leader: 1002	Replicas: 1002,1001	Isr: 1002,1001
 
     # In der ersten Shell:
     $KAFKA_HOME/bin/kafka-console-producer.sh --topic=topic --broker-list=`broker-list.sh`
@@ -133,15 +133,42 @@
     CLOSED: [2016-04-13 Wed 11:33]
     In docker-compose.yaml Broker Port öffnen:
     "9092" -> "9092:9092"
-    
+
     Aus Haskell heraus auf `docker-machine ip`:9092 verbinden
+
+*** TODO Topic Schema definieren, dass verwendet werden soll :Aufsetzen_Kafka:
+**** Entitäten
+     - Kunde
+     - Warkenkorb
+     - Produkt
+     - Bestellung
+**** Protokoll
+     Da Kafka zunächst einmal nur Text transportiert, verwenden wir einen JSON
+     Wrapper um wesentliche Metadaten in jeder Message zu speichern. Hier haben
+     wir uns für folgende Felder entschieden.
+
+***** id :: UUID (JSON String)
+      A uuid that uniquely identifies an event (not an entity).
+***** key :: String
+      A unique identifier of the entity (product, basket, order, etc) this event is about.
+      This can be the id/uuid of the entity or any other string that defines uniquely this entity.
+      Should be the same for all the events of the same entity.
+      Should also be used as the Kafka key for partitioning purposes (so all events for the same entity go to the same partition).
+***** time :: Long
+      The time in milliseconds since epoch (ex: System.currentTimeMillis() in Java)
+***** type :: String
+      The type/name of this event. Ex.: product.changed, order.created, basket.deleted, etc.
+      Should be in the past tense to make it clear the change already happened.
+***** payload
+      Object
+      The complete entity this event is about serialized as JSON object.
+
 
 * Offene TODOs
 ** Aufsetzen Kafka Cluster
-*** TODO Topic Schema definieren, dass verwendet werden soll :Aufsetzen_Kafka:
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
 ** Haskell Microservice Producer
-
+*** TODO Topic Schema in Haskell abbilden                  :Haskell_Producer:
 ** Haskell Microservice Consumer
 ** Spring Microservice Producer/Consumer
 ** Dokumentation schreiben
