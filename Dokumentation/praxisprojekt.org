@@ -111,14 +111,23 @@
     Services Messages produzieren und abrufen. Um diesen sich ändernden
     Anforderungen gerecht zu werden, muss Kafka so aufgesetzt werden, dass
     dynamisch neue Broker hinzugefügt oder heruntergefahren werden können.
+*** Automatisierung
+    Die Provisionierung einer Maschine mit einem Kafka Broker muss vollständig
+    automatisch ablaufen. Dies steht in direktem Bezug zu /Elastizität/ und dem
+    Prinzip der Automatisierung von Microservices.
+*** Resilienz
+    Die Message Queue stellt einen /Single Point of Failure/ dar. Sollte sie
+    ausfallen können die Services nicht miteinander kommunizieren und die
+    Verfügbarkeit des Gesamtsystems kann nicht sichergestellt werden. Daher
+    müssen Fallback Instanzen provisioniert werden, die einspringen wenn
+    Ausfälle auftreten. Weiterhin müssen ausgefallene Instanzen automatisch
+    neugestartet und provisioniert werden.
 
-   
 ** Docker/Container Technologie
 ** Monitoring?
 * Event Sourcing
 ** Eventsourcing - Greg Young, Eric Evans
 ** CQRS - Command Query Responsibility Segregation
 ** Projektionen als Queries
-
 
 \printbibliography
