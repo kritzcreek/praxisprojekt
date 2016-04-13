@@ -22,7 +22,7 @@ library
 executable hs-producer
   hs-source-dirs:      producer
   main-is:             Main.hs
-  ghc-options:         -Wall
+  ghc-options:         -Wall -threaded
   build-depends:       base
                      , haskell-producer
                      , haskakafka

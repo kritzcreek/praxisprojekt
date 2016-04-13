@@ -102,17 +102,46 @@
     # Wenn ich dem consumer ein --from-beginning mitgebe, bekommt er alle Messages nochmal
 
 #+END_SRC
-*** DONE Maximal 2 Level an Kapiteln                          :Dokumentation:
-    CLOSED: [2016-04-13 Wed 10:06]
-*** TODO Von außerhalb der Docker Shell mit dem Cluster sprechen :Aufsetzen_Kafka:
-* Offene TODOs
-** Aufsetzen Kafka Cluster
-*** TODO Kafka Cluster in Docker konfigurieren, sodass simples Skript funktioniert :Aufsetzen_Kafka:
+*** DONE Kafka Cluster in Docker konfigurieren, sodass simples Skript funktioniert :Aufsetzen_Kafka:
+    CLOSED: [2016-04-13 Wed 10:37]
     - In ~docker-compose.yaml~ ~KAFKA_ADVERTISED_HOST_NAME~ auf Rückgabe von
       ~docker-machine ip~ setzen.
+*** DONE Maximal 2 Level an Kapiteln                          :Dokumentation:
+    CLOSED: [2016-04-13 Wed 10:06]
+*** DONE librdkafka installieren                           :Haskell_Producer:
+    CLOSED: [2016-04-13 Wed 11:05]
+    ~brew install librdkafka~ Installiert leider eine sehr alte 0.8er Version
+    Selbst kompilieren:
+    #+BEGIN_SRC sh
+    ./configure
+    make
+
+    # openssl missing
+    # https://github.com/phusion/passenger/issues/1630
+    brew install openssl
+    brew link opennssl --force
+
+    sudo make install
+    #+END_SRC
+    Unter Windows könnte das schwierig sein
+
+*** DONE Haskell Producer Projekt aufsetzen                :Haskell_Producer:
+    CLOSED: [2016-04-13 Wed 11:32]
+*** DONE haskakafka installieren und Example projekt kopieren :Haskell_Producer:
+    CLOSED: [2016-04-13 Wed 11:32]
+*** DONE Von außerhalb der Docker Shell mit dem Cluster sprechen :Aufsetzen_Kafka:Haskell_Producer:
+    CLOSED: [2016-04-13 Wed 11:33]
+    In docker-compose.yaml Broker Port öffnen:
+    "9092" -> "9092:9092"
+    
+    Aus Haskell heraus auf `docker-machine ip`:9092 verbinden
+
+* Offene TODOs
+** Aufsetzen Kafka Cluster
 *** TODO Topic Schema definieren, dass verwendet werden soll :Aufsetzen_Kafka:
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
 ** Haskell Microservice Producer
+
 ** Haskell Microservice Consumer
 ** Spring Microservice Producer/Consumer
 ** Dokumentation schreiben
@@ -128,4 +157,6 @@
    [[file:~/dotfiles/.spacemacs.d/init.el::"~/Documents/praxisprojekt/Dokumentation/notizen.org"))]]
 
    ~with-eval-after-load 'org~ hat's geregelt
- 
+** TODO Prinzip der Automatisierung in Microservices beschreiben
+   [2016-04-13 Wed]
+   [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Automatisierung][Automatisierung]]
