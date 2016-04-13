@@ -11,23 +11,24 @@
 
 * Aufsetzen Kafka Cluster
 ** Offene TODOS:
-*** TODO Kafka Cluster in Docker konfigurieren, sodass simples Skript funktioniert
+*** TODO Kafka Cluster in Docker konfigurieren, sodass simples Skript funktioniert :Aufsetzen_Kafka:
     - In ~docker-compose.yaml~ ~KAFKA_ADVERTISED_HOST_NAME~ auf Rückgabe von
       ~docker-machine ip~ setzen.
-*** TODO Topic Schema definieren, dass verwendet werden soll
-*** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen
+*** TODO Topic Schema definieren, dass verwendet werden soll :Aufsetzen_Kafka:
+*** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
 ** <2016-04-11 Mo>
-*** DONE Docker aufsetzen
+*** DONE Docker aufsetzen                                   :Aufsetzen_Kafka:
     CLOSED: [2016-04-12 Di 12:27]
-    Mit brew cask
-*** DONE Docker Compose installieren
+    ~brew cask install dockertoolbox~
+*** DONE Docker Compose installieren                        :Aufsetzen_Kafka:
     CLOSED: [2016-04-12 Di 12:27]
-    ~brew cask install docker-compose~
-*** DONE Docker image herunterladen
-    CLOSED: [2016-04-12 Di 12:27]
-    wurstmeister/kafka mittels ~docker pull wurstmeister/kafka~
+    in toolbox enthalten
+*** DONE Docker aufsetzen                                   :Aufsetzen_Kafka:
+    CLOSED: [2016-04-12 Tue 16:25]
+    Guide: https://docs.docker.com/mac/step_one/
+    
 ** <2016-04-12 Di>
-*** DONE Repository und Dokumentation aufsetzen
+*** DONE Repository und Dokumentation aufsetzen               :Dokumentation:
     CLOSED: [2016-04-12 Di 12:26]
     Ich werde ein Git Repository unter [[https://github.com/kRITZCREEK/praxisprojekt][GitHub]] führen, in dem ich alle relevanten
     Artefakte aufbewahre.
@@ -38,15 +39,48 @@
     Wenn man die Schriftarten ~Gentium Plus~, ~Charis SIL~ und ~Dejavu Mono~
     installiert hat, lässt sich der org export mit xelatex kompilieren.
 
-*** DONE Bibtex Datei anlegen
+*** DONE Bibtex Datei anlegen                                 :Dokumentation:
     CLOSED: [2016-04-12 Di 14:00]
-*** DONE Bibtex Datei in org build einbauen
+*** DONE Bibtex Datei in org build einbauen                   :Dokumentation:
     CLOSED: [2016-04-12 Di 14:00]
+*** DONE Latex auf dem Mac aufsetzen                          :Dokumentation:
+    CLOSED: [2016-04-12 Tue 15:57]
+    ~brew cask install mactex~
+    ~brew tap caskroom/fonts~
+    ~brew cask install font-gentium-plus~
+    ~brew cask install font-charis-sil~
+    ~brew cask install font-dejavu-sans~
+** <2016-04-13 Wed>
+*** TODO unter OSX erfolgreich mit dem german & csquotes package kompilieren :Dokumentation:
+*** TODO Docker image anwerfen                              :Aufsetzen_Kafka:
+
+    Guide:http://wurstmeister.github.io/kafka-docker/ 
+
+#+BEGIN_SRC bash
+    git clone git@github.com:wurstmeister/kafka-docker.git
+    cd kafka-docker
+    mv docker-compose.yml docker-compose.yml.bak
+    mv docker-compose-single-broker.yml docker-compose.yml
+    docker-machine ip # 192.168.99.100
+    # KAFKA_ADVERTISED_HOST_NAME in docker-compose.yml
+    # auf `docker-machine ip` setzen
+    docker-compose up
+#+END_SRC
+
+Jetzt komme ich nicht an die Zookeeper IP... Ich schaue später weiter
+
 * Haskell Microservice Producer
 * Haskell Microservice Consumer
 * Spring Microservice Producer/Consumer
 * Dokumentation schreiben
 ** Offene TODOS:
-*** TODO Abstrakt schreiben, dass den praktischen Teil einfängt
-*** TODO Bibtex Datei mit Referenzen befüllen
-*** TODO Titelseite erstellen
+*** TODO Abstrakt schreiben, dass den praktischen Teil einfängt :Dokumentation:
+*** TODO Bibtex Datei mit Referenzen befüllen                 :Dokumentation:
+*** TODO Titelseite erstellen                                 :Dokumentation:
+* Tasks
+** DONE Fix default notes file shenanigens
+   CLOSED: [2016-04-13 Wed 07:12]
+   [2016-04-13 Wed]
+   [[file:~/dotfiles/.spacemacs.d/init.el::"~/Documents/praxisprojekt/Dokumentation/notizen.org"))]]
+
+   ~with-eval-after-load 'org~ hat's geregelt
