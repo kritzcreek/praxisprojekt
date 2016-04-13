@@ -8,14 +8,7 @@
 | Spring Microservice Producer/Consumer | 5 Tage  | <2016-04-28 Do>           |       | <2016-05-04 Mi> |
 | Dokumentation schreiben               | 10 Tage | wann immer etwas auffällt |       | <2016-05-18 Mi> |
 | Korrektur /Abgabe                     |         |                           |       |                 |
-
-* Aufsetzen Kafka Cluster
-** Offene TODOS:
-*** TODO Kafka Cluster in Docker konfigurieren, sodass simples Skript funktioniert :Aufsetzen_Kafka:
-    - In ~docker-compose.yaml~ ~KAFKA_ADVERTISED_HOST_NAME~ auf Rückgabe von
-      ~docker-machine ip~ setzen.
-*** TODO Topic Schema definieren, dass verwendet werden soll :Aufsetzen_Kafka:
-*** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
+* Journal
 ** <2016-04-11 Mo>
 *** DONE Docker aufsetzen                                   :Aufsetzen_Kafka:
     CLOSED: [2016-04-12 Di 12:27]
@@ -69,14 +62,21 @@
 
 Jetzt komme ich nicht an die Zookeeper IP... Ich schaue später weiter
 
-* Haskell Microservice Producer
-* Haskell Microservice Consumer
-* Spring Microservice Producer/Consumer
-* Dokumentation schreiben
-** Offene TODOS:
+* Offene TODOs
+** Aufsetzen Kafka Cluster
+*** TODO Kafka Cluster in Docker konfigurieren, sodass simples Skript funktioniert :Aufsetzen_Kafka:
+    - In ~docker-compose.yaml~ ~KAFKA_ADVERTISED_HOST_NAME~ auf Rückgabe von
+      ~docker-machine ip~ setzen.
+*** TODO Topic Schema definieren, dass verwendet werden soll :Aufsetzen_Kafka:
+*** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
+** Haskell Microservice Producer
+** Haskell Microservice Consumer
+** Spring Microservice Producer/Consumer
+** Dokumentation schreiben
 *** TODO Abstrakt schreiben, dass den praktischen Teil einfängt :Dokumentation:
 *** TODO Bibtex Datei mit Referenzen befüllen                 :Dokumentation:
 *** TODO Titelseite erstellen                                 :Dokumentation:
+
 * Tasks
 ** DONE Fix default notes file shenanigens
    CLOSED: [2016-04-13 Wed 07:12]
