@@ -102,6 +102,8 @@
     # Wenn ich dem consumer ein --from-beginning mitgebe, bekommt er alle Messages nochmal
 
 #+END_SRC
+    
+    Unter Linux muss noch getestet werden.
 *** DONE Kafka Cluster in Docker konfigurieren, sodass simples Skript funktioniert :Aufsetzen_Kafka:
     CLOSED: [2016-04-13 Wed 10:37]
     - In ~docker-compose.yaml~ ~KAFKA_ADVERTISED_HOST_NAME~ auf Rückgabe von
@@ -136,10 +138,11 @@
 
     Aus Haskell heraus auf `docker-machine ip`:9092 verbinden
 
-*** TODO Topic Schema definieren, dass verwendet werden soll :Aufsetzen_Kafka:
+*** DONE Topic Schema definieren, dass verwendet werden soll :Aufsetzen_Kafka:
+    CLOSED: [2016-04-13 Wed 17:10]
 **** Entitäten
      - Kunde
-     - Warkenkorb
+     - Warenkorb
      - Produkt
      - Bestellung
 **** Protokoll
@@ -163,12 +166,22 @@
       Object
       The complete entity this event is about serialized as JSON object.
 
-
+*** DONE Topic Schema in Haskell abbilden                  :Haskell_Producer:
+    CLOSED: [2016-04-13 Wed 17:11]
+      
+** <2016-04-14 Thu> 
+*** DONE Lenses für Schema                                 :Haskell_Producer:
+    CLOSED: [2016-04-13 Wed 22:59]
+*** DONE To/FromJSON für Schema                            :Haskell_Producer:
+    CLOSED: [2016-04-13 Wed 22:59]
+*** DONE time library in haskell client benutzen           :Haskell_Producer:
+    CLOSED: [2016-04-13 Wed 22:59]
+    [2016-04-13 Wed]
+    [[file:~/Documents/praxisprojekt/haskell-producer/src/Model.hs::newtype%20UTCTime%20=%20UTCTime%20String]]
 * Offene TODOs
 ** Aufsetzen Kafka Cluster
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
 ** Haskell Microservice Producer
-*** TODO Topic Schema in Haskell abbilden                  :Haskell_Producer:
 ** Haskell Microservice Consumer
 ** Spring Microservice Producer/Consumer
 ** Dokumentation schreiben
@@ -177,6 +190,9 @@
 *** TODO Inhaltsverzeichnes / Literaturverzeichnis Titel auf deutsch umstellen :Dokumentation:
 *** TODO Titelseite erstellen                                 :Dokumentation:
 
+*** TODO Prinzip der Automatisierung in Microservices beschreiben :Dokumentation:
+    [2016-04-13 Wed]
+    [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Automatisierung][Automatisierung]]
 * Tasks
 ** DONE Fix default notes file shenanigens
    CLOSED: [2016-04-13 Wed 07:12]
@@ -184,6 +200,3 @@
    [[file:~/dotfiles/.spacemacs.d/init.el::"~/Documents/praxisprojekt/Dokumentation/notizen.org"))]]
 
    ~with-eval-after-load 'org~ hat's geregelt
-** TODO Prinzip der Automatisierung in Microservices beschreiben
-   [2016-04-13 Wed]
-   [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Automatisierung][Automatisierung]]
