@@ -106,11 +106,11 @@
 * Aufsetzen der Infrastruktur
 ** Anforderungen
 *** Elastizität
-    Ein Message Broker wie Kafka kann zu verschiedenen Zeiten mit sehr
-    unterschiedlichen Lasten zu kämpfen haben. Zu Stoßzeiten werden sehr viele
-    Services Messages produzieren und abrufen. Um diesen sich ändernden
-    Anforderungen gerecht zu werden, muss Kafka so aufgesetzt werden, dass
-    dynamisch neue Broker hinzugefügt oder heruntergefahren werden können.
+    Ein Message Broker wie Kafka kann zu verschiedenen Zeiten unter variierender
+    Last arbeiten haben. Zu Stoßzeiten werden sehr viele Services Messages
+    produzieren und abrufen. Um diesen sich ändernden Anforderungen gerecht zu
+    werden, muss Kafka so aufgesetzt werden, dass dynamisch neue Broker
+    hinzugefügt oder heruntergefahren werden können.
 *** Automatisierung
     Die Provisionierung einer Maschine mit einem Kafka Broker muss vollständig
     automatisch ablaufen. Dies steht in direktem Bezug zu /Elastizität/ und dem
