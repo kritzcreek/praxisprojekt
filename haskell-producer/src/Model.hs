@@ -5,6 +5,7 @@
 
 module Model where
 
+import           Control.Monad
 import           Control.Lens
 import           Data.Aeson
 import           Data.Aeson.TH
@@ -12,7 +13,7 @@ import           Data.Text       (Text)
 import qualified Data.Text       as T
 import           Data.Time
 import           Data.UUID
-import           Data.UUID.V4
+
 import qualified Test.QuickCheck as QC
 import           Util
 
@@ -33,6 +34,9 @@ newtype Preis = Preis Integer
 
 newtype Adresse = Adresse Text
                   deriving (Show, Eq, FromJSON, ToJSON)
+
+data Entity a = Entity Text (Maybe a)
+                deriving (Show, Eq, Functor)
 
 data Message a =
   Message
@@ -59,20 +63,20 @@ data Produkt =
 data Warenkorb =
   Warenkorb
   { _warenkorbId     :: WarenkorbId
-  , _warenkorbKunde  :: KundeId
+  , _warenkorbKunde  :: Entity Kunde
   , _warenkorbPosten :: [WarenkorbPosten]
   } deriving (Show, Eq)
 
 data WarenkorbPosten =
   WarenkorbPosten
-  { _warenkorbPostenProdukt :: ProduktId
+  { _warenkorbPostenProdukt :: Entity Produkt
   , _warenkorbPostenAnzahl  :: Int
   } deriving (Show, Eq)
 
 data Bestellung =
   Bestellung
   { _bestellungId        :: BestellungId
-  , _bestellungWarenkorb :: WarenkorbId
+  , _bestellungWarenkorb :: Entity Warenkorb
   , _bestellungPreis     :: Preis
   , _bestellungAdresse   :: Adresse
   } deriving (Show, Eq)
@@ -96,6 +100,16 @@ deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_produk
 deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_warenkorb")})       ''Warenkorb
 deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_warenkorbPosten")}) ''WarenkorbPosten
 deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_bestellung")})      ''Bestellung
+
+instance (ToJSON a) => ToJSON (Entity a) where
+  toJSON (Entity _ a) = toJSON a
+
+instance (HasKey a, FromJSON a) => FromJSON (Entity a) where
+  parseJSON (Object o) =
+    (do a <- parseJSON (Object o)
+        return $ Entity (getKey a) (Just a))
+  parseJSON (String s) = pure (Entity s Nothing)
+  parseJSON _ = mzero
 
 -- ghci helper
 names :: [Text]
@@ -147,9 +161,6 @@ produkte =
   where
     mkProdukt i (n, p) = Produkt (ProduktId i) n (Preis p)
 
-uuids :: IO [Text]
-uuids = mapM (const (fmap toText nextRandom)) ([0..100] :: [Int])
-
 instance QC.Arbitrary Kunde where
   arbitrary = QC.elements kunden
 
@@ -163,12 +174,15 @@ instance QC.Arbitrary ProduktId where
   arbitrary = view produktId <$> QC.arbitrary
 
 instance QC.Arbitrary WarenkorbPosten where
-  arbitrary = WarenkorbPosten <$>
-    view produktId <$> QC.arbitrary <*>
-    QC.arbitrary `QC.suchThat` (> 0)
+  arbitrary = WarenkorbPosten <$> QC.arbitrary <*> QC.arbitrary `QC.suchThat` (> 0)
 
 instance QC.Arbitrary Warenkorb where
   arbitrary = Warenkorb <$> QC.arbitrary <*> QC.arbitrary <*> QC.arbitrary
+
+instance (QC.Arbitrary a, HasKey a) => QC.Arbitrary (Entity a) where
+  arbitrary = do
+    a <- QC.arbitrary
+    return $ Entity (getKey a) (Just a)
 
 instance (QC.Arbitrary a, HasKey a) => QC.Arbitrary (Message a) where
   arbitrary = do
@@ -190,6 +204,14 @@ instance HasKey Produkt where
   getKey p =
     let (ProduktId i) = view produktId p
     in T.pack (show i)
+
+instance HasKey Warenkorb where
+  getKey w =
+    let (WarenkorbId i) = view warenkorbId w
+    in T.pack (show i)
+
+instance HasKey (Entity a) where
+  getKey (Entity k _) = k
 
 -- newtype wrapping
 
