@@ -216,3 +216,6 @@
    [[file:~/dotfiles/.spacemacs.d/init.el::"~/Documents/praxisprojekt/Dokumentation/notizen.org"))]]
 
    ~with-eval-after-load 'org~ hat's geregelt
+** TODO Binde listings Umgebung fuer Code ein
+   [2016-04-14 Thu]
+   [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Modell][Modell]]

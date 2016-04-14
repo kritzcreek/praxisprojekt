@@ -36,13 +36,14 @@
 #+LATEX_HEADER: \usepackage[normalem]{ulem}
 #+LATEX_HEADER: \usepackage[ngerman]{babel}
 #+LATEX_HEADER: \usepackage{csquotes}
-# #+LATEX_HEADER: \usepackage{setspace}
 #+LATEX_HEADER: \setcounter{tocdepth}{1}
 #+LATEX_HEADER: \setcounter{secnumdepth}{1}
 #+LATEX_HEADER: \pagestyle{headings}
 #+LATEX_HEADER: \usepackage[backend=biber, style=science, backref=true]{biblatex}
 #+LATEX_HEADER: \addbibresource{literatur.bib}
 #+BIBLIOGRAPHY: literatur.bib
+#+LANGUAGE: de
+#+OPTIONS: H:4 ':t
 
 #+BEGIN_abstract
   Das wichtigste Prinzip in der Entwicklung einer Microservice Architektur ist,
@@ -125,6 +126,80 @@
 
 ** Docker/Container Technologie
 ** Monitoring?
+* Der Prototyp
+** Produktservice
+   Der Produktservice ist Owner des Produkt Topics. Er stellt eine API zur
+   Verfügung, die es erlaubt Produktdaten zu ändern. In unserem Protoyp werden
+   diese Änderungen zufällig generiert.
+
+*** Modell
+    Der Produktservice hat folgende Sicht auf die Produktentität:
+
+    #+BEGIN_SRC haskell
+      data Produkt =
+        Produkt
+        { id :: String
+        , name :: String
+        , beschreibung :: String
+        , preis :: Preis
+        , rabatt :: Prozent
+        }
+    #+END_SRC
+    #+CAPTION: Produkt Modell des Produktservices
+    Updates, die der Produktservice an Kafka schickt, enthalten eine Payload in
+    dieser Form.
+
+** Warenkorbservice
+
+   Der Warenkorbservice ist Owner für kein Topic. Stattdessen verwaltet er die
+   Warenkörbe der Kunden, die für die restlichen Services nicht zur Verfügung
+   stehen.
+
+*** Modell
+    Der Warenkorbservice hat folgende Sicht auf die Produktentität:
+    #+BEGIN_SRC haskell
+      data Produkt =
+        Produkt
+        { id :: String
+        , name :: String
+        , preis :: Preis
+        }
+    #+END_SRC
+    #+CAPTION: Produkt Modell des Warenkorbservices
+    Hierbei fällt auf, dass der Warenkorb nur an einem Subset der Felder der
+    Produktservice Produktentität Kafka interessiert ist. Weiterhin beschreibt
+    das ~preis~ Attribut den Preis, auf den der Rabatt bereits angewendet wurde.
+
+    Es wird also eine /Selektion/ auf die vorhandenen Felder angewendet, und die
+    verbleibenden Felder werden weiter durch /Transformation/ & /Aggregation/ in
+    ein Modell, das der Domäne des Warenkorbes[fn:artikel] entspricht,
+    transformiert.
+
+[fn:artikel]
+In Wirklichkeit ist der Begriff des *Preises* im E-Commerce noch
+deutlich komplexer. Einem *Produkt* ist zunächst einmal gar kein Preis
+zugewiesen. Stattdessen ist ein Produkt eine Einheit, die für die
+Präsentation verwendet wird (zB. Kaffetasse). \\
+Einen Preis hingegen weist man einem *Artikel* zu, der Elemente wie Art (zB.
+Farbe), Region (Produkte haben in unterschiedlichen Regionen unterschiedliche
+Preise) und Rabattaktionen beinhaltet.
+
+*** API
+    Der Warenkorbservice bietet die folgenden Operationen für das Bearbeiten von
+    Warenkörben an.
+
+**** Warenkorb anlegen
+     Legt einen neuen Warenkorb an und gibt die ~id~ des Warenkorbes zurück
+
+**** Artikel hinzufügen
+     Fügt einem bestehenden Warenkorb einen Artikel in der angegebenen Quantität
+     hinzu.
+**** Bestellung erstellen
+     Weist den Warenkorbservice an, eine Bestellung aus einem bestehenden
+     Warenkorb zu erstellen und an einen eventuellen Checkoutservice
+     weiterzureichen.
+
+
 * Event Sourcing
 ** Eventsourcing - Greg Young, Eric Evans
 ** CQRS - Command Query Responsibility Segregation
