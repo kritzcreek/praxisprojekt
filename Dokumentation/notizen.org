@@ -110,7 +110,7 @@
       ~docker-machine ip~ setzen.
 *** DONE Maximal 2 Level an Kapiteln                          :Dokumentation:
     CLOSED: [2016-04-13 Wed 10:06]
-*** DONE librdkafka installieren                           :Haskell_Producer:
+*** DONE librdkafka installieren                           :Haskell_Produktservice:
     CLOSED: [2016-04-13 Wed 11:05]
     ~brew install librdkafka~ Installiert leider eine sehr alte 0.8er Version
     Selbst kompilieren:
@@ -127,11 +127,11 @@
     #+END_SRC
     Unter Windows könnte das schwierig sein
 
-*** DONE Haskell Producer Projekt aufsetzen                :Haskell_Producer:
+*** DONE Haskell Producer Projekt aufsetzen                :Haskell_Produktservice:
     CLOSED: [2016-04-13 Wed 11:32]
-*** DONE haskakafka installieren und Example projekt kopieren :Haskell_Producer:
+*** DONE haskakafka installieren und Example projekt kopieren :Haskell_Produktservice:
     CLOSED: [2016-04-13 Wed 11:32]
-*** DONE Von außerhalb der Docker Shell mit dem Cluster sprechen :Aufsetzen_Kafka:Haskell_Producer:
+*** DONE Von außerhalb der Docker Shell mit dem Cluster sprechen :Aufsetzen_Kafka:Haskell_Produktservice:
     CLOSED: [2016-04-13 Wed 11:33]
     In docker-compose.yaml Broker Port öffnen:
     "9092" -> "9092:9092"
@@ -166,35 +166,42 @@
       Object
       The complete entity this event is about serialized as JSON object.
 
-*** DONE Topic Schema in Haskell abbilden                  :Haskell_Producer:
+*** DONE Topic Schema in Haskell abbilden                  :Haskell_Produktservice:
     CLOSED: [2016-04-13 Wed 17:11]
       
 ** <2016-04-14 Thu> 
-*** DONE Lenses für Schema                                 :Haskell_Producer:
+*** DONE Lenses für Schema                                 :Haskell_Produktservice:
     CLOSED: [2016-04-14 Thu 10:57]
-*** DONE To/FromJSON für Schema                            :Haskell_Producer:
+*** DONE To/FromJSON für Schema                            :Haskell_Produktservice:
     CLOSED: [2016-04-14 Thu 10:57]
-*** DONE time library in haskell client benutzen           :Haskell_Producer:
+*** DONE time library in haskell client benutzen           :Haskell_Produktservice:
     CLOSED: [2016-04-14 Thu 10:57]
     [2016-04-13 Wed]
     [[file:~/Documents/praxisprojekt/haskell-producer/src/Model.hs::newtype%20UTCTime%20=%20UTCTime%20String]]
+*** DONE Inhaltsverzeichnes / Literaturverzeichnis Titel auf deutsch umstellen :Dokumentation:
+    CLOSED: [2016-04-14 Thu 14:54]
 * Offene TODOs
 ** Aufsetzen Kafka Cluster
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
-** Haskell Microservice Producer
-** Haskell Microservice Consumer
+** Haskell Produkservice
+** Haskell Warenkorbservice
 ** Spring Microservice Producer/Consumer
 ** Dokumentation schreiben
 *** TODO Abstrakt schreiben, dass den praktischen Teil einfängt :Dokumentation:
 *** TODO Bibtex Datei mit Referenzen befüllen                 :Dokumentation:
-*** TODO Inhaltsverzeichnes / Literaturverzeichnis Titel auf deutsch umstellen :Dokumentation:
 *** TODO Titelseite erstellen                                 :Dokumentation:
 
+*** TODO Den Aufbau des Prototypen beschreiben                :Dokumentation:
+    Besonders cool wären hier Grafiken/Komponentendiagramme
+*** TODO Den Produktservice beschreiben                       :Dokumentation:
+*** TODO Den Warenkorbservice beschreiben                     :Dokumentation:
 *** TODO Prinzip der Automatisierung in Microservices beschreiben :Dokumentation:
     [2016-04-13 Wed]
     [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Automatisierung][Automatisierung]]
 * Literatursnippets
 ** Building Microservices
+*** 22
+    Microservices are small, autonomous services that work together
 *** 50-51
     All too often, it seems, the existing, wellunderstood standards and
     technology are ignored in favor of new standards that can only be
