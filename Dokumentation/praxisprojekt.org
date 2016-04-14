@@ -30,7 +30,7 @@
 #+TITLE: Verwendung des Messaging Systems Kafka zur Entkopplung von Microservices
 #+LATEX_CLASS: kc-report
 # #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=true, titlepage=false, headsepline=true]
-#+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=12pt, draft=false, titlepage=true, headsepline=true]
+#+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=false, titlepage=true, headsepline=true]
 #+LATEX_HEADER: \usepackage[hyperref,x11names]{xcolor}
 #+LATEX_HEADER: \usepackage[colorlinks=true,urlcolor=SteelBlue4,linkcolor=Firebrick4]{hyperref}
 #+LATEX_HEADER: \usepackage[normalem]{ulem}
@@ -85,6 +85,7 @@
     :PROPERTIES:
     :UNNUMBERED: t
     :END:
+
 
 * Infrastruktur und Provisionierung
 ** Anforderungen
