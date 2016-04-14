@@ -193,6 +193,23 @@
 *** TODO Prinzip der Automatisierung in Microservices beschreiben :Dokumentation:
     [2016-04-13 Wed]
     [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Automatisierung][Automatisierung]]
+
+* Literatursnippets
+** Building Microservices
+*** 50-51
+    All too often, it seems, the existing, wellunderstood standards and
+    technology are ignored in favor of new standards that can only be
+    implemented using brand-new technology—conveniently provided by the same
+    companies that help design the new standards in the first place!
+*** 56
+    Make sure you know what you’re getting: keep your middleware dumb, and keep
+    the smarts in the endpoints
+*** 57
+    The associated complexity with event-driven architectures and asynchronous
+    programming in general leads me to believe that you should be cautious in
+    how eagerly you start adopting these ideas. Ensure you have good monitoring
+    in place, and strongly consider the use of correlation IDs, which allow you
+    to trace requests across process boundaries.
 * Tasks
 ** DONE Fix default notes file shenanigens
    CLOSED: [2016-04-13 Wed 07:12]
