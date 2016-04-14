@@ -27,7 +27,7 @@
 #+END_SRC
 
 #+AUTHOR: Christoph Hegemann
-#+TITLE: Verwendung des Messaging Systems Kafka zur Entkopplung von Microservices
+#+TITLE: Messaging -- Entkopplung von Microservices
 #+LATEX_CLASS: kc-report
 # #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=true, titlepage=false, headsepline=true]
 #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=false, titlepage=true, headsepline=true]
@@ -40,7 +40,13 @@
 #+LATEX_HEADER: \setcounter{secnumdepth}{1}
 #+LATEX_HEADER: \pagestyle{headings}
 #+LATEX_HEADER: \usepackage[backend=biber, style=science, backref=true]{biblatex}
+
+#+LATEX_HEADER: \titlehead{\center{Technische Hochschule Köln}}
+#+LATEX_HEADER: \subject{Praxisprojekt}
+#+LATEX_HEADER: \subtitle{Am Beispiel des Messaging Systems Kafka}
+#+LATEX_HEADER: \publishers{Betreut von Prof.\ Dr.\ Christian Kohls}
 #+LATEX_HEADER: \addbibresource{literatur.bib}
+
 #+BIBLIOGRAPHY: literatur.bib
 #+LANGUAGE: de
 #+OPTIONS: H:4 ':t
