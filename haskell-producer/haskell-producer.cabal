@@ -1,13 +1,13 @@
 name:                haskell-producer
 version:             0.1.0.0
-synopsis:            Initial project template from stack
+synopsis:            Microservices that like to talk with Apache Kafka
 description:         Please see README.md
 homepage:            https://github.com/githubuser/haskell-producer#readme
 license:             BSD3
 license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2016 Author name here
+author:              Christoph Hegemann
+maintainer:          christoph.hegemann@rewe-digital.com
+copyright:           2016 Christoph Hegemann
 category:            Web
 build-type:          Simple
 -- extra-source-files:
@@ -24,7 +24,8 @@ library
                      , text
                      , time
                      , uuid
-  default-language:    Haskell2010
+                     , random
+ default-language:    Haskell2010
 
 executable hs-producer
   hs-source-dirs:      producer
@@ -48,4 +49,4 @@ test-suite haskell-producer-test
 
 source-repository head
   type:     git
-  location: https://github.com/githubuser/haskell-producer
+  location: https://github.com/kritzcreek/praxisprojekt

@@ -11,6 +11,7 @@ import           Data.Text     (Text)
 import           Data.Time
 import           Data.UUID
 import           Data.UUID.V4
+import           System.Random
 
 newtype KundeId = KundeId Int
                   deriving (Show, Eq, FromJSON, ToJSON)
@@ -113,10 +114,7 @@ names =
   ]
 
 kunden :: [Kunde]
-kunden =
-  map mkKunde (zip [1..] names)
-  where
-    mkKunde (i, n) = Kunde (KundeId i) n
+kunden = zipWith (Kunde . KundeId) [1..] names
 
 produktDaten :: [(Text, Integer)]
 produktDaten =
@@ -136,9 +134,12 @@ produktDaten =
 
 produkte :: [Produkt]
 produkte =
-  map mkProdukt (zip [1..] produktDaten)
+  zipWith mkProdukt [1..] produktDaten
   where
-    mkProdukt (i, (n, p)) = Produkt (ProduktId i) n (Preis p)
+    mkProdukt i (n, p) = Produkt (ProduktId i) n (Preis p)
 
 uuids :: IO [Text]
 uuids = mapM (const (fmap toText nextRandom)) ([0..100] :: [Int])
+
+randomNums :: Int -> [Int]
+randomNums t = randomRs (0, t - 1) (mkStdGen t)
