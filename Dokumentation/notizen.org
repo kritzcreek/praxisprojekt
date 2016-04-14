@@ -171,11 +171,11 @@
       
 ** <2016-04-14 Thu> 
 *** DONE Lenses für Schema                                 :Haskell_Producer:
-    CLOSED: [2016-04-13 Wed 22:59]
+    CLOSED: [2016-04-14 Thu 10:57]
 *** DONE To/FromJSON für Schema                            :Haskell_Producer:
-    CLOSED: [2016-04-13 Wed 22:59]
+    CLOSED: [2016-04-14 Thu 10:57]
 *** DONE time library in haskell client benutzen           :Haskell_Producer:
-    CLOSED: [2016-04-13 Wed 22:59]
+    CLOSED: [2016-04-14 Thu 10:57]
     [2016-04-13 Wed]
     [[file:~/Documents/praxisprojekt/haskell-producer/src/Model.hs::newtype%20UTCTime%20=%20UTCTime%20String]]
 * Offene TODOs
@@ -193,7 +193,6 @@
 *** TODO Prinzip der Automatisierung in Microservices beschreiben :Dokumentation:
     [2016-04-13 Wed]
     [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Automatisierung][Automatisierung]]
-
 * Literatursnippets
 ** Building Microservices
 *** 50-51

@@ -25,6 +25,7 @@ library
                      , time
                      , uuid
                      , random
+                     , QuickCheck
  default-language:    Haskell2010
 
 executable hs-producer

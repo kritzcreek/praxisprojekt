@@ -2,16 +2,19 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings          #-}
 {-# LANGUAGE TemplateHaskell            #-}
+
 module Model where
 
 import           Control.Lens
 import           Data.Aeson
 import           Data.Aeson.TH
-import           Data.Text     (Text)
+import           Data.Text       (Text)
+import qualified Data.Text       as T
 import           Data.Time
 import           Data.UUID
 import           Data.UUID.V4
-import           System.Random
+import qualified Test.QuickCheck as QC
+import           Util
 
 newtype KundeId = KundeId Int
                   deriving (Show, Eq, FromJSON, ToJSON)
@@ -20,7 +23,7 @@ newtype ProduktId = ProduktId Int
                   deriving (Show, Eq, FromJSON, ToJSON)
 
 newtype WarenkorbId = WarenkorbId Int
-                  deriving (Show, Eq, FromJSON, ToJSON)
+                  deriving (Show, Eq, FromJSON, ToJSON, QC.Arbitrary)
 
 newtype BestellungId = BestellungId Int
                   deriving (Show, Eq, FromJSON, ToJSON)
@@ -36,7 +39,7 @@ data Message a =
   { _messageId      :: Text
   , _messageKey     :: Text
   , _messageTime    :: UTCTime
-  , _messageType    :: String
+  , _messageType    :: Text
   , _messagePayload :: a
   } deriving (Show, Eq, Functor)
 
@@ -74,6 +77,12 @@ data Bestellung =
   , _bestellungAdresse   :: Adresse
   } deriving (Show, Eq)
 
+produkt :: IO (Message Produkt)
+produkt = QC.generate QC.arbitrary
+
+kunde :: IO (Message Kunde)
+kunde = QC.generate QC.arbitrary
+
 makeLenses ''Message
 makeLenses ''Kunde
 makeLenses ''Produkt
@@ -81,12 +90,12 @@ makeLenses ''Warenkorb
 makeLenses ''WarenkorbPosten
 makeLenses ''Bestellung
 
-deriveJSON defaultOptions ''Message
-deriveJSON defaultOptions ''Kunde
-deriveJSON defaultOptions ''Produkt
-deriveJSON defaultOptions ''Warenkorb
-deriveJSON defaultOptions ''WarenkorbPosten
-deriveJSON defaultOptions ''Bestellung
+deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_message")})         ''Message
+deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_kunde")})           ''Kunde
+deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_produkt")})         ''Produkt
+deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_warenkorb")})       ''Warenkorb
+deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_warenkorbPosten")}) ''WarenkorbPosten
+deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_bestellung")})      ''Bestellung
 
 -- ghci helper
 names :: [Text]
@@ -141,5 +150,58 @@ produkte =
 uuids :: IO [Text]
 uuids = mapM (const (fmap toText nextRandom)) ([0..100] :: [Int])
 
-randomNums :: Int -> [Int]
-randomNums t = randomRs (0, t - 1) (mkStdGen t)
+instance QC.Arbitrary Kunde where
+  arbitrary = QC.elements kunden
+
+instance QC.Arbitrary KundeId where
+  arbitrary = view kundeId <$> QC.arbitrary
+
+instance QC.Arbitrary Produkt where
+  arbitrary = QC.elements produkte
+
+instance QC.Arbitrary ProduktId where
+  arbitrary = view produktId <$> QC.arbitrary
+
+instance QC.Arbitrary WarenkorbPosten where
+  arbitrary = WarenkorbPosten <$>
+    view produktId <$> QC.arbitrary <*>
+    QC.arbitrary `QC.suchThat` (> 0)
+
+instance QC.Arbitrary Warenkorb where
+  arbitrary = Warenkorb <$> QC.arbitrary <*> QC.arbitrary <*> QC.arbitrary
+
+instance (QC.Arbitrary a, HasKey a) => QC.Arbitrary (Message a) where
+  arbitrary = do
+    ArbUUID mid <- QC.arbitrary
+    payload <- QC.arbitrary
+    ArbUTCTime time <- QC.arbitrary
+    mtype <- QC.elements ["create", "update", "delete"]
+    return $ Message (toText mid) (getKey payload) time mtype payload
+
+class HasKey a where
+  getKey :: a -> Text
+
+instance HasKey Kunde where
+  getKey k =
+    let (KundeId i) = view kundeId k
+    in T.pack (show i)
+
+instance HasKey Produkt where
+  getKey p =
+    let (ProduktId i) = view produktId p
+    in T.pack (show i)
+
+-- newtype wrapping
+
+newtype ArbUUID = ArbUUID UUID
+instance QC.Arbitrary ArbUUID where
+  arbitrary = ArbUUID <$> QC.choose (nil, nil)
+
+newtype ArbUTCTime = ArbUTCTime UTCTime
+instance QC.Arbitrary ArbUTCTime where
+  arbitrary = do
+    randomDay <- QC.choose (1, 29) :: QC.Gen Int
+    randomMonth <- QC.choose (1, 12) :: QC.Gen Int
+    randomYear <- QC.choose (2001, 2002) :: QC.Gen Integer
+    randomTime <- QC.choose (0, 86401) :: QC.Gen Int
+    return $ ArbUTCTime $ UTCTime (fromGregorian randomYear randomMonth randomDay) (fromIntegral randomTime)
