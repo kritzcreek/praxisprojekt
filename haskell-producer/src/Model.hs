@@ -5,7 +5,6 @@
 
 module Model where
 
-import           Control.Monad
 import           Control.Lens
 import           Data.Aeson
 import           Data.Aeson.TH
@@ -24,7 +23,7 @@ newtype ProduktId = ProduktId Int
                   deriving (Show, Eq, FromJSON, ToJSON)
 
 newtype WarenkorbId = WarenkorbId Int
-                  deriving (Show, Eq, FromJSON, ToJSON, QC.Arbitrary)
+                  deriving (Show, Eq, FromJSON, ToJSON)
 
 newtype BestellungId = BestellungId Int
                   deriving (Show, Eq, FromJSON, ToJSON)
@@ -84,8 +83,20 @@ data Bestellung =
 produkt :: IO (Message Produkt)
 produkt = QC.generate QC.arbitrary
 
+produkt_ :: IO Produkt
+produkt_ = QC.generate QC.arbitrary
+
 kunde :: IO (Message Kunde)
 kunde = QC.generate QC.arbitrary
+
+kunde_ :: IO Kunde
+kunde_ = QC.generate QC.arbitrary
+
+warenkorb :: IO (Message Warenkorb)
+warenkorb = QC.generate QC.arbitrary
+
+warenkorb_ :: IO Warenkorb
+warenkorb_ = QC.generate QC.arbitrary
 
 makeLenses ''Message
 makeLenses ''Kunde
@@ -101,15 +112,14 @@ deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_warenk
 deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_warenkorbPosten")}) ''WarenkorbPosten
 deriveJSON (defaultOptions {fieldLabelModifier=fieldLabelDrop (T.length "_bestellung")})      ''Bestellung
 
-instance (ToJSON a) => ToJSON (Entity a) where
-  toJSON (Entity _ a) = toJSON a
+instance ToJSON (Entity a) where
+  toJSON (Entity k _) = toJSON k
 
 instance (HasKey a, FromJSON a) => FromJSON (Entity a) where
-  parseJSON (Object o) =
-    (do a <- parseJSON (Object o)
-        return $ Entity (getKey a) (Just a))
   parseJSON (String s) = pure (Entity s Nothing)
-  parseJSON _ = mzero
+  parseJSON o = do
+    a <- parseJSON o
+    return $ Entity (getKey a) (Just a)
 
 -- ghci helper
 names :: [Text]
@@ -137,7 +147,7 @@ names =
   ]
 
 kunden :: [Kunde]
-kunden = zipWith (Kunde . KundeId) [1..] names
+kunden = zipWith (Kunde . KundeId) [1000..] names
 
 produktDaten :: [(Text, Integer)]
 produktDaten =
@@ -157,7 +167,7 @@ produktDaten =
 
 produkte :: [Produkt]
 produkte =
-  zipWith mkProdukt [1..] produktDaten
+  zipWith mkProdukt [100..] produktDaten
   where
     mkProdukt i (n, p) = Produkt (ProduktId i) n (Preis p)
 
@@ -177,7 +187,10 @@ instance QC.Arbitrary WarenkorbPosten where
   arbitrary = WarenkorbPosten <$> QC.arbitrary <*> QC.arbitrary `QC.suchThat` (> 0)
 
 instance QC.Arbitrary Warenkorb where
-  arbitrary = Warenkorb <$> QC.arbitrary <*> QC.arbitrary <*> QC.arbitrary
+  arbitrary = Warenkorb <$>
+    WarenkorbId <$> QC.arbitrarySizedNatural <*>
+    QC.arbitrary <*>
+    QC.arbitrary
 
 instance (QC.Arbitrary a, HasKey a) => QC.Arbitrary (Entity a) where
   arbitrary = do
