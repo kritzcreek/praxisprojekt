@@ -180,17 +180,29 @@
     [[file:~/Documents/praxisprojekt/haskell-producer/src/Model.hs::newtype%20UTCTime%20=%20UTCTime%20String]]
 *** DONE Inhaltsverzeichnes / Literaturverzeichnis Titel auf deutsch umstellen :Dokumentation:
     CLOSED: [2016-04-14 Thu 14:54]
+    # #+LANGUAGE: de
+*** DONE Titelseite erstellen                                 :Dokumentation:
+    CLOSED: [2016-04-14 Thu 17:34]
+
+*** TODO Neue Projektstruktur:                              :Aufsetzen_Kafka:
+    - Dokumentation
+    - produktservice
+    - warenkorbservice
+    - kafka-docker
 * Offene TODOs
 ** Aufsetzen Kafka Cluster
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
-** Haskell Produkservice
+** Haskell Produktservice
+*** TODO Producer der ein Produkt pro 2 Sekunden erstellt/updated :Haskell_Produktservice:
 ** Haskell Warenkorbservice
+*** TODO CLI? Interface für API calls              :Haskell_Warenkorbservice:
+*** TODO Model für Warenkorbservice                :Haskell_Warenkorbservice:
+*** TODO JSON Instanzen / Transformationen         :Haskell_Warenkorbservice:
+*** TODO Warenkorbservice Transstack mit STM State :Haskell_Warenkorbservice:
 ** Spring Microservice Producer/Consumer
 ** Dokumentation schreiben
 *** TODO Abstrakt schreiben, dass den praktischen Teil einfängt :Dokumentation:
 *** TODO Bibtex Datei mit Referenzen befüllen                 :Dokumentation:
-*** TODO Titelseite erstellen                                 :Dokumentation:
-
 *** TODO Den Aufbau des Prototypen beschreiben                :Dokumentation:
     Besonders cool wären hier Grafiken/Komponentendiagramme
 *** TODO Den Produktservice beschreiben                       :Dokumentation:

@@ -57,7 +57,7 @@
   bestehen.
   Eine weiteres grundlegendes Prinzip ist "Don't share the database". Jeder
   Service muss also die Daten, die er benötigt um zu funktionieren, selbst
-  speichern.asd
+  speichern.
   Natürlich arbeiten die verschiedenen Services jedoch häufig auf den selben
   Entitäten, sodass hier eine Synchronisation stattfinden muss.
   Wie können nun also mehrere Services mit den selben Entitäten arbeiten?
@@ -76,9 +76,6 @@
 ** "Don't share the database"
 ** Message Broker
 *** Apache Kafka
-    :PROPERTIES:
-    :UNNUMBERED: t
-    :END:
     A high-throughput distributed messaging system
 
     - Partitionierter Commit Log
@@ -88,9 +85,6 @@
       - Availability
       - +Partition Tolerance+
 *** RabbitMQ/ActiveMQ
-    :PROPERTIES:
-    :UNNUMBERED: t
-    :END:
 
 
 * Infrastruktur und Provisionierung
@@ -118,6 +112,11 @@
 
 
 * Der Prototyp
+  - Annäherung an ein realistisches Szenario
+  - Kommunikation zwischen Services
+  - Topics mit Ownern (Producern) und Consumern
+  - Services haben unterschiedliche Modelle für die selbe Entität (Domain Model)
+  
 ** Produktservice
    Der Produktservice ist Owner des Produkt Topics. Er stellt eine API zur
    Verfügung, die es erlaubt Produktdaten zu ändern. In unserem Protoyp werden
