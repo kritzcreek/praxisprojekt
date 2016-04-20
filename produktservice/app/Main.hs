@@ -29,7 +29,7 @@ main = do
   withKafkaProducer kafkaConfig topicConfig connectionString "produkte" $
     \_ topic -> do
       replicateM_ 100 $ do
-        _ <- produceMessage topic (KafkaSpecifiedPartition partition) . KafkaProduceMessage . BSL.toStrict . encode =<< produkt_
+        _ <- produceMessage topic (KafkaSpecifiedPartition partition) . KafkaProduceMessage . BSL.toStrict . encode =<< produkt
         threadDelay 1000000
       pure ()
   -- Bricht den log thread ab

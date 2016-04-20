@@ -12,3 +12,5 @@
 .DS_Store
 /haskell-producer/.stack-work
 /librdkafka
+/haskell-proto/.stack-work/
+.stack-work
