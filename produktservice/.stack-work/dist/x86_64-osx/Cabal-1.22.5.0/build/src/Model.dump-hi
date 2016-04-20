@@ -1,0 +1,2126 @@
+
+==================== FINAL INTERFACE ====================
+2016-04-20 11:20:55.128048 UTC
+
+interface produ_80p7D0JC9UF464h9M4qqf7:Model 7103
+  interface hash: c6f988c191dde47930aab2eb4346882a
+  ABI hash: e0b9c9ba0a5eced69f265f92ba339595
+  export-list hash: 5d2ae3f2ac14801d9776ff3836d49f61
+  orphan hash: 693e9af84d3dfcc71e640e005bdc5e2e
+  flag hash: 67cb82c5a73678ddfee24fc3341142a7
+  sig of: Nothing
+  used TH splices: True
+  where
+exports:
+  Model.produkt
+  Model.produktBeschreibung
+  Model.produktDaten
+  Model.produktId
+  Model.produktName
+  Model.produktPreis
+  Model.produktRabatt
+  Model.produkt_
+  Model.produkte
+  Model.Preis{Model.Preis}
+  Model.Produkt{Model.Produkt Model._produktBeschreibung Model._produktId Model._produktName Model._produktPreis Model._produktRabatt}
+  Model.ProduktId{Model.ProduktId}
+module dependencies:
+package dependencies: QuickCheck-2.8.1@Quick_8UnGnTXfSEEClQczG6tI7s
+                      StateVar-1.1.0.4@State_IOvB80WkYNkEizdt0JVpzy
+                      adjunctions-4.3@adjun_JBNnYVBXWyMG5aYJ0CKCPg
+                      aeson-0.9.0.1@aeson_LJIBliiEkn4J9xnahdCeak
+                      array-0.5.1.0@array_67iodizgJQIIxYVTp4emlA
+                      attoparsec-0.13.0.1@attop_C6pUTDzrecbIO4LDYHwJUG base-4.8.2.0
+                      base-orphans-0.5.4@baseo_0gFtKFBT26OGSKHmmdqdfx
+                      bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW
+                      binary-0.7.5.0@binar_3uXFWMoAGBg0xKP9MHKRwi
+                      bytestring-0.10.6.0@bytes_6VWy06pWzJq9evDvK2d4w6
+                      comonad-4.2.7.2@comon_L2hizmDooloB0V21jgTXXp
+                      containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU
+                      contravariant-1.4@contr_AHT97o0J4XR9jvmQrlQx0s
+                      deepseq-1.4.1.1@deeps_6vMKxt5sPFR0XsbRWvvq59
+                      distributive-0.5.0.2@distr_Bzw4892o7eSJ9GCWqoiGOX
+                      dlist-0.7.1.2@dlist_AO7XAasbAeyL0XLKeq1Aui
+                      exceptions-0.8.2.1@excep_6lgwjdgwblY7rzh5s6SLd8
+                      free-4.12.4@free_6So4BHgUyqe1B74EN63Nbv ghc-prim-0.4.0.0
+                      hashable-1.2.4.0@hasha_EalUWgp8NarBYWPbvYAD8I
+                      haskell-proto-0.1.0.0@haske_4sL3VM5mwAC7UYD12QUVyu
+                      integer-gmp-1.0.0.0
+                      kan-extensions-4.2.3@kanex_03x1SLuJqLiGeOTLIXODZo
+                      lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE
+                      mtl-2.2.1@mtl_Aue4leSeVkpKLsfHIV51E8
+                      prelude-extras-0.4.0.3@prelu_1gQpKVfMHul71LsAFgGRhv
+                      pretty-1.1.2.0@prett_JItwetRppk1H5Uq3xbjDGC
+                      primitive-0.6.1.0@primi_EphY2c7CCxSCBKjAN0YTR3
+                      profunctors-5.2@profu_75idf1IHqN1BdwZaoam0bt
+                      random-1.1@rando_9Kgekc9yEaLHLNUuw6paWL
+                      reflection-2.1.2@refle_Is9SiIf9zRHG2wDNDxPaS9
+                      scientific-0.3.4.6@scien_5s26qRhE5w04kI4pP1Rtwm
+                      semigroups-0.18.1@semig_EApcHsXPsrRKUkxxoKR3HO
+                      semigroupoids-5.0.1@semig_GorzpCq1pOx9Z9LQQWAMxA
+                      stm-2.4.4.1@stm_EyxFXFfnfY05IrjGaqCxeD
+                      tagged-0.8.3@tagge_5cptKNCoGdxJM6eqqNERxD template-haskell-2.10.0.0
+                      text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne
+                      tf-random-0.5@tfran_1eLmkn3WUnC8NZpPuDLGKF
+                      time-1.5.0.1@time_FTheb6LSxyX1UABIbBXRfn
+                      transformers-0.4.2.0@trans_GZTjP9K5WFq01xC9BAGQpF
+                      unordered-containers-0.2.5.1@unord_Kh4ayEkEku2Hr3yyCwld2j
+                      uuid-1.3.12@uuid_7jPE0yyqdN55Vg0MFa97yk
+                      uuid-types-1.0.3@uuidt_1jYi9RR4Gf08rGU1w6xxPr
+                      vector-0.11.0.0@vecto_LmZ3LQW4ivu8MsQuVgukln
+orphans: aeson-0.9.0.1@aeson_LJIBliiEkn4J9xnahdCeak:Data.Aeson.Types.Generic
+         aeson-0.9.0.1@aeson_LJIBliiEkn4J9xnahdCeak:Data.Aeson.Types.Instances
+         attoparsec-0.13.0.1@attop_C6pUTDzrecbIO4LDYHwJUG:Data.Attoparsec.ByteString.Char8
+         base-4.8.2.0:GHC.Base base-4.8.2.0:GHC.Float
+         base-orphans-0.5.4@baseo_0gFtKFBT26OGSKHmmdqdfx:Data.Orphans
+         binary-0.7.5.0@binar_3uXFWMoAGBg0xKP9MHKRwi:Data.Binary.Generic
+         bytestring-0.10.6.0@bytes_6VWy06pWzJq9evDvK2d4w6:Data.ByteString.Builder
+         hashable-1.2.4.0@hasha_EalUWgp8NarBYWPbvYAD8I:Data.Hashable.Generic
+         reflection-2.1.2@refle_Is9SiIf9zRHG2wDNDxPaS9:Data.Reflection
+         stm-2.4.4.1@stm_EyxFXFfnfY05IrjGaqCxeD:Control.Monad.STM
+         text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne:Data.Text
+         text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne:Data.Text.Lazy
+         text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne:Data.Text.Show
+         time-1.5.0.1@time_FTheb6LSxyX1UABIbBXRfn:Data.Time.Calendar.Gregorian
+         time-1.5.0.1@time_FTheb6LSxyX1UABIbBXRfn:Data.Time.Format.Parse
+         time-1.5.0.1@time_FTheb6LSxyX1UABIbBXRfn:Data.Time.LocalTime.LocalTime
+         transformers-0.4.2.0@trans_GZTjP9K5WFq01xC9BAGQpF:Control.Monad.Trans.Error
+         vector-0.11.0.0@vecto_LmZ3LQW4ivu8MsQuVgukln:Data.Vector.Fusion.Bundle
+         vector-0.11.0.0@vecto_LmZ3LQW4ivu8MsQuVgukln:Data.Vector.Unboxed
+family instance modules: adjunctions-4.3@adjun_JBNnYVBXWyMG5aYJ0CKCPg:Data.Functor.Rep
+                         attoparsec-0.13.0.1@attop_C6pUTDzrecbIO4LDYHwJUG:Data.Attoparsec.Internal.Types
+                         base-4.8.2.0:Control.Applicative base-4.8.2.0:Data.Either
+                         base-4.8.2.0:Data.Functor.Identity base-4.8.2.0:Data.Monoid
+                         base-4.8.2.0:Data.Type.Equality base-4.8.2.0:Data.Void
+                         base-4.8.2.0:GHC.Exts base-4.8.2.0:GHC.Generics
+                         base-4.8.2.0:GHC.TypeLits
+                         bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW:Data.Bifunctor.Biff
+                         bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW:Data.Bifunctor.Clown
+                         bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW:Data.Bifunctor.Flip
+                         bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW:Data.Bifunctor.Join
+                         bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW:Data.Bifunctor.Joker
+                         bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW:Data.Bifunctor.Product
+                         bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW:Data.Bifunctor.Sum
+                         bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW:Data.Bifunctor.Tannen
+                         bifunctors-5.2@bifun_53vJXsOoGn48mY3bf0G8xW:Data.Bifunctor.Wrapped
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.IntMap.Base
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.IntSet.Base
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.Map.Base
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.Sequence
+                         containers-0.5.6.2@conta_2C3ZI8RgPO2LBMidXKTvIU:Data.Set.Base
+                         dlist-0.7.1.2@dlist_AO7XAasbAeyL0XLKeq1Aui:Data.DList
+                         kan-extensions-4.2.3@kanex_03x1SLuJqLiGeOTLIXODZo:Data.Functor.Yoneda
+                         lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.At
+                         lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.Internal.Indexed
+                         lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.Internal.Zoom
+                         lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.Reified
+                         lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.Tuple
+                         lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.Wrapped
+                         pretty-1.1.2.0@prett_JItwetRppk1H5Uq3xbjDGC:Text.PrettyPrint.HughesPJ
+                         primitive-0.6.1.0@primi_EphY2c7CCxSCBKjAN0YTR3:Control.Monad.Primitive
+                         profunctors-5.2@profu_75idf1IHqN1BdwZaoam0bt:Data.Profunctor.Rep
+                         semigroups-0.18.1@semig_EApcHsXPsrRKUkxxoKR3HO:Data.List.NonEmpty
+                         semigroups-0.18.1@semig_EApcHsXPsrRKUkxxoKR3HO:Data.Semigroup
+                         tagged-0.8.3@tagge_5cptKNCoGdxJM6eqqNERxD:Data.Tagged
+                         template-haskell-2.10.0.0:Language.Haskell.TH.Syntax
+                         text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne:Data.Text
+                         text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne:Data.Text.Lazy
+                         unordered-containers-0.2.5.1@unord_Kh4ayEkEku2Hr3yyCwld2j:Data.HashMap.Base
+                         unordered-containers-0.2.5.1@unord_Kh4ayEkEku2Hr3yyCwld2j:Data.HashSet
+                         uuid-types-1.0.3@uuidt_1jYi9RR4Gf08rGU1w6xxPr:Data.UUID.Types.Internal
+                         uuid-types-1.0.3@uuidt_1jYi9RR4Gf08rGU1w6xxPr:Data.UUID.Types.Internal.Builder
+                         vector-0.11.0.0@vecto_LmZ3LQW4ivu8MsQuVgukln:Data.Vector
+                         vector-0.11.0.0@vecto_LmZ3LQW4ivu8MsQuVgukln:Data.Vector.Primitive
+                         vector-0.11.0.0@vecto_LmZ3LQW4ivu8MsQuVgukln:Data.Vector.Storable
+                         vector-0.11.0.0@vecto_LmZ3LQW4ivu8MsQuVgukln:Data.Vector.Unboxed
+                         vector-0.11.0.0@vecto_LmZ3LQW4ivu8MsQuVgukln:Data.Vector.Unboxed.Base
+import  -/  QuickCheck-2.8.1@Quick_8UnGnTXfSEEClQczG6tI7s:Test.QuickCheck 437de8bc77c4cf58d9f8e24d5f1189e0
+import  -/  QuickCheck-2.8.1@Quick_8UnGnTXfSEEClQczG6tI7s:Test.QuickCheck.Arbitrary 5b0fb1f0c5892614b4f635b9443c97b1
+import  -/  QuickCheck-2.8.1@Quick_8UnGnTXfSEEClQczG6tI7s:Test.QuickCheck.Gen 99ea14d47e0743a0e0483e3176e4e3ae
+import  -/  aeson-0.9.0.1@aeson_LJIBliiEkn4J9xnahdCeak:Data.Aeson bef554fbea5259b89d8771370426d062
+import  -/  aeson-0.9.0.1@aeson_LJIBliiEkn4J9xnahdCeak:Data.Aeson.TH 2cecd4529d45227ed608ef1553bc38d8
+import  -/  aeson-0.9.0.1@aeson_LJIBliiEkn4J9xnahdCeak:Data.Aeson.Types.Class f1fc1c4f41bb5600b83b0c2595c1fd3a
+import  -/  aeson-0.9.0.1@aeson_LJIBliiEkn4J9xnahdCeak:Data.Aeson.Types.Instances 5e61c178ece7ce8fc8e045110475d109
+import  -/  aeson-0.9.0.1@aeson_LJIBliiEkn4J9xnahdCeak:Data.Aeson.Types.Internal 5f2709b07dd63c03775e2206f7738370
+import  -/  base-4.8.2.0:Data.Function 6b13a8d3a5e3bd757a91434dce3fc7f3
+import  -/  base-4.8.2.0:Data.Functor 5c701b0af1708f0192a25dfe14ce6274
+import  -/  base-4.8.2.0:GHC.Base 1db77db5dae73d8c424c85b09fbadb89
+import  -/  base-4.8.2.0:GHC.List 0c736920522bbd14b770342776012ab6
+import  -/  base-4.8.2.0:GHC.Show 0e1d8380a8fb0cfb07ebeda3b70cbf38
+import  -/  base-4.8.2.0:Prelude 694dcaf039efe62df1c44834e2dbd2fb
+import  -/  ghc-prim-0.4.0.0:GHC.Classes e1f4ff80f7b5262008a595d29986fb18
+import  -/  ghc-prim-0.4.0.0:GHC.Types 6b27fb3fdbd0e3f0925a4496c66513bb
+import  -/  haskell-proto-0.1.0.0@haske_4sL3VM5mwAC7UYD12QUVyu:Kafkaproto.Entity 927396be39ca1bb3bfc1013c9f5d62f2
+import  -/  haskell-proto-0.1.0.0@haske_4sL3VM5mwAC7UYD12QUVyu:Kafkaproto.Message d3c3e43246b1e3c465abb1c1b76e9e58
+import  -/  haskell-proto-0.1.0.0@haske_4sL3VM5mwAC7UYD12QUVyu:Kafkaproto.Util 4554e377efb7581951460ea1067e4a8f
+import  -/  integer-gmp-1.0.0.0:GHC.Integer.Type 371e90fe753f08ddedf0d2657a9ef5c4
+import  -/  lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens a5368ffa6d0cbf8fd125f759680f31ba
+import  -/  lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.Getter 06d318f95bc8376b9c94098904b2ee35
+import  -/  lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.Setter 62fb6d931e7a6face45fc7cce8ae99e2
+import  -/  lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.TH 4e34ff2f42a1b589efc227807bee2139
+import  -/  lens-4.13@lens_1gTJ36UCyD62LWMmxWYMEE:Control.Lens.Type 84b274f7b1052dadbb116cf856f36818
+import  -/  text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne:Data.Text b53ae191632883b10562be5cbaa0b22b
+import  -/  text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne:Data.Text.Internal d9b6b9a9dd535595b612aea5738b7466
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fArbitraryProdukt ::
+    Test.QuickCheck.Arbitrary.Arbitrary Model.Produkt
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Model.Produkt
+                  Model.$fArbitraryProdukt_$carbitrary
+                  Model.$fArbitraryProdukt_$s$dmshrink -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fArbitraryProdukt1 ::
+    Test.QuickCheck.Random.QCGen -> GHC.Types.Int -> Model.Produkt
+  {- Arity: 2, Strictness: <L,1*U(U,U,U,1*U,A,A)><L,U(U)>m,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: Test.QuickCheck.Random.QCGen w1 :: GHC.Types.Int ->
+                 case Model.$wa w w1 of ww { (#,,,,#) ww1 ww2 ww3 ww4 ww5 ->
+                 Model.Produkt ww1 ww2 ww3 ww4 ww5 }) -}
+b02f9fddc3f9427f7b9047f385575e95
+  $fArbitraryProdukt2 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 50) -}
+59f4349a62bc1cc20ce659224f3e04de
+  $fArbitraryProdukt3 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 0) -}
+d2704f4aa2c7c5e436af0467298fbc92
+  $fArbitraryProdukt4 :: GHC.Types.Int
+  {- HasNoCafRefs, Unfolding: (GHC.Types.I# 4) -}
+1690135d059a32ce07aa38efde938cfa
+  $fArbitraryProdukt5 ::
+    Data.Text.Array.MArray s1
+    -> GHC.Types.Int
+    -> [GHC.Types.Char]
+    -> GHC.Prim.Int#
+    -> GHC.Prim.State# s1
+    -> (# GHC.Prim.State# s1, Data.Text.Internal.Text #)
+  {- Arity: 5, Strictness: <L,U(U)><L,U(U)><S,1*U><L,U><L,U>,
+     Inline: [0] -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fArbitraryProdukt6 :: Test.QuickCheck.Gen.Gen Model.Produkt
+  {- Unfolding: (Test.QuickCheck.Gen.elements
+                   @ Model.Produkt
+                   Model.produkte) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fArbitraryProduktId ::
+    Test.QuickCheck.Arbitrary.Arbitrary Model.ProduktId
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Model.ProduktId
+                  Model.$fArbitraryProduktId_$carbitrary
+                  Model.$fArbitraryProduktId_$s$dmshrink -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fArbitraryProduktId1 ::
+    Test.QuickCheck.Random.QCGen -> GHC.Types.Int -> Model.ProduktId
+  {- Arity: 2, Strictness: <L,1*U(U,U,U,1*U,A,A)><L,U(U)>,
+     Unfolding: InlineRule (2, True, False)
+                (\ r :: Test.QuickCheck.Random.QCGen n :: GHC.Types.Int ->
+                 case Model.$fArbitraryProdukt1
+                        r
+                        n of wild { Model.Produkt x x1 x2 x3 x4 ->
+                 x }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fArbitraryProduktId_$carbitrary ::
+    Test.QuickCheck.Gen.Gen Model.ProduktId
+  {- Arity: 2, Strictness: <L,1*U(U,U,U,1*U,A,A)><L,U(U)>,
+     Unfolding: InlineRule (0, True, True)
+                Model.$fArbitraryProduktId1
+                  `cast`
+                (Sym (Test.QuickCheck.Gen.NTCo:Gen[0] <Model.ProduktId>_R)) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fArbitraryProduktId_$s$dmshrink ::
+    Model.ProduktId -> [Model.ProduktId]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,A>,
+     Unfolding: InlineRule (-1, True, True)
+                (\ ds1 :: Model.ProduktId -> GHC.Types.[] @ Model.ProduktId) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fArbitraryProdukt_$carbitrary ::
+    Test.QuickCheck.Gen.Gen Model.Produkt
+  {- Arity: 2, Strictness: <L,1*U(U,U,U,1*U,A,A)><L,U(U)>m,
+     Unfolding: InlineRule (0, True, True)
+                Model.$fArbitraryProdukt1
+                  `cast`
+                (Sym (Test.QuickCheck.Gen.NTCo:Gen[0] <Model.Produkt>_R)) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fArbitraryProdukt_$s$dmshrink :: Model.Produkt -> [Model.Produkt]
+  {- Arity: 1, HasNoCafRefs, Strictness: <L,A>,
+     Unfolding: InlineRule (-1, True, True)
+                (\ ds1 :: Model.Produkt -> GHC.Types.[] @ Model.Produkt) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fEqPreis :: GHC.Classes.Eq Model.Preis
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Model.Preis Model.$fEqPreis_$c== Model.$fEqPreis_$c/= -}
+1d66ac91c3f9898e57ee79b366323620
+  $fEqPreis_$c/= :: Model.Preis -> Model.Preis -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (0, True, True)
+                GHC.Integer.Type.neqInteger
+                  `cast`
+                (Sym (Model.NTCo:Preis[0])
+                 ->_R Sym (Model.NTCo:Preis[0])
+                 ->_R <GHC.Types.Bool>_R) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fEqPreis_$c== :: Model.Preis -> Model.Preis -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U><S,1*U>,
+     Unfolding: InlineRule (0, True, True)
+                GHC.Integer.Type.eqInteger
+                  `cast`
+                (Sym (Model.NTCo:Preis[0])
+                 ->_R Sym (Model.NTCo:Preis[0])
+                 ->_R <GHC.Types.Bool>_R) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fEqProdukt :: GHC.Classes.Eq Model.Produkt
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Model.Produkt Model.$fEqProdukt_$c== Model.$fEqProdukt_$c/= -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fEqProduktId :: GHC.Classes.Eq Model.ProduktId
+  DFunId[0]
+  {- HasNoCafRefs, Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Model.ProduktId
+                  Model.$fEqProduktId_$c==
+                  Model.$fEqProduktId_$c/= -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fEqProduktId_$c/= ::
+    Model.ProduktId -> Model.ProduktId -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U(U)><S,1*U(U)>,
+     Unfolding: InlineRule (0, True, True)
+                GHC.Classes.neInt
+                  `cast`
+                (Sym (Model.NTCo:ProduktId[0])
+                 ->_R Sym (Model.NTCo:ProduktId[0])
+                 ->_R <GHC.Types.Bool>_R) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fEqProduktId_$c== ::
+    Model.ProduktId -> Model.ProduktId -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs, Strictness: <S,1*U(U)><S,1*U(U)>,
+     Unfolding: InlineRule (0, True, True)
+                GHC.Classes.eqInt
+                  `cast`
+                (Sym (Model.NTCo:ProduktId[0])
+                 ->_R Sym (Model.NTCo:ProduktId[0])
+                 ->_R <GHC.Types.Bool>_R) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fEqProdukt_$c/= ::
+    Model.Produkt -> Model.Produkt -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLLL),1*U(1*U(U),1*U(U,U,U),1*U(U,U,U),1*U,1*U(U))><S(SLLLL),1*U(1*U(U),1*U(U,U,U),1*U(U,U,U),1*U,1*U(U))>,
+     Unfolding: InlineRule (2, True, False)
+                (\ a3 :: Model.Produkt b :: Model.Produkt ->
+                 case Model.$fEqProdukt_$c== a3 b of wild {
+                   GHC.Types.False -> GHC.Types.True
+                   GHC.Types.True -> GHC.Types.False }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fEqProdukt_$c== ::
+    Model.Produkt -> Model.Produkt -> GHC.Types.Bool
+  {- Arity: 2, HasNoCafRefs,
+     Strictness: <S(SLLLL),1*U(1*U(U),1*U(U,U,U),1*U(U,U,U),1*U,1*U(U))><S(SLLLL),1*U(1*U(U),1*U(U,U,U),1*U(U,U,U),1*U,1*U(U))>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (2, True, False)
+                (\ w :: Model.Produkt w1 :: Model.Produkt ->
+                 case w of ww { Model.Produkt ww1 ww2 ww3 ww4 ww5 ->
+                 case ww1
+                        `cast`
+                      (Model.NTCo:ProduktId[0]) of ww6 { GHC.Types.I# ww7 ->
+                 case w1 of ww8 { Model.Produkt ww9 ww10 ww11 ww12 ww13 ->
+                 case ww9
+                        `cast`
+                      (Model.NTCo:ProduktId[0]) of ww14 { GHC.Types.I# ww15 ->
+                 Model.$w$c==
+                   ww7
+                   ww2
+                   ww3
+                   ww4
+                   ww5
+                   ww15
+                   ww10
+                   ww11
+                   ww12
+                   ww13 } } } }) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fFromJSONPreis :: Data.Aeson.Types.Class.FromJSON Model.Preis
+  DFunId[0]
+  {- Arity: 1, Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                Model.$fFromJSONPreis_$cparseJSON
+                  `cast`
+                (Sym (Data.Aeson.Types.Class.NTCo:FromJSON[0] <Model.Preis>_N)) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fFromJSONPreis_$cparseJSON ::
+    Data.Aeson.Types.Internal.Value
+    -> Data.Aeson.Types.Internal.Parser Model.Preis
+  {- Arity: 1,
+     Unfolding: InlineRule (0, True, True)
+                Data.Aeson.Types.Instances.$fFromJSONInteger_$cparseJSON
+                  `cast`
+                (<Data.Aeson.Types.Internal.Value>_R
+                 ->_R (Data.Aeson.Types.Internal.Parser
+                         (Sym (Model.NTCo:Preis[0])))_R) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fFromJSONProdukt :: Data.Aeson.Types.Class.FromJSON Model.Produkt
+  DFunId[0]
+  {- Arity: 1, Strictness: <S,1*U>, Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                Model.$fFromJSONProdukt_$cparseJSON
+                  `cast`
+                (Sym (Data.Aeson.Types.Class.NTCo:FromJSON[0]
+                          <Model.Produkt>_N)) -}
+47d0ee064e848f55f91bc483de21214f
+  $fFromJSONProdukt1 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "rabatt"#) -}
+a7e90e2b93372743fc7a173a67deab01
+  $fFromJSONProdukt2 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "preis"#) -}
+16fe295b8ffd427e88ebe935d75595aa
+  $fFromJSONProdukt3 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "beschreibung"#) -}
+fbd9d7b51a95d1ad70ee3dd509766707
+  $fFromJSONProdukt4 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "name"#) -}
+19b285661164018824b1e21d8b4e5d28
+  $fFromJSONProdukt5 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "id"#) -}
+5cb76a0286bf6df5557745be17d2e3fd
+  $fFromJSONProdukt6 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Object"#) -}
+f3239109e047153f4623280927ef9479
+  $fFromJSONProdukt7 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Model.Produkt"#) -}
+79718874a734f58b09e0e5c8a4479ad7
+  $fFromJSONProdukt8 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Produkt"#) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fFromJSONProduktId ::
+    Data.Aeson.Types.Class.FromJSON Model.ProduktId
+  DFunId[0]
+  {- Arity: 1, Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                Model.$fFromJSONProduktId_$cparseJSON
+                  `cast`
+                (Sym (Data.Aeson.Types.Class.NTCo:FromJSON[0]
+                          <Model.ProduktId>_N)) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fFromJSONProduktId_$cparseJSON ::
+    Data.Aeson.Types.Internal.Value
+    -> Data.Aeson.Types.Internal.Parser Model.ProduktId
+  {- Arity: 1,
+     Unfolding: InlineRule (0, True, True)
+                Data.Aeson.Types.Instances.$fFromJSONInt_$cparseJSON
+                  `cast`
+                (<Data.Aeson.Types.Internal.Value>_R
+                 ->_R (Data.Aeson.Types.Internal.Parser
+                         (Sym (Model.NTCo:ProduktId[0])))_R) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fFromJSONProdukt_$cparseJSON ::
+    Data.Aeson.Types.Internal.Value
+    -> Data.Aeson.Types.Internal.Parser Model.Produkt
+  {- Arity: 1, Strictness: <S,1*U>,
+     Unfolding: (\ value :: Data.Aeson.Types.Internal.Value ->
+                 case value of wild {
+                   DEFAULT
+                   -> Data.Aeson.TH.parseTypeMismatch'
+                        @ Model.Produkt
+                        Model.$fFromJSONProdukt8
+                        Model.$fFromJSONProdukt7
+                        Model.$fFromJSONProdukt6
+                        (case wild of wild1 {
+                           Data.Aeson.Types.Internal.Array ds1 -> Data.Aeson.TH.valueConName5
+                           Data.Aeson.Types.Internal.String ds1 -> Data.Aeson.TH.valueConName4
+                           Data.Aeson.Types.Internal.Number ds1 -> Data.Aeson.TH.valueConName3
+                           Data.Aeson.Types.Internal.Bool ds1 -> Data.Aeson.TH.valueConName2
+                           Data.Aeson.Types.Internal.Null -> Data.Aeson.TH.valueConName1 })
+                   Data.Aeson.Types.Internal.Object recObj
+                   -> let {
+                        m :: Data.Aeson.Types.Internal.Parser Model.ProduktId
+                        = case Model.$fFromJSONProdukt5 of ww { Data.Text.Internal.Text ww1 ww2 ww3 ->
+                          Data.Aeson.TH.$w$clookupField
+                            @ Model.ProduktId
+                            Data.Aeson.Types.Instances.$fFromJSONInt_$cparseJSON
+                              `cast`
+                            (Trans
+                                 (<Data.Aeson.Types.Internal.Value>_R
+                                  ->_R (Data.Aeson.Types.Internal.Parser
+                                          (Sym (Model.NTCo:ProduktId[0])))_R)
+                                 (Sym (Data.Aeson.Types.Class.NTCo:FromJSON[0]
+                                           <Model.ProduktId>_N)))
+                            Model.$fFromJSONProdukt7
+                            Model.$fFromJSONProdukt8
+                            recObj
+                            ww1
+                            ww2
+                            ww3 }
+                      } in
+                      let {
+                        e :: Data.Aeson.Types.Internal.Parser Data.Text.Internal.Text
+                        = case Model.$fFromJSONProdukt4 of ww { Data.Text.Internal.Text ww1 ww2 ww3 ->
+                          Data.Aeson.TH.$w$clookupField
+                            @ Data.Text.Internal.Text
+                            Data.Aeson.Types.Instances.$fFromJSONText0_$cparseJSON
+                              `cast`
+                            (Sym (Data.Aeson.Types.Class.NTCo:FromJSON[0]
+                                      <Data.Text.Internal.Text>_N))
+                            Model.$fFromJSONProdukt7
+                            Model.$fFromJSONProdukt8
+                            recObj
+                            ww1
+                            ww2
+                            ww3 }
+                      } in
+                      let {
+                        e1 :: Data.Aeson.Types.Internal.Parser Data.Text.Internal.Text
+                        = case Model.$fFromJSONProdukt3 of ww { Data.Text.Internal.Text ww1 ww2 ww3 ->
+                          Data.Aeson.TH.$w$clookupField
+                            @ Data.Text.Internal.Text
+                            Data.Aeson.Types.Instances.$fFromJSONText0_$cparseJSON
+                              `cast`
+                            (Sym (Data.Aeson.Types.Class.NTCo:FromJSON[0]
+                                      <Data.Text.Internal.Text>_N))
+                            Model.$fFromJSONProdukt7
+                            Model.$fFromJSONProdukt8
+                            recObj
+                            ww1
+                            ww2
+                            ww3 }
+                      } in
+                      let {
+                        e2 :: Data.Aeson.Types.Internal.Parser Model.Preis
+                        = case Model.$fFromJSONProdukt2 of ww { Data.Text.Internal.Text ww1 ww2 ww3 ->
+                          Data.Aeson.TH.$w$clookupField
+                            @ Model.Preis
+                            Data.Aeson.Types.Instances.$fFromJSONInteger_$cparseJSON
+                              `cast`
+                            (Trans
+                                 (<Data.Aeson.Types.Internal.Value>_R
+                                  ->_R (Data.Aeson.Types.Internal.Parser
+                                          (Sym (Model.NTCo:Preis[0])))_R)
+                                 (Sym (Data.Aeson.Types.Class.NTCo:FromJSON[0] <Model.Preis>_N)))
+                            Model.$fFromJSONProdukt7
+                            Model.$fFromJSONProdukt8
+                            recObj
+                            ww1
+                            ww2
+                            ww3 }
+                      } in
+                      let {
+                        e3 :: Data.Aeson.Types.Internal.Parser GHC.Types.Int
+                        = case Model.$fFromJSONProdukt1 of ww { Data.Text.Internal.Text ww1 ww2 ww3 ->
+                          Data.Aeson.TH.$w$clookupField
+                            @ GHC.Types.Int
+                            Data.Aeson.Types.Instances.$fFromJSONInt_$cparseJSON
+                              `cast`
+                            (Sym (Data.Aeson.Types.Class.NTCo:FromJSON[0] <GHC.Types.Int>_N))
+                            Model.$fFromJSONProdukt7
+                            Model.$fFromJSONProdukt8
+                            recObj
+                            ww1
+                            ww2
+                            ww3 }
+                      } in
+                      (\ @ (f :: * -> *)
+                         @ r
+                         kf :: Data.Aeson.Types.Internal.Failure f r
+                         ks :: Data.Aeson.Types.Internal.Success Model.Produkt f r ->
+                       m `cast`
+                       (Data.Aeson.Types.Internal.NTCo:Parser[0] <Model.ProduktId>_R)
+                         @ f
+                         @ r
+                         kf
+                         (\ a30 :: Model.ProduktId ->
+                          e `cast`
+                          (Data.Aeson.Types.Internal.NTCo:Parser[0]
+                               <Data.Text.Internal.Text>_R)
+                            @ f
+                            @ r
+                            kf
+                            (\ a31 :: Data.Text.Internal.Text ->
+                             e1
+                               `cast`
+                             (Data.Aeson.Types.Internal.NTCo:Parser[0]
+                                  <Data.Text.Internal.Text>_R)
+                               @ f
+                               @ r
+                               kf
+                               (\ a3 :: Data.Text.Internal.Text ->
+                                e2
+                                  `cast`
+                                (Data.Aeson.Types.Internal.NTCo:Parser[0] <Model.Preis>_R)
+                                  @ f
+                                  @ r
+                                  kf
+                                  (\ a4 :: Model.Preis ->
+                                   e3
+                                     `cast`
+                                   (Data.Aeson.Types.Internal.NTCo:Parser[0] <GHC.Types.Int>_R)
+                                     @ f
+                                     @ r
+                                     kf
+                                     (\ a5 :: GHC.Types.Int ->
+                                      ks (Model.Produkt a30 a31 a3 a4 a5)))))))
+                        `cast`
+                      (Sym (Data.Aeson.Types.Internal.NTCo:Parser[0]
+                                <Model.Produkt>_R)) }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fHasKeyProdukt :: Kafkaproto.Entity.HasKey Model.Produkt
+  DFunId[0]
+  {- Arity: 1, Strictness: <S(SLLLL),1*U(1*U(U),A,A,A,A)>,
+     Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                Model.$fHasKeyProdukt_$cgetKey
+                  `cast`
+                (Sym (Kafkaproto.Entity.NTCo:HasKey[0] <Model.Produkt>_N)) -}
+911d39d78dc13e1db25784942802fe81
+  $fHasKeyProdukt1 ::
+    Data.Text.Array.MArray s1
+    -> GHC.Types.Int
+    -> [GHC.Types.Char]
+    -> GHC.Prim.Int#
+    -> GHC.Prim.State# s1
+    -> (# GHC.Prim.State# s1, Data.Text.Internal.Text #)
+  {- Arity: 5, Strictness: <L,U(U)><L,U(U)><S,1*U><L,U><L,U>,
+     Inline: [0] -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fHasKeyProdukt_$cgetKey ::
+    Model.Produkt -> Data.Text.Internal.Text
+  {- Arity: 1, Strictness: <S(SLLLL),1*U(1*U(U),A,A,A,A)>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: Model.Produkt ->
+                 case w of ww { Model.Produkt ww1 ww2 ww3 ww4 ww5 ->
+                 case ww1
+                        `cast`
+                      (Model.NTCo:ProduktId[0]) of ww6 { GHC.Types.I# ww7 ->
+                 Model.$w$cgetKey ww7 } }) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fShowPreis :: GHC.Show.Show Model.Preis
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Model.Preis
+                  Model.$fShowPreis_$cshowsPrec
+                  Model.$fShowPreis_$cshow
+                  Model.$fShowPreis_$cshowList -}
+1d66ac91c3f9898e57ee79b366323620
+  $fShowPreis1 :: Model.Preis -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (\ w :: Model.Preis w1 :: GHC.Base.String ->
+                 Model.$w$cshowsPrec 0 w w1) -}
+a2535e0220ff92263746b4fa8b2f9f19
+  $fShowPreis2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Preis "#) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fShowPreis_$cshow :: Model.Preis -> GHC.Base.String
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: Model.Preis ->
+                 Model.$fShowPreis_$cshowsPrec
+                   GHC.Show.shows18
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fShowPreis_$cshowList :: [Model.Preis] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__
+                   @ Model.Preis
+                   Model.$fShowPreis1) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fShowPreis_$cshowsPrec ::
+    GHC.Types.Int -> Model.Preis -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <S,1*U(U)><L,U><L,U>, Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: GHC.Types.Int w1 :: Model.Preis w2 :: GHC.Base.String ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Model.$w$cshowsPrec ww1 w1 w2 }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProdukt :: GHC.Show.Show Model.Produkt
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Model.Produkt
+                  Model.$fShowProdukt_$cshowsPrec
+                  Model.$fShowProdukt_$cshow
+                  Model.$fShowProdukt_$cshowList -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProdukt1 :: Model.Produkt -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (\ w :: Model.Produkt w1 :: GHC.Base.String ->
+                 case w of ww { Model.Produkt ww1 ww2 ww3 ww4 ww5 ->
+                 Model.$w$cshowsPrec1 0 ww1 ww2 ww3 ww4 ww5 w1 }) -}
+47141e9d5df80632a20f94d4117e9c03
+  $fShowProdukt10 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "Produkt {"#) -}
+a073ff7f4f871d09c2fe19e1b2095490
+  $fShowProdukt2 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "}"#) -}
+7ccda8f0636546faee5631869bcda9ed
+  $fShowProdukt3 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_produktRabatt = "#) -}
+55da6970c592cd65e1459ff267fb434d
+  $fShowProdukt4 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_produktPreis = "#) -}
+77804ad79ba80c814a6b1295714e4f92
+  $fShowProdukt5 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString#
+                   "_produktBeschreibung = "#) -}
+d6c1dad06eea03cb4bf71f54de5b981d
+  $fShowProdukt6 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_produktName = "#) -}
+a12b707b2dd8c1cf15f214f493de4fc2
+  $fShowProdukt7 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# ", "#) -}
+3f5a0be031b21fd8658c4bfdca909568
+  $fShowProdukt8 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "ProduktId "#) -}
+b6dab2a6753a7e005dbf7dc33e240ba2
+  $fShowProdukt9 :: [GHC.Types.Char]
+  {- Unfolding: (GHC.CString.unpackCString# "_produktId = "#) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProduktId :: GHC.Show.Show Model.ProduktId
+  DFunId[0]
+  {- Strictness: m, Inline: [ALWAYS] CONLIKE,
+     Unfolding: DFun:.
+                  @ Model.ProduktId
+                  Model.$fShowProduktId_$cshowsPrec
+                  Model.$fShowProduktId_$cshow
+                  Model.$fShowProduktId_$cshowList -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProduktId1 :: Model.ProduktId -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (\ w :: Model.ProduktId w1 :: GHC.Base.String ->
+                 Model.$w$cshowsPrec2 0 w w1) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProduktId_$cshow :: Model.ProduktId -> GHC.Base.String
+  {- Arity: 1, Strictness: <L,1*U(U)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: Model.ProduktId ->
+                 Model.$fShowProduktId_$cshowsPrec
+                   GHC.Show.shows18
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProduktId_$cshowList :: [Model.ProduktId] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__
+                   @ Model.ProduktId
+                   Model.$fShowProduktId1) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProduktId_$cshowsPrec ::
+    GHC.Types.Int -> Model.ProduktId -> GHC.Show.ShowS
+  {- Arity: 3, Strictness: <S,1*U(U)><L,1*U(U)><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: GHC.Types.Int
+                   w1 :: Model.ProduktId
+                   w2 :: GHC.Base.String ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 Model.$w$cshowsPrec2 ww1 w1 w2 }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProdukt_$cshow :: Model.Produkt -> GHC.Base.String
+  {- Arity: 1,
+     Strictness: <S,1*U(1*U(U),1*U(U,U,U),1*U(U,U,U),U,1*U(U))>,
+     Unfolding: InlineRule (1, True, False)
+                (\ x :: Model.Produkt ->
+                 Model.$fShowProdukt_$cshowsPrec
+                   GHC.Show.shows18
+                   x
+                   (GHC.Types.[] @ GHC.Types.Char)) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProdukt_$cshowList :: [Model.Produkt] -> GHC.Show.ShowS
+  {- Arity: 2,
+     Unfolding: (GHC.Show.showList__
+                   @ Model.Produkt
+                   Model.$fShowProdukt1) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fShowProdukt_$cshowsPrec ::
+    GHC.Types.Int -> Model.Produkt -> GHC.Show.ShowS
+  {- Arity: 3,
+     Strictness: <S,1*U(U)><S,1*U(1*U(U),1*U(U,U,U),1*U(U,U,U),U,1*U(U))><L,U>,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (3, True, False)
+                (\ w :: GHC.Types.Int w1 :: Model.Produkt w2 :: GHC.Base.String ->
+                 case w of ww { GHC.Types.I# ww1 ->
+                 case w1 of ww2 { Model.Produkt ww3 ww4 ww5 ww6 ww7 ->
+                 Model.$w$cshowsPrec1 ww1 ww3 ww4 ww5 ww6 ww7 w2 } }) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fToJSONPreis :: Data.Aeson.Types.Class.ToJSON Model.Preis
+  DFunId[0]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>m4,
+     Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                Model.$fToJSONPreis_$ctoJSON
+                  `cast`
+                (Sym (Data.Aeson.Types.Class.NTCo:ToJSON[0] <Model.Preis>_N)) -}
+1d66ac91c3f9898e57ee79b366323620
+  $fToJSONPreis_$ctoJSON ::
+    Model.Preis -> Data.Aeson.Types.Internal.Value
+  {- Arity: 1, HasNoCafRefs, Strictness: <S,1*U>m4,
+     Unfolding: InlineRule (0, True, True)
+                Data.Aeson.Types.Instances.$fToJSONInteger_$ctoJSON
+                  `cast`
+                (Sym (Model.NTCo:Preis[0])
+                 ->_R <Data.Aeson.Types.Internal.Value>_R) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fToJSONProdukt :: Data.Aeson.Types.Class.ToJSON Model.Produkt
+  DFunId[0]
+  {- Arity: 1, Strictness: <S,1*U(1*U(U),U,U,1*U,1*U(U))>m1,
+     Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                Model.$fToJSONProdukt_$ctoJSON
+                  `cast`
+                (Sym (Data.Aeson.Types.Class.NTCo:ToJSON[0] <Model.Produkt>_N)) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fToJSONProduktId :: Data.Aeson.Types.Class.ToJSON Model.ProduktId
+  DFunId[0]
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(S),1*U(U)>m4,
+     Inline: INLINE (sat-args=0),
+     Unfolding: InlineRule (0, False, True)
+                Model.$fToJSONProduktId_$ctoJSON
+                  `cast`
+                (Sym (Data.Aeson.Types.Class.NTCo:ToJSON[0]
+                          <Model.ProduktId>_N)) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fToJSONProduktId_$ctoJSON ::
+    Model.ProduktId -> Data.Aeson.Types.Internal.Value
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(S),1*U(U)>m4,
+     Unfolding: InlineRule (0, True, True)
+                Data.Aeson.Types.Instances.$fToJSONInt_$ctoJSON
+                  `cast`
+                (Sym (Model.NTCo:ProduktId[0])
+                 ->_R <Data.Aeson.Types.Internal.Value>_R) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $fToJSONProdukt_$ctoJSON ::
+    Model.Produkt -> Data.Aeson.Types.Internal.Value
+  {- Arity: 1, Strictness: <S,1*U(1*U(U),U,U,1*U,1*U(U))>m1,
+     Inline: INLINE[0],
+     Unfolding: InlineRule (1, True, False)
+                (\ w :: Model.Produkt ->
+                 case w of ww { Model.Produkt ww1 ww2 ww3 ww4 ww5 ->
+                 case Model.$w$ctoJSON ww1 ww2 ww3 ww4 ww5 of ww6 { (##) ww7 ->
+                 Data.Aeson.Types.Internal.Object ww7 } }) -}
+37da4f1592bb43cde5f945a38e909e64
+  $w$c== ::
+    GHC.Prim.Int#
+    -> Data.Text.Internal.Text
+    -> Data.Text.Internal.Text
+    -> Model.Preis
+    -> GHC.Types.Int
+    -> GHC.Prim.Int#
+    -> Data.Text.Internal.Text
+    -> Data.Text.Internal.Text
+    -> Model.Preis
+    -> GHC.Types.Int
+    -> GHC.Types.Bool
+  {- Arity: 10, HasNoCafRefs,
+     Strictness: <L,U><L,1*U(U,U,U)><L,1*U(U,U,U)><L,1*U><L,1*U(U)><L,U><L,1*U(U,U,U)><L,1*U(U,U,U)><L,1*U><L,1*U(U)>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: Data.Text.Internal.Text
+                   ww2 :: Data.Text.Internal.Text
+                   ww3 :: Model.Preis
+                   ww4 :: GHC.Types.Int
+                   ww5 :: GHC.Prim.Int#
+                   ww6 :: Data.Text.Internal.Text
+                   ww7 :: Data.Text.Internal.Text
+                   ww8 :: Model.Preis
+                   ww9 :: GHC.Types.Int ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.==# ww ww5) of wild {
+                   GHC.Types.False -> GHC.Types.False
+                   GHC.Types.True
+                   -> case ww1 of wild1 { Data.Text.Internal.Text dt dt1 dt2 ->
+                      case ww6 of wild2 { Data.Text.Internal.Text dt3 dt4 dt5 ->
+                      case GHC.Prim.tagToEnum#
+                             @ GHC.Types.Bool
+                             (GHC.Prim.==# dt2 dt5) of wild3 {
+                        GHC.Types.False -> GHC.Types.False
+                        GHC.Types.True
+                        -> case {__pkg_ccall text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne _hs_text_memcmp GHC.Prim.ByteArray#
+                                                                                                      -> GHC.Prim.Word#
+                                                                                                      -> GHC.Prim.ByteArray#
+                                                                                                      -> GHC.Prim.Word#
+                                                                                                      -> GHC.Prim.Word#
+                                                                                                      -> GHC.Prim.State#
+                                                                                                           GHC.Prim.RealWorld
+                                                                                                      -> (# GHC.Prim.State#
+                                                                                                              GHC.Prim.RealWorld,
+                                                                                                            GHC.Prim.Int# #)}
+                                  dt
+                                  (GHC.Prim.int2Word# dt1)
+                                  dt3
+                                  (GHC.Prim.int2Word# dt4)
+                                  (GHC.Prim.int2Word# dt2)
+                                  GHC.Prim.realWorld# of wild4 { (#,#) ds11 ds12 ->
+                           case GHC.Prim.narrow32Int# ds12 of wild5 {
+                             DEFAULT -> GHC.Types.False
+                             0
+                             -> case ww2 of wild6 { Data.Text.Internal.Text dt7 dt8 dt9 ->
+                                case ww7 of wild7 { Data.Text.Internal.Text dt10 dt11 dt12 ->
+                                case GHC.Prim.tagToEnum#
+                                       @ GHC.Types.Bool
+                                       (GHC.Prim.==# dt9 dt12) of wild8 {
+                                  GHC.Types.False -> GHC.Types.False
+                                  GHC.Types.True
+                                  -> case {__pkg_ccall text-1.2.2.1@text_HmqVQnZSpjaC156ABqPhne _hs_text_memcmp GHC.Prim.ByteArray#
+                                                                                                                -> GHC.Prim.Word#
+                                                                                                                -> GHC.Prim.ByteArray#
+                                                                                                                -> GHC.Prim.Word#
+                                                                                                                -> GHC.Prim.Word#
+                                                                                                                -> GHC.Prim.State#
+                                                                                                                     GHC.Prim.RealWorld
+                                                                                                                -> (# GHC.Prim.State#
+                                                                                                                        GHC.Prim.RealWorld,
+                                                                                                                      GHC.Prim.Int# #)}
+                                            dt7
+                                            (GHC.Prim.int2Word# dt8)
+                                            dt10
+                                            (GHC.Prim.int2Word# dt11)
+                                            (GHC.Prim.int2Word# dt9)
+                                            GHC.Prim.realWorld# of wild9 { (#,#) ds1 ds2 ->
+                                     case GHC.Prim.narrow32Int# ds2 of wild10 {
+                                       DEFAULT -> GHC.Types.False
+                                       0
+                                       -> case GHC.Integer.Type.eqInteger#
+                                                 ww3 `cast` (Model.NTCo:Preis[0])
+                                                 ww8
+                                                   `cast`
+                                                 (Model.NTCo:Preis[0]) of wild11 { DEFAULT ->
+                                          case GHC.Prim.tagToEnum#
+                                                 @ GHC.Types.Bool
+                                                 wild11 of wild12 {
+                                            GHC.Types.False -> GHC.Types.False
+                                            GHC.Types.True
+                                            -> GHC.Classes.eqInt
+                                                 ww4
+                                                 ww9 } } } } } } } } } } } } }) -}
+2a64e1721e9ef9f26c2ebfa6fe49946b
+  $w$cgetKey :: GHC.Prim.Int# -> Data.Text.Internal.Text
+  {- Arity: 1, Strictness: <L,U>, Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int# ->
+                 case GHC.Show.$wshowSignedInt
+                        0
+                        ww
+                        (GHC.Types.[] @ GHC.Types.Char) of ww4 { (#,#) ww5 ww6 ->
+                 GHC.ST.runSTRep
+                   @ Data.Text.Internal.Text
+                   (\ @ s1 s2 :: GHC.Prim.State# s1[OneShot] ->
+                    case GHC.Prim.newByteArray# @ s1 8 s2 of ds1 { (#,#) ipv ipv1 ->
+                    Model.$fHasKeyProdukt1
+                      @ s1
+                      (Data.Text.Array.MArray @ s1 ipv1)
+                      Model.$fArbitraryProdukt4
+                      (GHC.Types.: @ GHC.Types.Char ww5 ww6)
+                      0
+                      ipv }) }) -}
+1d66ac91c3f9898e57ee79b366323620
+  $w$cshowsPrec ::
+    GHC.Prim.Int# -> Model.Preis -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 3, Strictness: <L,U><L,U><L,U>, Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   w :: Model.Preis
+                   w1 :: GHC.Base.String ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.>=# ww 11) of wild {
+                   GHC.Types.False
+                   -> GHC.Base.++
+                        @ GHC.Types.Char
+                        Model.$fShowPreis2
+                        (case GHC.Show.$w$cshowsPrec1
+                                11
+                                w `cast` (Model.NTCo:Preis[0])
+                                w1 of ww2 { (#,#) ww3 ww4 ->
+                         GHC.Types.: @ GHC.Types.Char ww3 ww4 })
+                   GHC.Types.True
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.shows9
+                        (GHC.Base.++
+                           @ GHC.Types.Char
+                           Model.$fShowPreis2
+                           (case GHC.Show.$w$cshowsPrec1
+                                   11
+                                   w `cast` (Model.NTCo:Preis[0])
+                                   (GHC.Types.:
+                                      @ GHC.Types.Char
+                                      GHC.Show.shows8
+                                      w1) of ww2 { (#,#) ww3 ww4 ->
+                            GHC.Types.: @ GHC.Types.Char ww3 ww4 })) }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $w$cshowsPrec1 ::
+    GHC.Prim.Int#
+    -> Model.ProduktId
+    -> Data.Text.Internal.Text
+    -> Data.Text.Internal.Text
+    -> Model.Preis
+    -> GHC.Types.Int
+    -> GHC.Base.String
+    -> GHC.Base.String
+  {- Arity: 7,
+     Strictness: <L,U><L,1*U(U)><L,1*U(U,U,U)><L,1*U(U,U,U)><L,U><L,1*U(U)><L,U>,
+     Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   ww1 :: Model.ProduktId
+                   ww2 :: Data.Text.Internal.Text
+                   ww3 :: Data.Text.Internal.Text
+                   ww4 :: Model.Preis
+                   ww5 :: GHC.Types.Int
+                   w :: GHC.Base.String ->
+                 let {
+                   p :: GHC.Show.ShowS {- Arity: 1, Strictness: <L,1*U> -}
+                   = \ x :: GHC.Base.String[OneShot] ->
+                     GHC.Base.++
+                       @ GHC.Types.Char
+                       Model.$fShowProdukt10
+                       (GHC.Base.++
+                          @ GHC.Types.Char
+                          Model.$fShowProdukt9
+                          (Model.$w$cshowsPrec2
+                             0
+                             ww1
+                             (GHC.Base.++
+                                @ GHC.Types.Char
+                                Model.$fShowProdukt7
+                                (GHC.Base.++
+                                   @ GHC.Types.Char
+                                   Model.$fShowProdukt6
+                                   (case Data.Text.Show.$w$cshowsPrec
+                                           ww2
+                                           (GHC.Base.++
+                                              @ GHC.Types.Char
+                                              Model.$fShowProdukt7
+                                              (GHC.Base.++
+                                                 @ GHC.Types.Char
+                                                 Model.$fShowProdukt5
+                                                 (case Data.Text.Show.$w$cshowsPrec
+                                                         ww3
+                                                         (GHC.Base.++
+                                                            @ GHC.Types.Char
+                                                            Model.$fShowProdukt7
+                                                            (GHC.Base.++
+                                                               @ GHC.Types.Char
+                                                               Model.$fShowProdukt4
+                                                               (Model.$w$cshowsPrec
+                                                                  0
+                                                                  ww4
+                                                                  (GHC.Base.++
+                                                                     @ GHC.Types.Char
+                                                                     Model.$fShowProdukt7
+                                                                     (GHC.Base.++
+                                                                        @ GHC.Types.Char
+                                                                        Model.$fShowProdukt3
+                                                                        (case ww5 of ww6 { GHC.Types.I# ww7 ->
+                                                                         case GHC.Show.$wshowSignedInt
+                                                                                0
+                                                                                ww7
+                                                                                (GHC.Base.++
+                                                                                   @ GHC.Types.Char
+                                                                                   Model.$fShowProdukt2
+                                                                                   x) of ww8 { (#,#) ww9 ww10 ->
+                                                                         GHC.Types.:
+                                                                           @ GHC.Types.Char
+                                                                           ww9
+                                                                           ww10 } })))))) of ww6 { (#,#) ww7 ww8 ->
+                                                  GHC.Types.:
+                                                    @ GHC.Types.Char
+                                                    ww7
+                                                    ww8 }))) of ww6 { (#,#) ww7 ww8 ->
+                                    GHC.Types.: @ GHC.Types.Char ww7 ww8 })))))
+                 } in
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.>=# ww 11) of wild {
+                   GHC.Types.False -> p w
+                   GHC.Types.True
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.shows9
+                        (p (GHC.Types.: @ GHC.Types.Char GHC.Show.shows8 w)) }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $w$cshowsPrec2 ::
+    GHC.Prim.Int#
+    -> Model.ProduktId -> GHC.Base.String -> GHC.Base.String
+  {- Arity: 3, Strictness: <L,U><L,1*U(U)><L,U>, Inline: [0],
+     Unfolding: (\ ww :: GHC.Prim.Int#
+                   w :: Model.ProduktId
+                   w1 :: GHC.Base.String ->
+                 case GHC.Prim.tagToEnum#
+                        @ GHC.Types.Bool
+                        (GHC.Prim.>=# ww 11) of wild {
+                   GHC.Types.False
+                   -> GHC.Base.++
+                        @ GHC.Types.Char
+                        Model.$fShowProdukt8
+                        (case w `cast`
+                              (Model.NTCo:ProduktId[0]) of ww2 { GHC.Types.I# ww3 ->
+                         case GHC.Show.$wshowSignedInt 11 ww3 w1 of ww4 { (#,#) ww5 ww6 ->
+                         GHC.Types.: @ GHC.Types.Char ww5 ww6 } })
+                   GHC.Types.True
+                   -> GHC.Types.:
+                        @ GHC.Types.Char
+                        GHC.Show.shows9
+                        (GHC.Base.++
+                           @ GHC.Types.Char
+                           Model.$fShowProdukt8
+                           (case w `cast`
+                                 (Model.NTCo:ProduktId[0]) of ww2 { GHC.Types.I# ww3 ->
+                            case GHC.Show.$wshowSignedInt
+                                   11
+                                   ww3
+                                   (GHC.Types.:
+                                      @ GHC.Types.Char
+                                      GHC.Show.shows8
+                                      w1) of ww4 { (#,#) ww5 ww6 ->
+                            GHC.Types.: @ GHC.Types.Char ww5 ww6 } })) }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $w$ctoJSON ::
+    Model.ProduktId
+    -> Data.Text.Internal.Text
+    -> Data.Text.Internal.Text
+    -> Model.Preis
+    -> GHC.Types.Int
+    -> (# Data.Aeson.Types.Internal.Object #)
+  {- Arity: 5, Strictness: <L,1*U(U)><L,U><L,U><L,1*U><L,1*U(U)>,
+     Inline: [0],
+     Unfolding: (\ ww :: Model.ProduktId
+                   ww1 :: Data.Text.Internal.Text
+                   ww2 :: Data.Text.Internal.Text
+                   ww3 :: Model.Preis
+                   ww4 :: GHC.Types.Int ->
+                 case Data.Aeson.Types.Internal.$sfromList1
+                        @ Data.Aeson.Types.Internal.Value
+                        (GHC.Types.:
+                           @ Data.Aeson.Types.Internal.Pair
+                           (Model.$fFromJSONProdukt5,
+                            case ww
+                                   `cast`
+                                 (Model.NTCo:ProduktId[0]) of wild { GHC.Types.I# i ->
+                            case GHC.Integer.Type.smallInteger i of dt { DEFAULT ->
+                            Data.Aeson.Types.Internal.Number
+                              (Data.Scientific.Scientific dt 0) } })
+                           (GHC.Types.:
+                              @ Data.Aeson.Types.Internal.Pair
+                              (Model.$fFromJSONProdukt4, Data.Aeson.Types.Internal.$WString ww1)
+                              (GHC.Types.:
+                                 @ Data.Aeson.Types.Internal.Pair
+                                 (Model.$fFromJSONProdukt3, Data.Aeson.Types.Internal.$WString ww2)
+                                 (GHC.Types.:
+                                    @ Data.Aeson.Types.Internal.Pair
+                                    (Model.$fFromJSONProdukt2,
+                                     case ww3 `cast` (Model.NTCo:Preis[0]) of dt { DEFAULT ->
+                                     Data.Aeson.Types.Internal.Number
+                                       (Data.Scientific.Scientific dt 0) })
+                                    (GHC.Types.:
+                                       @ Data.Aeson.Types.Internal.Pair
+                                       (Model.$fFromJSONProdukt1,
+                                        case ww4 of wild { GHC.Types.I# i ->
+                                        case GHC.Integer.Type.smallInteger i of dt { DEFAULT ->
+                                        Data.Aeson.Types.Internal.Number
+                                          (Data.Scientific.Scientific dt 0) } })
+                                       (GHC.Types.[] @ Data.Aeson.Types.Internal.Pair))))))
+                        (Data.HashMap.Base.Empty
+                           @ Data.Text.Internal.Text
+                           @ Data.Aeson.Types.Internal.Value) of dt { DEFAULT ->
+                 (# dt #) }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  $wa ::
+    Test.QuickCheck.Random.QCGen
+    -> GHC.Types.Int
+    -> (# Model.ProduktId,
+          Data.Text.Internal.Text,
+          Data.Text.Internal.Text,
+          Model.Preis,
+          GHC.Types.Int #)
+  {- Arity: 2, Strictness: <L,1*U(U,U,U,1*U,A,A)><L,U(U)>,
+     Inline: [0],
+     Unfolding: (\ w :: Test.QuickCheck.Random.QCGen
+                   w1 :: GHC.Types.Int ->
+                 let {
+                   ds1 :: (System.Random.TF.Gen.TFGen, System.Random.TF.Gen.TFGen)
+                   = case w `cast`
+                          (Test.QuickCheck.Random.NTCo:QCGen[0]) of ww { System.Random.TF.Gen.TFGen ww1 ww2 ww3 ww4 ww5 ww6 ->
+                     case System.Random.TF.Gen.$wtfGenSplit
+                            ww1
+                            ww2
+                            ww3
+                            ww4 of ww7 { (#,#) ww8 ww9 ->
+                     (ww8, ww9) } }
+                 } in
+                 case Model.$fArbitraryProdukt6
+                        `cast`
+                      (Test.QuickCheck.Gen.NTCo:Gen[0] <Model.Produkt>_R)
+                        (case ds1 of wild { (,) g1 g2 ->
+                         g1 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0])) })
+                        w1 of wild { Model.Produkt x x1 x2 x3 x4 ->
+                 let {
+                   ds2 :: (System.Random.TF.Gen.TFGen, System.Random.TF.Gen.TFGen)
+                   = case ds1 of wild1 { (,) g1 g2 ->
+                     case g2 of ww { System.Random.TF.Gen.TFGen ww1 ww2 ww3 ww4 ww5 ww6 ->
+                     case System.Random.TF.Gen.$wtfGenSplit
+                            ww1
+                            ww2
+                            ww3
+                            ww4 of ww7 { (#,#) ww8 ww9 ->
+                     (ww8, ww9) } } }
+                 } in
+                 (# x,
+                    x1,
+                    case w1 of ww { GHC.Types.I# ww1 ->
+                    case Test.QuickCheck.Arbitrary.$wa18
+                           @ GHC.Types.Char
+                           Test.QuickCheck.Arbitrary.$fArbitraryChar
+                           (case ds2 of wild1 { (,) g1 g2 ->
+                            g1 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0])) })
+                           ww1 of dt { DEFAULT ->
+                    GHC.ST.runSTRep
+                      @ Data.Text.Internal.Text
+                      (\ @ s1 s2 :: GHC.Prim.State# s1[OneShot] ->
+                       case GHC.Prim.newByteArray# @ s1 8 s2 of ds3 { (#,#) ipv ipv1 ->
+                       Model.$fArbitraryProdukt5
+                         @ s1
+                         (Data.Text.Array.MArray @ s1 ipv1)
+                         Model.$fArbitraryProdukt4
+                         dt
+                         0
+                         ipv }) } },
+                    x3,
+                    case System.Random.$wrandomIvalInteger
+                           @ Test.QuickCheck.Random.QCGen
+                           @ GHC.Types.Int
+                           Test.QuickCheck.Random.$fRandomGenQCGen
+                           GHC.Num.$fNumInt
+                           Model.$fArbitraryProdukt3
+                           Model.$fArbitraryProdukt2
+                           (case ds2 of wild1 { (,) g1 g2 ->
+                            case g2 of ww { System.Random.TF.Gen.TFGen ww1 ww2 ww3 ww4 ww5 ww6 ->
+                            case System.Random.TF.Gen.$wtfGenSplit
+                                   ww1
+                                   ww2
+                                   ww3
+                                   ww4 of ww7 { (#,#) ww8 ww9 ->
+                            ww8
+                              `cast`
+                            (Sym (Test.QuickCheck.Random.NTCo:QCGen[0])) } } }) of ww2 { (#,#) ww3 ww4 ->
+                    ww3 } #) }) -}
+1d66ac91c3f9898e57ee79b366323620
+  newtype Preis = Preis GHC.Integer.Type.Integer
+b6653886001fd9fe20b5d4f45b2abdb2
+  data Produkt
+    = Produkt {_produktId :: Model.ProduktId,
+               _produktName :: Data.Text.Internal.Text,
+               _produktBeschreibung :: Data.Text.Internal.Text,
+               _produktPreis :: Model.Preis,
+               _produktRabatt :: GHC.Types.Int}
+b6653886001fd9fe20b5d4f45b2abdb2
+  newtype ProduktId = ProduktId GHC.Types.Int
+797cdadf4fd256ab64616af50ecb9770
+  _produktBeschreibung :: Model.Produkt -> Data.Text.Internal.Text
+  RecSel Model.Produkt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLSLL),1*U(A,A,1*U(U,U,U),A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt ds1 ds2 ds3 ds4 ds5 -> ds3 }) -}
+1fd3d3b3b9c8cc77eb06c7f433d3def9
+  _produktId :: Model.Produkt -> Model.ProduktId
+  RecSel Model.Produkt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(SLLLL),1*U(1*U(U),A,A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt ds1 ds2 ds3 ds4 ds5 -> ds1 }) -}
+3c60bd299e238864ef7bcfa1cc28704d
+  _produktName :: Model.Produkt -> Data.Text.Internal.Text
+  RecSel Model.Produkt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LSLLL),1*U(A,1*U(U,U,U),A,A,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt ds1 ds2 ds3 ds4 ds5 -> ds2 }) -}
+79e5a0b390dd0d0747a730c3b5cf3267
+  _produktPreis :: Model.Produkt -> Model.Preis
+  RecSel Model.Produkt
+  {- Arity: 1, HasNoCafRefs, Strictness: <S(LLLSL),1*U(A,A,A,1*U,A)>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt ds1 ds2 ds3 ds4 ds5 -> ds4 }) -}
+80c4d173c5b43130e9685b63757dca9c
+  _produktRabatt :: Model.Produkt -> GHC.Types.Int
+  RecSel Model.Produkt
+  {- Arity: 1, HasNoCafRefs,
+     Strictness: <S(LLLLS),1*U(A,A,A,A,1*U(U))>,
+     Unfolding: InlineRule (1, True, False)
+                (\ ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt ds1 ds2 ds3 ds4 ds5 -> ds5 }) -}
+00be89eced25f6977695d3eb461160c7
+  produkt :: GHC.Types.IO (Kafkaproto.Message.Message Model.Produkt)
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Model.produkt1
+                  `cast`
+                (Sym (GHC.Types.NTCo:IO[0]
+                          <Kafkaproto.Message.Message Model.Produkt>_R)) -}
+61b704a7302f8c967b443c8bfe267db3
+  produkt1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld,
+          Kafkaproto.Message.Message Model.Produkt #)
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: (\ eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case System.Random.TF.Init.theTFGen
+                        `cast`
+                      (GHC.IORef.NTCo:IORef[0] <System.Random.TF.Gen.TFGen>_N) of wild { GHC.STRef.STRef r# ->
+                 case GHC.Prim.atomicModifyMutVar#
+                        @ GHC.Prim.RealWorld
+                        @ System.Random.TF.Gen.TFGen
+                        @ (System.Random.TF.Gen.TFGen, System.Random.TF.Gen.TFGen)
+                        @ System.Random.TF.Gen.TFGen
+                        r#
+                        System.Random.TF.Gen.tfGenSplit
+                        eta of ds1 { (#,#) ipv ipv1 ->
+                 (# ipv,
+                    case Kafkaproto.Message.$wa1
+                           @ Model.Produkt
+                           Model.$fArbitraryProdukt
+                           Model.$fHasKeyProdukt_$cgetKey
+                             `cast`
+                           (Sym (Kafkaproto.Entity.NTCo:HasKey[0] <Model.Produkt>_N))
+                           ipv1 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0]))
+                           Test.QuickCheck.Gen.generate2 of ww { (#,,,,#) ww1 ww2 ww3 ww4 ww5 ->
+                    Kafkaproto.Message.Message
+                      @ Model.Produkt
+                      ww1
+                      ww2
+                      ww3
+                      ww4
+                      ww5 } #) } }) -}
+25a13c8ae85125b22e9e470fba787800
+  produktBeschreibung ::
+    Control.Lens.Type.Lens' Model.Produkt Data.Text.Internal.Text
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <S(C(C(S))L),1*U(1*C1(C1(U)),A)><L,1*C1(U)><S,1*U(U,U,U,U,U)>,
+     Inline: INLINE (sat-args=2),
+     Unfolding: InlineRule (3, False, False)
+                (\ @ (f :: * -> *)
+                   $dFunctor :: GHC.Base.Functor f
+                   f1 :: Data.Text.Internal.Text -> f Data.Text.Internal.Text
+                   ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt x x1 x2 x3 x4 ->
+                 GHC.Base.fmap
+                   @ f
+                   $dFunctor
+                   @ Data.Text.Internal.Text
+                   @ Model.Produkt
+                   (\ y :: Data.Text.Internal.Text -> Model.Produkt x x1 y x3 x4)
+                   (f1 x2) }) -}
+0b3128760f8ee8e3fe346bfbdfd5d356
+  produktDaten ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten123
+                   Model.produktDaten1) -}
+9c65ad5e7d7413df4eb86a7997bca498
+  produktDaten1 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten121
+                   Model.produktDaten2) -}
+08ad50942183c2922427575f8b39ffea
+  produktDaten10 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten102
+                   Model.produktDaten11) -}
+9dc118dee823d05338157f6a1289a3cc
+  produktDaten100 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten101, Model.produktDaten60)) -}
+c8aa963ff3ef89783767c6af09a1a3d8
+  produktDaten101 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString#
+                   "Gew\\195\\188rzgurken"#) -}
+cf0ecd94d709448537b99e7bfbfb5ddb
+  produktDaten102 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten103, Model.produktDaten43)) -}
+99ccb4bc14ae6f5efd6cefc76f32bc68
+  produktDaten103 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString#
+                   "Gr\\195\\188nkohl"#) -}
+856e1e124f04fdb9428de5c30bce1430
+  produktDaten104 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten105, Model.produktDaten43)) -}
+61b8f8a69ed37c467298abde81230d52
+  produktDaten105 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Fenchel"#) -}
+5915c9623dfeee3b98990ee7663770c7
+  produktDaten106 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten107, Model.produktDaten84)) -}
+a4e667378e4694aca25629f03af077ba
+  produktDaten107 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Feldsalat"#) -}
+be4598fe7227e854cb561ae968926a74
+  produktDaten108 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten109, Model.produktDaten84)) -}
+be516179af76b75e74f421edbc034a33
+  produktDaten109 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Endivie"#) -}
+0ff130071b5f1d1eb5a2ba832be447b5
+  produktDaten11 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten100
+                   Model.produktDaten12) -}
+8ef12fcef0b6af98169e8477cf63366a
+  produktDaten110 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten111, Model.produktDaten60)) -}
+631a7b43eb8bf2cdba1b4928b2b2d68f
+  produktDaten111 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Chinakohl"#) -}
+e3b2c801cf4c77e3510585c976649cdf
+  produktDaten112 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten113, Model.produktDaten60)) -}
+31f96a8da97f73cecfbbeeb96ec12a09
+  produktDaten113 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString#
+                   "Chicor\\195\\169e"#) -}
+9d7faa90e76a0d0eabe41e42d7d4bdef
+  produktDaten114 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten115, Model.produktDaten43)) -}
+16ed1c4c309d8c7bcc3ce22f2e41fea3
+  produktDaten115 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Brokkoli"#) -}
+6e28d3406ff87dd387e7ac661a679437
+  produktDaten116 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten117, Model.produktDaten43)) -}
+644931750b27632698b892c7a64fbc92
+  produktDaten117 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Blumenkohl"#) -}
+2332c62db997ea4815b74d93fb02b270
+  produktDaten118 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten120, Model.produktDaten119)) -}
+539c9ebd6c7ccdb7232cf9aacd1a3728
+  produktDaten119 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 30) -}
+4cdb4c67dfffa12c65c1456a5fff033c
+  produktDaten12 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten98
+                   Model.produktDaten13) -}
+c6dfe28e7efc4bee40c399acc1ce2438
+  produktDaten120 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Bambussprossen"#) -}
+8f3217e893b2f75cbfd97bfb3f32bc7a
+  produktDaten121 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten122, Model.produktDaten43)) -}
+e8a7a5d07939dc4c346c79ae5fface1f
+  produktDaten122 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Auberginen"#) -}
+d65caeb9ad6c3944537ea370c8714ff2
+  produktDaten123 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten124, Model.produktDaten43)) -}
+b9192ee5b69cf7ddd3e4a7ff663961e6
+  produktDaten124 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Artischocken"#) -}
+8555ed03884499cd98ccdaaa21cacd84
+  produktDaten13 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten96
+                   Model.produktDaten14) -}
+3ac10e147f9be4d0828c18e08a5a83ec
+  produktDaten14 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten94
+                   Model.produktDaten15) -}
+9e41b8f7428713e7d7cf281bf81114cb
+  produktDaten15 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten92
+                   Model.produktDaten16) -}
+edb4eddb2c492fc62151f9392e64644a
+  produktDaten16 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten90
+                   Model.produktDaten17) -}
+ee21d417007cb83ffe80edcb15a3c8fe
+  produktDaten17 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten88
+                   Model.produktDaten18) -}
+86d055abc40f757aef17ea0f1219e845
+  produktDaten18 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten86
+                   Model.produktDaten19) -}
+b1726c8f991727545eb71cfc66f6fe65
+  produktDaten19 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten83
+                   Model.produktDaten20) -}
+e863f305ffecd436562a20e723bba0ef
+  produktDaten2 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten118
+                   Model.produktDaten3) -}
+c97eab5d67643c180dd70e8cca40dac0
+  produktDaten20 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten80
+                   Model.produktDaten21) -}
+ca8883f2f12dde5d315e95b1559bf1b3
+  produktDaten21 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten78
+                   Model.produktDaten22) -}
+96aba8a637c592c731e6518742cf2129
+  produktDaten22 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten76
+                   Model.produktDaten23) -}
+24667b729fe86bcb47c482891a290178
+  produktDaten23 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten74
+                   Model.produktDaten24) -}
+52830b3ae279d5f5cd20597cf7b5a91b
+  produktDaten24 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten72
+                   Model.produktDaten25) -}
+439f899313c94d471be8b430d1ad1929
+  produktDaten25 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten70
+                   Model.produktDaten26) -}
+864f0bd9fae48dfff1c1d8d1a5bab588
+  produktDaten26 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten68
+                   Model.produktDaten27) -}
+c8270ed38e6063193b65f83f9f573a2c
+  produktDaten27 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten66
+                   Model.produktDaten28) -}
+bac245254527458e5d1320acd97450c6
+  produktDaten28 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten64
+                   Model.produktDaten29) -}
+2a459a81416d78e132a4f418ed81c1b3
+  produktDaten29 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten62
+                   Model.produktDaten30) -}
+d290034db972052c06638788a53cee1c
+  produktDaten3 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten116
+                   Model.produktDaten4) -}
+86a0fb0161e0761bdafb685e7b1d6e32
+  produktDaten30 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten59
+                   Model.produktDaten31) -}
+990470ef341723d22d42f728e4edb786
+  produktDaten31 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten57
+                   Model.produktDaten32) -}
+e8b0158adb004e31af8fa393a302bbd9
+  produktDaten32 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten54
+                   Model.produktDaten33) -}
+e3c73558da3dc296e46f36d812f09c42
+  produktDaten33 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten51
+                   Model.produktDaten34) -}
+afa6eb46abc8ee89165e3d5f266f2c9e
+  produktDaten34 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten49
+                   Model.produktDaten35) -}
+9fc1284eabd18aa2a795fc0f168ed96e
+  produktDaten35 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten47
+                   Model.produktDaten36) -}
+3565d1f02b6fbb1b515438fef99e3a34
+  produktDaten36 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten45
+                   Model.produktDaten37) -}
+47b37010d0fbac851b476e0bda82ae02
+  produktDaten37 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten42
+                   Model.produktDaten38) -}
+a5154045b4715e30222b7a8b6c401cff
+  produktDaten38 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten39
+                   (GHC.Types.[]
+                      @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer))) -}
+cd9db4df858a5908f790c0532b22f05e
+  produktDaten39 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten41, Model.produktDaten40)) -}
+cd1b56700c983fbda0a7c67da470c7d3
+  produktDaten4 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten114
+                   Model.produktDaten5) -}
+caca642c2c48345f3821d76f9ec38fd5
+  produktDaten40 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 2) -}
+55536b14fb0e1b88d749614c734931b4
+  produktDaten41 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Zwiebeln"#) -}
+230d16de5cc8e95ff65197b48f9da54b
+  produktDaten42 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten44, Model.produktDaten43)) -}
+4d721b8794482bba37e04eefb9426414
+  produktDaten43 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 150) -}
+e668bc375848a6104a6df913c96a0146
+  produktDaten44 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Zucchini"#) -}
+b5c3a92a9e76144e56f7434ba396ba05
+  produktDaten45 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten46, Model.produktDaten43)) -}
+4703c41d2e3138e4227969d8569325ce
+  produktDaten46 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Wirsing"#) -}
+1c2313c074168351bc476c7dd81b997f
+  produktDaten47 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten48, Model.produktDaten43)) -}
+7b3aa1ce955ba3240e84db456f71e97b
+  produktDaten48 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString#
+                   "Wei\\195\\159kraut"#) -}
+1d7bcd279585328446fb4c9fa523b4ce
+  produktDaten49 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten50, Model.produktDaten43)) -}
+9b28e23c1206407c2e6527946ffa02a9
+  produktDaten5 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten112
+                   Model.produktDaten6) -}
+f2dc35e9e38bce693139f80bb64fd758
+  produktDaten50 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Tomaten"#) -}
+7c663ed1cba7dd9e307f6c1f6aa1246e
+  produktDaten51 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten53, Model.produktDaten52)) -}
+57693fc6ff1c64516e10e1cbab36fa1c
+  produktDaten52 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 1) -}
+b3406b9f322ff8510a55c1cc1305f4e9
+  produktDaten53 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Tapioka"#) -}
+e523b55fee01e197d9f6e247b4dc82f8
+  produktDaten54 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten56, Model.produktDaten55)) -}
+1440de9c6925f89808efa3153070a137
+  produktDaten55 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 200) -}
+9b65ff3902261ef415a8590b79de8f88
+  produktDaten56 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Spinat"#) -}
+ff69586441af985e8375245a0bd5d5a4
+  produktDaten57 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten58, Model.produktDaten55)) -}
+9f9bc1ed759c69dae369bacc4c560045
+  produktDaten58 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Spargel"#) -}
+4082adf3afa454c15984e201ac6dc069
+  produktDaten59 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten61, Model.produktDaten60)) -}
+7226c1174a0d11ed7bc20cab9ee79009
+  produktDaten6 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten110
+                   Model.produktDaten7) -}
+8297da056a49d071ac957e0ed813a7a3
+  produktDaten60 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 5) -}
+3363ca4f7fa26c56bc0cd1ae8ec8b9bb
+  produktDaten61 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Sellerie"#) -}
+a122f7446cfa46cdaddff76dab898cd6
+  produktDaten62 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten63, Model.produktDaten43)) -}
+2c9b022989c0d875f7d7b11d5103f9e9
+  produktDaten63 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Schwarzwurzeln"#) -}
+2508664e66510dc12478e73248c87e98
+  produktDaten64 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten65, Model.produktDaten40)) -}
+52c14a1d0923162e8d23821b54e2d975
+  produktDaten65 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Schnittlauch"#) -}
+76cfd8c5a7111289456581c77dae4725
+  produktDaten66 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten67, Model.produktDaten43)) -}
+7ac6d47b01cd9cb6c2ce72fcd7d6d7d3
+  produktDaten67 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Sauerkraut"#) -}
+dd1f1327d4c58580880ca45d955b2569
+  produktDaten68 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten69, Model.produktDaten40)) -}
+ccb4468fbb71226a2404a13c42c62477
+  produktDaten69 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Sauerampfer"#) -}
+87ea6d7ee88023af537d50f4b11a6975
+  produktDaten7 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten108
+                   Model.produktDaten8) -}
+4c6c39838da289c5b507610abc3bd3a7
+  produktDaten70 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten71, Model.produktDaten43)) -}
+fab96958bb95de8d235c161c096a42fa
+  produktDaten71 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Salatgurken"#) -}
+b5baecf306e21be8c95828d5bedd7e9a
+  produktDaten72 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten73, Model.produktDaten43)) -}
+bf5db01525cbc64f2afe850db83ac71e
+  produktDaten73 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Rotkraut"#) -}
+5848077f756ff44a7a22df601174cdbd
+  produktDaten74 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten75, Model.produktDaten43)) -}
+930e17c99e2e12e203a94c7c70c88b77
+  produktDaten75 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Rote Bete"#) -}
+5c03a812c1115cbf8010cb6c2ab94494
+  produktDaten76 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten77, Model.produktDaten43)) -}
+6ae36deedf8419d5d0cc76a4e6045056
+  produktDaten77 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Rosenkohl"#) -}
+37337537eefce0b156f103729c212c35
+  produktDaten78 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten79, Model.produktDaten60)) -}
+ce97dfdb69d717a1e89e88f8b0b247c1
+  produktDaten79 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Radieschen"#) -}
+23c44dc842aefe1723871dececef94e7
+  produktDaten8 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten106
+                   Model.produktDaten9) -}
+4c67a2664867465f42a43e020037eb2a
+  produktDaten80 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten82, Model.produktDaten81)) -}
+73ea979e186b65dbc74ce42f301b6e62
+  produktDaten81 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 100) -}
+e1ba31bdc055ff2765a853d91505a050
+  produktDaten82 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Paprika"#) -}
+bc1952d1734b99b887c48e3084068b77
+  produktDaten83 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten85, Model.produktDaten84)) -}
+9e345e89644903414f2dc6cdfa63d262
+  produktDaten84 :: GHC.Integer.Type.Integer
+  {- HasNoCafRefs, Unfolding: (__integer 3) -}
+62a38bb42e33495d673c15e375841e6b
+  produktDaten85 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Oliven"#) -}
+3191ce53ca81d4770cf75b9c9bb54efd
+  produktDaten86 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten87, Model.produktDaten81)) -}
+b72e7d94cc15399bf041a007ce4d3ca7
+  produktDaten87 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Mais"#) -}
+8a75a228c53374a35d6e2e374cc5b33f
+  produktDaten88 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten89, Model.produktDaten43)) -}
+deb3d9247df2d0f0f17bb97fc47116ce
+  produktDaten89 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Lauch"#) -}
+b5ca706c53c0fc8f6f4a4b69e9247b7f
+  produktDaten9 ::
+    [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+  {- Strictness: m2,
+     Unfolding: (GHC.Types.:
+                   @ (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+                   Model.produktDaten104
+                   Model.produktDaten10) -}
+48add00199bd6085341dd53a699abc33
+  produktDaten90 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten91, Model.produktDaten43)) -}
+e77b19320f56410ece0fdb7b641e85e6
+  produktDaten91 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "K\\195\\188rbis"#) -}
+3b849b3c02926729d1c86db28b85faa6
+  produktDaten92 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten93, Model.produktDaten40)) -}
+e75730044d9f402c9dbfcbfc010e4df2
+  produktDaten93 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Kresse"#) -}
+cfeb346a6a248a90abb575ee93cc4cc7
+  produktDaten94 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten95, Model.produktDaten84)) -}
+118b8aa7b0b8adf3314dee9279add4fa
+  produktDaten95 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Kopfsalat"#) -}
+b55cee5ec10035220535cb9613e0b762
+  produktDaten96 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten97, Model.produktDaten81)) -}
+87305b6bcea233d4f5b725273ced0255
+  produktDaten97 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Kohlrabi"#) -}
+448888097e4708b53d8df5d86da80fbe
+  produktDaten98 ::
+    (Data.Text.Internal.Text, GHC.Integer.Type.Integer)
+  {- Strictness: m,
+     Unfolding: ((Model.produktDaten99, Model.produktDaten43)) -}
+d78dfdf29791c6dc782d712294e9ce70
+  produktDaten99 :: Data.Text.Internal.Text
+  {- Unfolding: (Data.Text.Show.unpackCString# "Karotten"#) -}
+18c10f15784ef5e069f243dae85583c0
+  produktId :: Control.Lens.Type.Lens' Model.Produkt Model.ProduktId
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <S(C(C(S))L),1*U(1*C1(C1(U)),A)><L,1*C1(U)><S,1*U(U,U,U,U,U)>,
+     Inline: INLINE (sat-args=2),
+     Unfolding: InlineRule (3, False, False)
+                (\ @ (f :: * -> *)
+                   $dFunctor :: GHC.Base.Functor f
+                   f1 :: Model.ProduktId -> f Model.ProduktId
+                   ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt x x1 x2 x3 x4 ->
+                 GHC.Base.fmap
+                   @ f
+                   $dFunctor
+                   @ Model.ProduktId
+                   @ Model.Produkt
+                   (\ y :: Model.ProduktId -> Model.Produkt y x1 x2 x3 x4)
+                   (f1 x) }) -}
+ecde3652c88f9865bf26e9342f927ab8
+  produktName ::
+    Control.Lens.Type.Lens' Model.Produkt Data.Text.Internal.Text
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <S(C(C(S))L),1*U(1*C1(C1(U)),A)><L,1*C1(U)><S,1*U(U,U,U,U,U)>,
+     Inline: INLINE (sat-args=2),
+     Unfolding: InlineRule (3, False, False)
+                (\ @ (f :: * -> *)
+                   $dFunctor :: GHC.Base.Functor f
+                   f1 :: Data.Text.Internal.Text -> f Data.Text.Internal.Text
+                   ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt x x1 x2 x3 x4 ->
+                 GHC.Base.fmap
+                   @ f
+                   $dFunctor
+                   @ Data.Text.Internal.Text
+                   @ Model.Produkt
+                   (\ y :: Data.Text.Internal.Text -> Model.Produkt x y x2 x3 x4)
+                   (f1 x1) }) -}
+fd4ebdf8af16b542c001f8bfeae1155c
+  produktPreis :: Control.Lens.Type.Lens' Model.Produkt Model.Preis
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <S(C(C(S))L),1*U(1*C1(C1(U)),A)><L,1*C1(U)><S,1*U(U,U,U,U,U)>,
+     Inline: INLINE (sat-args=2),
+     Unfolding: InlineRule (3, False, False)
+                (\ @ (f :: * -> *)
+                   $dFunctor :: GHC.Base.Functor f
+                   f1 :: Model.Preis -> f Model.Preis
+                   ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt x x1 x2 x3 x4 ->
+                 GHC.Base.fmap
+                   @ f
+                   $dFunctor
+                   @ Model.Preis
+                   @ Model.Produkt
+                   (\ y :: Model.Preis -> Model.Produkt x x1 x2 y x4)
+                   (f1 x3) }) -}
+3ebc7a2a08056ce33966e1e2900eb4d0
+  produktRabatt ::
+    Control.Lens.Type.Lens' Model.Produkt GHC.Types.Int
+  {- Arity: 3, HasNoCafRefs,
+     Strictness: <S(C(C(S))L),1*U(1*C1(C1(U)),A)><L,1*C1(U)><S,1*U(U,U,U,U,U)>,
+     Inline: INLINE (sat-args=2),
+     Unfolding: InlineRule (3, False, False)
+                (\ @ (f :: * -> *)
+                   $dFunctor :: GHC.Base.Functor f
+                   f1 :: GHC.Types.Int -> f GHC.Types.Int
+                   ds :: Model.Produkt ->
+                 case ds of wild { Model.Produkt x x1 x2 x3 x4 ->
+                 GHC.Base.fmap
+                   @ f
+                   $dFunctor
+                   @ GHC.Types.Int
+                   @ Model.Produkt
+                   (\ y :: GHC.Types.Int -> Model.Produkt x x1 x2 x3 y)
+                   (f1 x4) }) -}
+c6d531cde83555f13ca59f58ff09e2e9
+  produkt_ :: GHC.Types.IO Model.Produkt
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (0, True, True)
+                Model.produkt_1
+                  `cast`
+                (Sym (GHC.Types.NTCo:IO[0] <Model.Produkt>_R)) -}
+2888f31260c8ff4505f28959bb6ac26d
+  produkt_1 ::
+    GHC.Prim.State# GHC.Prim.RealWorld
+    -> (# GHC.Prim.State# GHC.Prim.RealWorld, Model.Produkt #)
+  {- Arity: 1, Strictness: <L,U>,
+     Unfolding: InlineRule (1, True, False)
+                (\ eta :: GHC.Prim.State# GHC.Prim.RealWorld[OneShot] ->
+                 case System.Random.TF.Init.theTFGen
+                        `cast`
+                      (GHC.IORef.NTCo:IORef[0] <System.Random.TF.Gen.TFGen>_N) of wild { GHC.STRef.STRef r# ->
+                 case GHC.Prim.atomicModifyMutVar#
+                        @ GHC.Prim.RealWorld
+                        @ System.Random.TF.Gen.TFGen
+                        @ (System.Random.TF.Gen.TFGen, System.Random.TF.Gen.TFGen)
+                        @ System.Random.TF.Gen.TFGen
+                        r#
+                        System.Random.TF.Gen.tfGenSplit
+                        eta of ds1 { (#,#) ipv ipv1 ->
+                 (# ipv,
+                    Model.$fArbitraryProdukt1
+                      ipv1 `cast` (Sym (Test.QuickCheck.Random.NTCo:QCGen[0]))
+                      Test.QuickCheck.Gen.generate2 #) } }) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  produkte :: [Model.Produkt]
+  {- Unfolding: (Model.produkte_go 100 Model.produktDaten) -}
+b6653886001fd9fe20b5d4f45b2abdb2
+  produkte_go ::
+    GHC.Prim.Int#
+    -> [(Data.Text.Internal.Text, GHC.Integer.Type.Integer)]
+    -> [Model.Produkt]
+  {- Arity: 2, Strictness: <L,U><S,1*U> -}
+instance Test.QuickCheck.Arbitrary.Arbitrary [Model.Produkt]
+  = Model.$fArbitraryProdukt
+instance Test.QuickCheck.Arbitrary.Arbitrary [Model.ProduktId]
+  = Model.$fArbitraryProduktId
+instance GHC.Classes.Eq [Model.Preis] = Model.$fEqPreis
+instance GHC.Classes.Eq [Model.Produkt] = Model.$fEqProdukt
+instance GHC.Classes.Eq [Model.ProduktId] = Model.$fEqProduktId
+instance Data.Aeson.Types.Class.FromJSON [Model.Preis]
+  = Model.$fFromJSONPreis
+instance Data.Aeson.Types.Class.FromJSON [Model.Produkt]
+  = Model.$fFromJSONProdukt
+instance Data.Aeson.Types.Class.FromJSON [Model.ProduktId]
+  = Model.$fFromJSONProduktId
+instance Kafkaproto.Entity.HasKey [Model.Produkt]
+  = Model.$fHasKeyProdukt
+instance GHC.Show.Show [Model.Preis] = Model.$fShowPreis
+instance GHC.Show.Show [Model.Produkt] = Model.$fShowProdukt
+instance GHC.Show.Show [Model.ProduktId] = Model.$fShowProduktId
+instance Data.Aeson.Types.Class.ToJSON [Model.Preis]
+  = Model.$fToJSONPreis
+instance Data.Aeson.Types.Class.ToJSON [Model.Produkt]
+  = Model.$fToJSONProdukt
+instance Data.Aeson.Types.Class.ToJSON [Model.ProduktId]
+  = Model.$fToJSONProduktId
+"SPEC/Model $dmshrink @ Produkt" [ALWAYS] forall $dArbitrary :: Test.QuickCheck.Arbitrary.Arbitrary
+                                                                  Model.Produkt
+  Test.QuickCheck.Arbitrary.$dmshrink @ Model.Produkt $dArbitrary
+  = Model.$fArbitraryProdukt_$s$dmshrink
+"SPEC/Model $dmshrink @ ProduktId" [ALWAYS] forall $dArbitrary :: Test.QuickCheck.Arbitrary.Arbitrary
+                                                                    Model.ProduktId
+  Test.QuickCheck.Arbitrary.$dmshrink @ Model.ProduktId $dArbitrary
+  = Model.$fArbitraryProduktId_$s$dmshrink
+vectorised variables:
+vectorised tycons:
+vectorised reused tycons:
+parallel variables:
+parallel tycons:
+trusted: none
+require own pkg trusted: False
+

@@ -3,8 +3,8 @@
 |                                       | ~Dauer  | Beginn                    | Delta | Ende            |
 |---------------------------------------+---------+---------------------------+-------+-----------------|
 | Aufsetzen Kafka Cluster               | 5 Tage  | <2016-04-11 Mo>           |       | <2016-04-15 Fr> |
-| Haskell Microservice Producer         | 5 Tage  | <2016-04-18 Mo>           |       | <2016-04-22 Fr> |
-| Haskell Microservice Consumer         | 3 Tage  | <2016-04-25 Mo>           |       | <2016-04-27 Mi> |
+| Haskell Microservice Produktservice   | 5 Tage  | <2016-04-18 Mo>           |       | <2016-04-22 Fr> |
+| Haskell Microservice Warenkorbservice | 3 Tage  | <2016-04-25 Mo>           |       | <2016-04-27 Mi> |
 | Spring Microservice Producer/Consumer | 5 Tage  | <2016-04-28 Do>           |       | <2016-05-04 Mi> |
 | Dokumentation schreiben               | 10 Tage | wann immer etwas auffällt |       | <2016-05-18 Mi> |
 | Korrektur /Abgabe                     |         |                           |       |                 |
@@ -184,16 +184,19 @@
 *** DONE Titelseite erstellen                                 :Dokumentation:
     CLOSED: [2016-04-14 Thu 17:34]
 
+** <2016-04-20 Wed>
 *** TODO Neue Projektstruktur:                              :Aufsetzen_Kafka:
     - Dokumentation
     - produktservice
     - warenkorbservice
     - kafka-docker
+*** DONE Producer der ein Produkt pro Sekunde erstellt/updated :Haskell_Produktservice:
+    CLOSED: [2016-04-20 Wed 14:27]
+    produktservice exe kann arbitrary Produkte verschicken
 * Offene TODOs
 ** Aufsetzen Kafka Cluster
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
 ** Haskell Produktservice
-*** TODO Producer der ein Produkt pro 2 Sekunden erstellt/updated :Haskell_Produktservice:
 ** Haskell Warenkorbservice
 *** TODO CLI? Interface für API calls              :Haskell_Warenkorbservice:
 *** TODO Model für Warenkorbservice                :Haskell_Warenkorbservice:
@@ -228,6 +231,16 @@
     how eagerly you start adopting these ideas. Ensure you have good monitoring
     in place, and strongly consider the use of correlation IDs, which allow you
     to trace requests across process boundaries.
+* Fragen
+** TODO Wie oft (wenn überhaupt) will jemand meine Artefakte sehen?
+   Und sollen lesbare PDFs im Repo/CI zu finden sein?
+** TODO Will jemand außer mir meinen Code deployen?
+   Soll ich docker images aus meinen Services bauen?
+** TODO Was sind Dinge die REWE von mir sehen will?
+  - Kalender mit Anwesenheiten füllen
+  - Metriken? Welche?
+  - Showcase? Frontend?
+
 * Tasks
 ** DONE Fix default notes file shenanigens
    CLOSED: [2016-04-13 Wed 07:12]

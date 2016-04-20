@@ -66,12 +66,12 @@
 * Motivation
 ** Microservice Architektur
 *** Domain Driven Design 
-    Eric Evans cite:Evans-DomainDrivenDesign
+    Eric Evans \cite{Evans-DomainDrivenDesign}
 *** Conways Law - Melvin Conway
     organizations which design systems ... are constrained to produce designs
     which are copies of the communication structures of these organizations
 *** Microservice Definition
-    "Microservices are small, autonomous services that work together" cite:Newman-BuildingMicroservices
+    "Microservices are small, autonomous services that work together" \cite{Newman-BuildingMicroservices}
 
 ** "Don't share the database"
 ** Message Broker
