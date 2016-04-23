@@ -36,7 +36,7 @@ loggingConsumer topicString =
   consumeSingle :: KafkaTopic -> IO ()
   consumeSingle topic =
     consumeMessage topic partition 1000 >>= either
-      (const (threadDelay 1000000))
+      (const (threadDelay 100000))
       (print . fmap (view (produktName)) . decodeProduct)
 
 decodeProduct :: KafkaMessage -> Maybe Produkt

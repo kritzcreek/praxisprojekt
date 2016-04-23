@@ -30,7 +30,7 @@ main = do
     \_ topic -> do
       replicateM_ 100 $ do
         _ <- produceMessage topic (KafkaSpecifiedPartition partition) . KafkaProduceMessage . BSL.toStrict . encode =<< produkt
-        threadDelay 1000000
+        threadDelay 100000
       pure ()
   -- Bricht den log thread ab
   -- exitSuccess

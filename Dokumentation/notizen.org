@@ -185,7 +185,8 @@
     CLOSED: [2016-04-14 Thu 17:34]
 
 ** <2016-04-20 Wed>
-*** TODO Neue Projektstruktur:                              :Aufsetzen_Kafka:
+*** DONE Neue Projektstruktur:                              :Aufsetzen_Kafka:
+    CLOSED: [2016-04-22 Fri 10:19]
     - Dokumentation
     - produktservice
     - warenkorbservice
@@ -193,6 +194,39 @@
 *** DONE Producer der ein Produkt pro Sekunde erstellt/updated :Haskell_Produktservice:
     CLOSED: [2016-04-20 Wed 14:27]
     produktservice exe kann arbitrary Produkte verschicken
+** <2016-04-22 Fri>
+*** TODO Docker Image aus Produktservice             :Haskell_Produktservice:
+    https://github.com/mgreenly/dockerimages/tree/master/alpine-stack
+    #+BEGIN_SRC sh
+   /Documents/praxisprojekt/produktservice master
+   > which alpine-dockerize
+   /Users/christophhegemann/.local/bin/alpine-dockerize
+   
+   ~/Documents/praxisprojekt/produktservice master
+   > alpine-dockerize
+   latest: Pulling from mgreenly/alpine-stack
+   4d06f2521e4f: Pull complete
+   d098f7f3ad34: Pull complete
+   92668451a664: Pull complete
+   a421b0b0f303: Pull complete
+   Digest: sha256:7db7d3f07f2eef299006b3f677453d5dc3948ab9b8a4e136ab51c6a90a18da05
+   Status: Downloaded newer image for mgreenly/alpine-stack:latest
+   Downloading lts-5.13 build plan ...
+   Downloaded lts-5.13 build plan.
+   Caching build plan
+   Updating package index Hackage (mirrored at https://s3.amazonaws.com/hackage.fpcomplete.com/00-index.tar.gz) ...
+   Downloading package index from https://s3.amazonaws.com/hackage.fpcomplete.com/00-index.tar.gz
+   Populating index cache ...
+   Populated index cache. 
+   /data/../haskell-proto: canonicalizePath: does not exist (No such file or directory)
+   find: -printf: unknown primary or operator
+
+    #+END_SRC
+
+    Das Problem ist, dass die shared library nicht im Docker image verfügbar ist.
+
+    Außerdem muss ich schauen wie man librdkafka installieren würde.
+
 * Offene TODOs
 ** Aufsetzen Kafka Cluster
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
@@ -231,6 +265,8 @@
     how eagerly you start adopting these ideas. Ensure you have good monitoring
     in place, and strongly consider the use of correlation IDs, which allow you
     to trace requests across process boundaries.
+** Enterprise Integration Patterns
+*** 
 * Fragen
 ** TODO Wie oft (wenn überhaupt) will jemand meine Artefakte sehen?
    Und sollen lesbare PDFs im Repo/CI zu finden sein?
