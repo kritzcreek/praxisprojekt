@@ -265,8 +265,11 @@
     how eagerly you start adopting these ideas. Ensure you have good monitoring
     in place, and strongly consider the use of correlation IDs, which allow you
     to trace requests across process boundaries.
+*** 127
+    Docker is being used in production by multiple companies. It provides many
+    of the benefits of lightweight containers in terms of efficiency and speed
+    of provisioning, together with the tools to avoid many of the downsides.
 ** Enterprise Integration Patterns
-*** 
 * Fragen
 ** TODO Wie oft (wenn überhaupt) will jemand meine Artefakte sehen?
    Und sollen lesbare PDFs im Repo/CI zu finden sein?

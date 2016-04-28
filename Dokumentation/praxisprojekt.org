@@ -108,6 +108,24 @@
     neugestartet und provisioniert werden.
 
 ** Docker/Container Technologie
+*** Hype Technology
+*** Infrastruktur versionierbar machen
+*** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
+*** Zitat:
+    "Docker is being used in production by multiple companies. It provides many
+     of the benefits of lightweight containers in terms of efficiency and speed
+     of provisioning, together with the tools to avoid many of the
+     downsides."cite:Newman-BuildingMicroservices
+*** Nachteile:
+   - Benötigt Service Discovery
+   - Verleitet dazu Security Updates nicht einzuspielen
+
+** Infrastruktur Landschaft
+
+   #+CAPTION: Außensicht Systemlandschaft
+   #+LABEL: fig:infra-schaubild
+   [[./bilder/infra-schaubild.jpg]]
+
 ** Monitoring?
 
 
@@ -145,6 +163,8 @@
    Warenkörbe der Kunden, die für die restlichen Services nicht zur Verfügung
    stehen.
 
+   [[fig:infra-schaubild][Infra Schaubild]]
+
 *** Modell
     Der Warenkorbservice hat folgende Sicht auf die Produktentität:
     #+BEGIN_SRC haskell
@@ -177,6 +197,7 @@ Preise) und Rabattaktionen beinhaltet.
 *** API
     Der Warenkorbservice bietet die folgenden Operationen für das Bearbeiten von
     Warenkörben an.
+     
 
 **** Warenkorb anlegen
      Legt einen neuen Warenkorb an und gibt die ~id~ des Warenkorbes zurück
