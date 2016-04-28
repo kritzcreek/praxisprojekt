@@ -16,6 +16,9 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Model
+                     , Common.Util
+                     , Common.Message
+                     , Common.Entity
   build-depends:       base >= 4.7 && < 5
                      , time
                      , aeson
@@ -24,7 +27,6 @@ library
                      , uuid
                      , random
                      , QuickCheck
-                     , haskell-proto
   default-language:    Haskell2010
 
 executable produktservice-exe
@@ -34,7 +36,6 @@ executable produktservice-exe
   build-depends:       base
                      , produktservice
                      , haskakafka
-                     , haskell-proto
                      , bytestring
                      , aeson
   default-language:    Haskell2010

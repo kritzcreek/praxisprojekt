@@ -11,9 +11,9 @@ import           Data.Text          (Text)
 import qualified Data.Text          as T
 import qualified Test.QuickCheck    as QC
 
-import           Kafkaproto.Entity
-import           Kafkaproto.Message
-import           Kafkaproto.Util
+import           Common.Entity
+import           Common.Message
+import           Common.Util
 
 newtype ProduktId = ProduktId Int
   deriving (Show, Eq, FromJSON, ToJSON)

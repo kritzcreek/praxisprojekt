@@ -1,13 +1,13 @@
 module Main where
 
-import           Control.Concurrent    (forkIO, threadDelay)
+import           Control.Concurrent   (forkIO, threadDelay)
 import           Control.Monad
 import           Data.Aeson
 -- import qualified Data.ByteString.Char8 as C8
 import qualified Data.ByteString.Lazy as BSL
 import           Haskakafka
 import           Model
-import           System.Exit           (exitSuccess)
+import           System.Exit          (exitSuccess)
 
 kafkaConfig :: [(String, String)]
 kafkaConfig = [("socket.timeout.ms", "50000")]
@@ -40,7 +40,7 @@ main = do
 --   input <- C8.getLine
 --   if C8.unpack input == "quit"
 --     then pure ()
---     else 
+--     else
 --          >> handleInput topic
 
 -- loggingConsumer :: String -> IO ()
