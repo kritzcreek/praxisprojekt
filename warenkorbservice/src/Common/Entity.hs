@@ -1,5 +1,5 @@
-{-# LANGUAGE DeriveFunctor       #-}
-module Kafkaproto.Entity where
+{-# LANGUAGE DeriveFunctor #-}
+module Common.Entity where
 
 import           Data.Aeson
 import           Data.Text       (Text)

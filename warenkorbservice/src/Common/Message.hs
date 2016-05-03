@@ -1,20 +1,17 @@
-{-# LANGUAGE DeriveFunctor       #-}
-{-# LANGUAGE OverloadedStrings   #-}
-{-# LANGUAGE TemplateHaskell     #-}
+{-# LANGUAGE DeriveFunctor     #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TemplateHaskell   #-}
 
-module Kafkaproto.Message where
+module Common.Message where
 
+import           Common.Entity
+import           Common.Util
 import           Control.Lens
-import           Data.Aeson
 import           Data.Aeson.TH
 import           Data.Text       (Text)
 import qualified Data.Text       as T
 import           Data.Time
 import           Data.UUID
-
-import Kafkaproto.Util
-import Kafkaproto.Entity
-
 import qualified Test.QuickCheck as QC
 
 data Message a =

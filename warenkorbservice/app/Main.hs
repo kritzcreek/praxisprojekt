@@ -8,7 +8,7 @@ import qualified Data.ByteString.Lazy as BSL
 import           Haskakafka
 import           Model
 import           System.Exit           (exitSuccess)
-import qualified Kafkaproto.Message as KP
+import qualified Common.Message as Message
 
 kafkaConfig :: [(String, String)]
 kafkaConfig = [("socket.timeout.ms", "50000")]
@@ -42,8 +42,8 @@ loggingConsumer topicString =
 decodeProduct :: KafkaMessage -> Maybe Produkt
 decodeProduct m =
   let payload = messagePayload m
-      produkt = decodeStrict payload :: Maybe (KP.Message Produkt)
-  in view KP.messagePayload <$> produkt
+      produkt = decodeStrict payload :: Maybe (Message.Message Produkt)
+  in view Message.messagePayload <$> produkt
 
 main :: IO ()
 main = loggingConsumer "produkte"

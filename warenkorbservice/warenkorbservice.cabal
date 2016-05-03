@@ -16,6 +16,9 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Model
+                     , Common.Entity
+                     , Common.Message
+                     , Common.Util
   build-depends:       base >= 4.7 && < 5
                      , time
                      , aeson
@@ -24,17 +27,15 @@ library
                      , uuid
                      , random
                      , QuickCheck
-                     , haskell-proto
   default-language:    Haskell2010
 
-executable warenkorbservice-exe
+executable warenkorbservice
   hs-source-dirs:      app
   main-is:             Main.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , warenkorbservice
                      , haskakafka
-                     , haskell-proto
                      , bytestring
                      , aeson
                      , lens

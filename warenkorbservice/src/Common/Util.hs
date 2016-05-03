@@ -1,4 +1,4 @@
-module Kafkaproto.Util where
+module Common.Util where
 
 import Data.Char (toLower)
 
