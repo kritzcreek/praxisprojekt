@@ -16,7 +16,7 @@ topicConfig :: [(String, String)]
 topicConfig = [("request.timeout.ms", "50000")]
 
 connectionString :: String
-connectionString = "192.168.99.100:9092"
+connectionString = "172.17.0.1:9092"
 
 partition :: Int
 partition = 0

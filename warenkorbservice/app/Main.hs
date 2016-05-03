@@ -17,7 +17,7 @@ topicConfig :: [(String, String)]
 topicConfig = [("request.timeout.ms", "50000")]
 
 connectionString :: String
-connectionString = "192.168.99.100:9092"
+connectionString = "172.17.0.1:9092"
 
 partition :: Int
 partition = 0
@@ -31,18 +31,17 @@ loggingConsumer topicString =
                                         -- KafkaOffsetEnd, KafkaOffset or KafkaOffsetStored)
                     $ \kafka topic -> do
     setLogLevel kafka KafkaLogCrit
-    forever $ consumeSingle topic
+    forever (consumeSingle topic)
   where
   consumeSingle :: KafkaTopic -> IO ()
   consumeSingle topic =
     consumeMessage topic partition 1000 >>= either
       (const (threadDelay 100000))
-      (print . fmap (view (produktName)) . decodeProduct)
+      (print . fmap (view produktName) . decodeProduct)
 
 decodeProduct :: KafkaMessage -> Maybe Produkt
 decodeProduct m =
-  let payload = messagePayload m
-      produkt = decodeStrict payload :: Maybe (Message.Message Produkt)
+  let produkt = (decodeStrict . messagePayload) m
   in view Message.messagePayload <$> produkt
 
 main :: IO ()
