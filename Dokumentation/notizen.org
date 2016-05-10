@@ -195,7 +195,8 @@
     CLOSED: [2016-04-20 Wed 14:27]
     produktservice exe kann arbitrary Produkte verschicken
 ** <2016-04-22 Fri>
-*** TODO Docker Image aus Produktservice             :Haskell_Produktservice:
+*** DONE Docker Image aus Produktservice             :Haskell_Produktservice:
+    CLOSED: [2016-05-10 Tue 09:54]
     https://github.com/mgreenly/dockerimages/tree/master/alpine-stack
     #+BEGIN_SRC sh
    /Documents/praxisprojekt/produktservice master
@@ -226,7 +227,10 @@
     Das Problem ist, dass die shared library nicht im Docker image verfügbar ist.
 
     Außerdem muss ich schauen wie man librdkafka installieren würde.
-
+*** DONE Docker Image aus Warenkorbservice         :Haskell_Warenkorbservice:
+    CLOSED: [2016-05-10 Tue 09:54]
+** <2016-05-10 Tue>
+*** TODO Umgebungsvariablen für die Services bestimmen :Haskell_Produktservice:Haskell_Warenkorbservice:
 * Offene TODOs
 ** Aufsetzen Kafka Cluster
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
