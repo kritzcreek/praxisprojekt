@@ -5,7 +5,6 @@
 | Aufsetzen Kafka Cluster               | 5 Tage  | <2016-04-11 Mo>           |       | <2016-04-15 Fr> |
 | Haskell Microservice Produktservice   | 5 Tage  | <2016-04-18 Mo>           |       | <2016-04-22 Fr> |
 | Haskell Microservice Warenkorbservice | 3 Tage  | <2016-04-25 Mo>           |       | <2016-04-27 Mi> |
-| Spring Microservice Producer/Consumer | 5 Tage  | <2016-04-28 Do>           |       | <2016-05-04 Mi> |
 | Dokumentation schreiben               | 10 Tage | wann immer etwas auffällt |       | <2016-05-18 Mi> |
 | Korrektur /Abgabe                     |         |                           |       |                 |
 
@@ -169,7 +168,8 @@
 *** DONE Topic Schema in Haskell abbilden                  :Haskell_Produktservice:
     CLOSED: [2016-04-13 Wed 17:11]
       
-** <2016-04-14 Thu> 
+** <2016-04-14 Thu>
+
 *** DONE Lenses für Schema                                 :Haskell_Produktservice:
     CLOSED: [2016-04-14 Thu 10:57]
 *** DONE To/FromJSON für Schema                            :Haskell_Produktservice:
@@ -230,7 +230,13 @@
 *** DONE Docker Image aus Warenkorbservice         :Haskell_Warenkorbservice:
     CLOSED: [2016-05-10 Tue 09:54]
 ** <2016-05-10 Tue>
+*** DONE Binde listings Umgebung fuer Code ein
+    CLOSED: [2016-05-10 Tue 13:55]
+    [2016-04-14 Thu]
+    [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Modell][Modell]]
 *** TODO Umgebungsvariablen für die Services bestimmen :Haskell_Produktservice:Haskell_Warenkorbservice:
+**** KAFKA_ADVERTISED_HOST
+**** POSTGRES Variablen
 * Offene TODOs
 ** Aufsetzen Kafka Cluster
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
@@ -281,6 +287,3 @@
    [[file:~/dotfiles/.spacemacs.d/init.el::"~/Documents/praxisprojekt/Dokumentation/notizen.org"))]]
 
    ~with-eval-after-load 'org~ hat's geregelt
-** TODO Binde listings Umgebung fuer Code ein
-   [2016-04-14 Thu]
-   [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Modell][Modell]]

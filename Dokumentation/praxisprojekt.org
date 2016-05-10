@@ -23,7 +23,8 @@
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
     (setq org-latex-pdf-process
-    '("latexmk -xelatex -interaction=nonstopmode -pdf %f"))
+    '("latexmk -xelatex -shell-escape -interaction=nonstopmode -pdf %f"))
+    (setq org-latex-listings 'minted)
 #+END_SRC
 
 #+AUTHOR: Christoph Hegemann
@@ -36,6 +37,8 @@
 #+LATEX_HEADER: \usepackage[normalem]{ulem}
 #+LATEX_HEADER: \usepackage[ngerman]{babel}
 #+LATEX_HEADER: \usepackage{csquotes}
+#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usemintedstyle{emacs}
 #+LATEX_HEADER: \setcounter{tocdepth}{1}
 #+LATEX_HEADER: \setcounter{secnumdepth}{1}
 #+LATEX_HEADER: \pagestyle{headings}
@@ -86,49 +89,6 @@
       - +Partition Tolerance+
 *** RabbitMQ/ActiveMQ
 
-
-* Infrastruktur und Provisionierung
-** Anforderungen
-*** Elastizität
-    Ein Message Broker wie Kafka kann zu verschiedenen Zeiten unter variierender
-    Last arbeiten haben. Zu Stoßzeiten werden sehr viele Services Messages
-    produzieren und abrufen. Um diesen sich ändernden Anforderungen gerecht zu
-    werden, muss Kafka so aufgesetzt werden, dass dynamisch neue Broker
-    hinzugefügt oder heruntergefahren werden können.
-*** Automatisierung
-    Die Provisionierung einer Maschine mit einem Kafka Broker muss vollständig
-    automatisch ablaufen. Dies steht in direktem Bezug zu /Elastizität/ und dem
-    Prinzip der Automatisierung von Microservices.
-*** Resilienz
-    Die Message Queue stellt einen /Single Point of Failure/ dar. Sollte sie
-    ausfallen können die Services nicht miteinander kommunizieren und die
-    Verfügbarkeit des Gesamtsystems kann nicht sichergestellt werden. Daher
-    müssen Fallback Instanzen provisioniert werden, die einspringen wenn
-    Ausfälle auftreten. Weiterhin müssen ausgefallene Instanzen automatisch
-    neugestartet und provisioniert werden.
-
-** Docker/Container Technologie
-*** Hype Technology
-*** Infrastruktur versionierbar machen
-*** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
-*** Zitat:
-    "Docker is being used in production by multiple companies. It provides many
-     of the benefits of lightweight containers in terms of efficiency and speed
-     of provisioning, together with the tools to avoid many of the
-     downsides."cite:Newman-BuildingMicroservices
-*** Nachteile:
-   - Benötigt Service Discovery
-   - Verleitet dazu Security Updates nicht einzuspielen
-
-** Infrastruktur Landschaft
-
-   #+CAPTION: Außensicht Systemlandschaft
-   #+LABEL: fig:infra-schaubild
-   [[./bilder/infra-schaubild.jpg]]
-
-** Monitoring?
-
-
 * Der Prototyp
   - Annäherung an ein realistisches Szenario
   - Kommunikation zwischen Services
@@ -144,13 +104,12 @@
     Der Produktservice hat folgende Sicht auf die Produktentität:
 
     #+BEGIN_SRC haskell
-      data Produkt =
-        Produkt
-        { id :: String
-        , name :: String
+      data Produkt = Produkt
+        { id           :: String
+        , name         :: String
         , beschreibung :: String
-        , preis :: Preis
-        , rabatt :: Prozent
+        , preis        :: Preis
+        , rabatt       :: Prozent
         }
     #+END_SRC
     #+CAPTION: Produkt Modell des Produktservices
@@ -170,8 +129,8 @@
     #+BEGIN_SRC haskell
       data Produkt =
         Produkt
-        { id :: String
-        , name :: String
+        { id    :: String
+        , name  :: String
         , preis :: Preis
         }
     #+END_SRC
@@ -209,6 +168,73 @@ Preise) und Rabattaktionen beinhaltet.
      Weist den Warenkorbservice an, eine Bestellung aus einem bestehenden
      Warenkorb zu erstellen und an einen eventuellen Checkoutservice
      weiterzureichen.
+
+
+* Infrastruktur und Provisionierung
+** Anforderungen
+*** Elastizität
+    Ein Message Broker wie Kafka kann zu verschiedenen Zeiten unter variierender
+    Last arbeiten haben. Zu Stoßzeiten werden sehr viele Services Messages
+    produzieren und abrufen. Um diesen sich ändernden Anforderungen gerecht zu
+    werden, muss Kafka so aufgesetzt werden, dass dynamisch neue Broker
+    hinzugefügt oder heruntergefahren werden können.
+*** Automatisierung
+    Die Provisionierung einer Maschine mit einem Kafka Broker muss vollständig
+    automatisch ablaufen. Dies steht in direktem Bezug zu /Elastizität/ und dem
+    Prinzip der Automatisierung von Microservices.
+*** Resilienz
+    Die Message Queue stellt einen /Single Point of Failure/ dar. Sollte sie
+    ausfallen können die Services nicht miteinander kommunizieren und die
+    Verfügbarkeit des Gesamtsystems kann nicht sichergestellt werden. Daher
+    müssen Fallback Instanzen provisioniert werden, die einspringen wenn
+    Ausfälle auftreten. Weiterhin müssen ausgefallene Instanzen automatisch
+    neugestartet und provisioniert werden.
+
+** Docker/Container Technologie
+*** Hype Technology
+*** Infrastruktur versionierbar machen
+*** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
+*** Zitat:
+    "Docker is being used in production by multiple companies. It provides many
+     of the benefits of lightweight containers in terms of efficiency and speed
+     of provisioning, together with the tools to avoid many of the
+     downsides."\cite{Newman-BuildingMicroservices}
+*** Nachteile:
+   - Benötigt im großen Stil Service Discovery
+   - Verleitet dazu Security Updates nicht einzuspielen
+** Infrastruktur Landschaft
+
+   #+CAPTION: Außensicht Systemlandschaft
+   #+LABEL: fig:infra-schaubild
+   [[./bilder/infra-schaubild.jpg]]
+
+** Container für Services
+   - 1 Build image für Haskell Projekte
+     - base fpco/stack-build
+
+       Beinhaltet Haskell Compiler und build tools
+       + librdkafka dependency kritzcreeek/stack-kafka-build
+   - 1 Run image für Haskell Projekte
+     - base fpco/stack-run
+
+       Beinhaltet Laufzeitabhängigkeiten für Haskell Projekte. Das sind zum
+       Beispiel Systembibliotheken die dynamisch gegen die Executable gelinkt
+       sind.
+       + buildtools (gcc etc.)
+       + eventuell weitere Abhängigkeiten (openssl)
+       + librdkafka dependency kritzcreeek/stack-kafka-run
+
+   - Docker Konfiguration für Services geschieht in ~stack.yaml~
+     - Gebaut werden die Projekte innerhalb des Build Containers
+       (kritzcreeek/stack-kafka-build). Kommando: ~stack build~
+     - Run Container für die Services werden auf das Run Image aufgesetzt.
+       Kommando: ~stack image container~
+     - Services können mittels ~docker run -d kritzcreeek/produktservice
+       produktservice~ gestartet werden.
+     - Services können nun mit in docker-compose aufgenommen und leichter
+       konfiguriert werden.
+
+** Monitoring?
 
 
 * Fazit
