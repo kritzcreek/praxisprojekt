@@ -185,6 +185,8 @@
     CLOSED: [2016-04-14 Thu 17:34]
 
 ** <2016-04-20 Wed>
+*** DONE Model für Warenkorbservice                :Haskell_Warenkorbservice:
+    CLOSED: [2016-05-12 Thu 08:00]
 *** DONE Neue Projektstruktur:                              :Aufsetzen_Kafka:
     CLOSED: [2016-04-22 Fri 10:19]
     - Dokumentation
@@ -234,6 +236,11 @@
     CLOSED: [2016-05-10 Tue 13:55]
     [2016-04-14 Thu]
     [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Modell][Modell]]
+** <2016-05-12 Thu>
+*** TODO Docker book zu BibTex hinzufügen
+*** TODO Aktuelle Richtung des Projektes mit Kohls besprechen
+*** TODO Laptop Tasche besorgen
+*** TODO Umgebungsvariablen von Host -> Container
 *** TODO Umgebungsvariablen für die Services bestimmen :Haskell_Produktservice:Haskell_Warenkorbservice:
 **** KAFKA_ADVERTISED_HOST
 **** POSTGRES Variablen
@@ -242,11 +249,8 @@
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
 ** Haskell Produktservice
 ** Haskell Warenkorbservice
-*** TODO CLI? Interface für API calls              :Haskell_Warenkorbservice:
-*** TODO Model für Warenkorbservice                :Haskell_Warenkorbservice:
-*** TODO JSON Instanzen / Transformationen         :Haskell_Warenkorbservice:
+*** TODO REST Interface für API calls              :Haskell_Warenkorbservice:
 *** TODO Warenkorbservice Transstack mit STM State :Haskell_Warenkorbservice:
-** Spring Microservice Producer/Consumer
 ** Dokumentation schreiben
 *** TODO Abstrakt schreiben, dass den praktischen Teil einfängt :Dokumentation:
 *** TODO Bibtex Datei mit Referenzen befüllen                 :Dokumentation:
