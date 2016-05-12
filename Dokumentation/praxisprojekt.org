@@ -194,6 +194,55 @@ Preise) und Rabattaktionen beinhaltet.
 *** Hype Technology
 *** Infrastruktur versionierbar machen
 *** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
+*** Terminologie und Bausteine von Docker
+   - Docker Daemon
+
+     Ein Hintergrundprozess, der die laufenden Docker Container verwaltet und
+     auf Kommandos des Nutzer reagiert. Dieser Daemon kann auf der gleichen
+     Maschine wie der Nutzer ausgeführt werden, oder remote auf einem Server.
+
+   - Docker Client
+
+     Ein Docker Client ist ein Programm mit dessen Hilfe der Nutzer Befehle an
+     einen Docker Daemon senden kann. Üblicherweise verwendet man einen CLI 
+     (Command Line Interface) Client, es gibt aber auch bereits Clients mit
+     einer graphischen Nutzeroberfläche (Kitematic).
+
+   - Docker Images
+
+     Ein Image ist der kleinste Building Block in der Docker Welt. Images werden
+     aufeinander aufgesetzt und lassen sich in verschiedenen Projekten und
+     Applikationen wiederverwenden. Ein Image beinhaltet dabei immer einen
+     Befehl, wie zum Beispiel:
+     1. Füge eine Datei hinzu
+     2. Öffne einen Port
+     3. Lade ein Source Archiv herunter
+     4. Führe einen Shell Befehl aus
+     5. ...
+
+   - Docker Registry
+
+     Eine Docker Registry ist ein Registry, bei der Nutzer ihre Images
+     hochladen, versionieren und für andere Nutzer verfügbar machen können. Eine
+     Docker Registry ist vergleichbar mit einem Git Server auf dem Entwickler
+     ihren Source Code hochladen, versionieren und für andere Nutzer verfügbar
+     machen können.
+
+     Die Macher von Docker betreiben eine öffentliche Registry mit dem Namen
+     Dockerhub. Dockerhub ist für Nutzer, die ihre Images öffentlich machen
+     kostenlos, und für Unternehmen oder Nutzer die ihre Images privat verwalten
+     wollen für Geld nutzbar.
+
+     Weiterhin gibt es die Möglichkeit eine Registry selbst zu betreiben, wie es
+     bei der REWE Digital der Fall ist. Hierfür sprechen einige Gründe:
+     1. Mehr Kontrolle
+     2. Keine Abhängigkeit von (Docker Macher)
+     3. Images sind häufig mehrere 100MB groß und es ist daher schneller wenn
+        die Registry nah bzw. im selben Datencenter wie die Container betrieben
+        werden.
+
+   - Docker Container
+
 *** Zitat:
     "Docker is being used in production by multiple companies. It provides many
      of the benefits of lightweight containers in terms of efficiency and speed
