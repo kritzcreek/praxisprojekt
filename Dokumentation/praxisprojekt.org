@@ -28,7 +28,8 @@
 #+END_SRC
 
 #+AUTHOR: Christoph Hegemann
-#+TITLE: Messaging -- Entkopplung von Microservices
+# #+TITLE: Messaging -- Entkopplung von Microservices
+#+TITLE: Docker als Virtualisierungstrategie
 #+LATEX_CLASS: kc-report
 # #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=true, titlepage=false, headsepline=true]
 #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=false, titlepage=true, headsepline=true]
@@ -46,7 +47,7 @@
 
 #+LATEX_HEADER: \titlehead{\center{Technische Hochschule Köln}}
 #+LATEX_HEADER: \subject{Praxisprojekt}
-#+LATEX_HEADER: \subtitle{Am Beispiel des Messaging Systems Kafka}
+#+LATEX_HEADER: \subtitle{Für die Implementierung und Integration von Microservices}
 #+LATEX_HEADER: \publishers{Betreut von Prof.\ Dr.\ Christian Kohls}
 #+LATEX_HEADER: \addbibresource{literatur.bib}
 
@@ -76,24 +77,92 @@
 *** Microservice Definition
     "Microservices are small, autonomous services that work together" \cite{Newman-BuildingMicroservices}
 
-** "Don't share the database"
+** Integrationsstrategien
+*** Integration über eine gemeinsame (relationale) Datenbank
+    #+BEGIN_QUOTE
+
+    "If a family of integrated applications all rely on
+    the same database, then you can be pretty sure that they are always
+    consistent all of the time" \cite{Hohpe-EnterpriseIntegrationPatterns}
+
+    #+END_QUOTE
+
+    Klassischerweise integriert man verschiedene Applikationen und Services
+    mithilfe einer geteilten relationen Datenbank. Diese Herangehensweise hat
+    viele Vorteile:
+
+    - Hohe Konsistenzgarantien
+
+      Als einzige Quelle der Wahrheit, kann eine Datenbank mithilfe von
+      Transaktionen dafür sorgen, dass niemals ein inkonsistenter Datenbestand
+      abgespeichert werden kann.
+
+    - Breite Unterstützung von SQL
+
+      Es gibt für nahezu alle Sprachen und Frameworks hochwertige SQL
+      Bibliotheken die sich seit vielen Jahren in der Industrie bewährt haben.
+
+    - Ein gemeinsames Datenmodell
+
+      Da alle Dienste mit dem selben Schema arbeiten, können schon früh
+      Inkompatibilitäten zwischen den Services und Missverständnisse bei der
+      Modellierung des Datenmodelles gefunden und geklärt werden.
+
+    In einer Microservice Architektur wird die geteilte Datenbank jedoch von
+    Nachteilen und Problemen geplagt. 
+
+    - Ein gemeinsames Datenmodell
+
+      Alle Services müssen mit demselben Datenmodell arbeiten. Dies widerspricht
+      ganz deutlich dem Prinzip der "Bounded Contexts" aus Domain Driven Design.
+      Nicht jeder Service hat dieselbe Sicht auf eine Entität. Hier einen
+      gemeinsamen Nenner zu finden, erfordert dass sich alle Teams einigen und
+      jede Änderung am Datenmodell ist ein potentieller Breaking Change für
+      jeden Service.
+
+    - Implementierungsdetails liegen offen
+
+      Ein Schema in einer Datenbank ist als eine API zu sehen, da jeder Client
+      der Datenbank auf das Schema zugreifen kann. "The DB is effectively a very
+      large, shared API that is also quite brittle."
+      \cite{Newman-BuildingMicroservices})
+
+      Ein Service legt also mit seinem Datenmodell einen großen Teil seiner
+      Implementierung offen. Dies sorgt für Kopplung zwischen den Services und
+      widerspricht damit eindeutig der Zielsetzung der Microservice Architektur.
+
+    - Single Point of Failure
+
+      In einer Architektur, die darauf ausgelegt ist, einzelne Services
+      unabhängig voneinander zu machen um Ausfälle lokal zu halten und
+      Fehlertolerant zu sein hat eine von allen Services verwendete Datenbank
+      keinen Platz. Wenn diese ausfällt ist das gesamte System ausgefallen.
+
+    - Performanz Probleme
+
+      Da Konsistenzgarantien nur durch Locking und Transaktionen gewährleistet
+      werden können, kann ein einziger Service der viel Last auf der Datenbank
+      erzeugt, alle anderen Services mit "ausbremsen".
+*** Messaging
 ** Message Broker
 *** Apache Kafka
-    A high-throughput distributed messaging system
+  A high-throughput distributed messaging system
 
-    - Partitionierter Commit Log
-    - Verteilt. Also mehrere Instanzen
-    - CAP Theorem
-      - Consistency
-      - Availability
-      - +Partition Tolerance+
+  - Partitionierter Commit Log
+  - Verteilt. Also mehrere Instanzen
+  - CAP Theorem
+    - Consistency
+    - Availability
+    - +Partition Tolerance+
 *** RabbitMQ/ActiveMQ
+
 
 * Der Prototyp
   - Annäherung an ein realistisches Szenario
-  - Kommunikation zwischen Services
-  - Topics mit Ownern (Producern) und Consumern
   - Services haben unterschiedliche Modelle für die selbe Entität (Domain Model)
+  - Topics mit Ownern (Producern) und Consumern
+  - Kommunikation zwischen Services über Kafka Message Broker
+  - Der Prototyp braucht eine Story für Dinge wie Deployment oder Monitoring
   
 ** Produktservice
    Der Produktservice ist Owner des Produkt Topics. Er stellt eine API zur
@@ -191,9 +260,15 @@ Preise) und Rabattaktionen beinhaltet.
     neugestartet und provisioniert werden.
 
 ** Docker/Container Technologie
-*** Hype Technology
-*** Infrastruktur versionierbar machen
-*** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
+*** Warum Docker?
+    "Docker aims to reduce the cycle time between code being written and code being
+    tested, deployed, and used. It aims to make your applications portable, easy to
+    build, and easy to collaborate on."\cite{Turnbull-TheDockerBook}
+
+    "Docker is being used in production by multiple companies. It provides many
+    of the benefits of lightweight containers in terms of efficiency and speed
+    of provisioning, together with the tools to avoid many of the
+    downsides."\cite{Newman-BuildingMicroservices}
 *** Terminologie und Bausteine von Docker
    - Docker Daemon
 
@@ -243,11 +318,18 @@ Preise) und Rabattaktionen beinhaltet.
 
    - Docker Container
 
-*** Zitat:
-    "Docker is being used in production by multiple companies. It provides many
-     of the benefits of lightweight containers in terms of efficiency and speed
-     of provisioning, together with the tools to avoid many of the
-     downsides."\cite{Newman-BuildingMicroservices}
+*** Infrastruktur versionierbar machen
+**** Dockerfiles
+    In Docker verwendet man sogenannte Dockerfiles um das Erzeugen von
+    Images in reproduzierbaren Schritten festzuhalten. Dieses Dockerfile liegt
+    in Textform vor, und lässt sich damit in ein Version Control System wie GIT
+    einchecken und versionieren.
+
+**** Tags
+    Einzelne Images können, analog zu Git, mit Tags versehen werden, sodass
+    getaggte Versionen eines Dockerimages leicht referenziert und als Bausteine
+    für weitere Images verwendet werden können.
+*** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
 *** Nachteile:
    - Benötigt im großen Stil Service Discovery
    - Verleitet dazu Security Updates nicht einzuspielen
@@ -258,21 +340,23 @@ Preise) und Rabattaktionen beinhaltet.
    [[./bilder/infra-schaubild.jpg]]
 
 ** Container für Services
-   - 1 Build image für Haskell Projekte
-     - base fpco/stack-build
+*** librdkafka
+*** Die verwendeten Images
+   - Build image für Haskell Projekte 
 
-       Beinhaltet Haskell Compiler und build tools
-       + librdkafka dependency kritzcreeek/stack-kafka-build
-   - 1 Run image für Haskell Projekte
-     - base fpco/stack-run
+     Base Image: fpco/stack-build
 
-       Beinhaltet Laufzeitabhängigkeiten für Haskell Projekte. Das sind zum
-       Beispiel Systembibliotheken die dynamisch gegen die Executable gelinkt
-       sind.
+     Beinhaltet Haskell Compiler und build tools + librdkafka dependency kritzcreeek/stack-kafka-build
+   - Run image für Haskell Projekte
+     Base Image fpco/stack-run
+     
+     Beinhaltet Laufzeitabhängigkeiten für Haskell Projekte. Das sind zum
+     Beispiel Systembibliotheken die dynamisch gegen die Executable gelinkt
+     sind.
        + buildtools (gcc etc.)
        + eventuell weitere Abhängigkeiten (openssl)
        + librdkafka dependency kritzcreeek/stack-kafka-run
-
+         
    - Docker Konfiguration für Services geschieht in ~stack.yaml~
      - Gebaut werden die Projekte innerhalb des Build Containers
        (kritzcreeek/stack-kafka-build). Kommando: ~stack build~
@@ -282,7 +366,6 @@ Preise) und Rabattaktionen beinhaltet.
        produktservice~ gestartet werden.
      - Services können nun mit in docker-compose aufgenommen und leichter
        konfiguriert werden.
-
 ** Monitoring?
 
 

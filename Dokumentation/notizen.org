@@ -237,13 +237,22 @@
     [2016-04-14 Thu]
     [[file:~/Documents/praxisprojekt/Dokumentation/praxisprojekt.org::*Modell][Modell]]
 ** <2016-05-12 Thu>
-*** TODO Docker book zu BibTex hinzufügen
-*** TODO Aktuelle Richtung des Projektes mit Kohls besprechen
+*** DONE Docker book zu BibTex hinzufügen
+    CLOSED: [2016-05-12 Thu 13:05]
+*** DONE Aktuelle Richtung des Projektes mit Kohls besprechen
+    CLOSED: [2016-05-12 Thu 13:16]
 *** TODO Laptop Tasche besorgen
+    Ticket erstellt, sollte am Dienstag erledigt sein
+** <2016-05-17 Tue>
+*** TODO Gespräch mit Prof. Kohls
+    - Infrastrukturthemen sind umfangreicher und spannender als gedacht
+    - Docker als Containertechnologie, Unterscheidung von Virtualisierung
+    - Fokus auf Entwicklung und Integration von Microservices
 *** TODO Umgebungsvariablen von Host -> Container
 *** TODO Umgebungsvariablen für die Services bestimmen :Haskell_Produktservice:Haskell_Warenkorbservice:
 **** KAFKA_ADVERTISED_HOST
 **** POSTGRES Variablen
+
 * Offene TODOs
 ** Aufsetzen Kafka Cluster
 *** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
