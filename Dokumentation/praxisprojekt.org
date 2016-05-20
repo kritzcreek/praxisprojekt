@@ -29,7 +29,7 @@
 
 #+AUTHOR: Christoph Hegemann
 # #+TITLE: Messaging -- Entkopplung von Microservices
-#+TITLE: Docker als Virtualisierungstrategie
+#+TITLE: Isolation & Virtualisierung von Services mit Docker
 #+LATEX_CLASS: kc-report
 # #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=true, titlepage=false, headsepline=true]
 #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=false, titlepage=true, headsepline=true]
@@ -47,7 +47,7 @@
 
 #+LATEX_HEADER: \titlehead{\center{Technische Hochschule Köln}}
 #+LATEX_HEADER: \subject{Praxisprojekt}
-#+LATEX_HEADER: \subtitle{Für die Implementierung und Integration von Microservices}
+#+LATEX_HEADER: \subtitle{Im Kontext der Implementierung und Integration von Microservices}
 #+LATEX_HEADER: \publishers{Betreut von Prof.\ Dr.\ Christian Kohls}
 #+LATEX_HEADER: \addbibresource{literatur.bib}
 
@@ -56,27 +56,55 @@
 #+OPTIONS: H:4 ':t
 
 #+BEGIN_abstract
-  Das wichtigste Prinzip in der Entwicklung einer Microservice Architektur ist,
-  dass zwischen den einzelnen Services so wenige Abhängigkeiten wie nur möglich
-  bestehen.
-  Eine weiteres grundlegendes Prinzip ist "Don't share the database". Jeder
-  Service muss also die Daten, die er benötigt um zu funktionieren, selbst
-  speichern.
-  Natürlich arbeiten die verschiedenen Services jedoch häufig auf den selben
-  Entitäten, sodass hier eine Synchronisation stattfinden muss.
-  Wie können nun also mehrere Services mit den selben Entitäten arbeiten?
+
+Bei der REWE Digital wird ein großes Softwareprojekt umgesetzt. Um die große
+Anzahl an Teams, Entwicklern und Systemen zu bändigen hat man sich für eine
+Microservice Architektur entschieden. Das Aufteilen der Domäne in viele kleine,
+unabhängige Bereiche erlaubt es Komplexität auf der Software Ebene gering zu
+halten, bringt jedoch neue Schwierigkeiten im Bereich von Operations, Deployment
+und Integration mit sich.
+
+Ein Ansatz um die gestiegene Komplexität von Provisionierung und Integration von
+Microservices anzugehen ist Virtualisierung mithilfe von Containertechnologie,
+wie die derzeit verbreiteste Lösung, das von der gleichnamigen Firma entwickelte
+Docker. In diesem Praxisprojekt werde ich mit der Implementierung von
+Microservices und ihrem Deployment mithilfe von Docker beschäftigen und meine
+Fortschritte sowie Rückschläge dokumentieren.
+
 #+END_abstract
 
 * Motivation
+
+** Großes Software Projekt bei der REWE Digital
+*** Mehr als 20 Teams, je 5-7 Mitarbeiter
+*** Hoher Featuredruck, kaum Maintenanceaufwand
+*** Schnell wachsen
+*** Agiles Vorgehen
+*** Rapid Prototyping
 ** Microservice Architektur
+*** Microservices
+    "Microservices are small, autonomous services that work together"
+    \cite{Newman-BuildingMicroservices}
+    
+    Auf kleinen Services lässt sich schnell iterieren. Sollte sich
+    herausstellen, dass die falsche Herangehensweise gewählt wurde, kann ein
+    bereits geschriebener Microservice in vertretbarem Zeitaufwand neu
+    geschrieben werden.
+
+    Durch die hohe Autonomie der Services können Teams parallel arbeiten und an
+    vielen Stellen iterieren ohne sich gegenseitig zu behindern.
+
+*** Korrelation Kommmunikationsstruktur -- Softwarestruktur
+    #+BEGIN_QUOTE
+
+    Organizations which design systems ... are constrained to produce designs
+    which are copies of the communication structures of these organizations.
+
+    -- Melvin E. Conway
+
+    #+END_QUOTE
 *** Domain Driven Design 
     Eric Evans \cite{Evans-DomainDrivenDesign}
-*** Conways Law - Melvin Conway
-    organizations which design systems ... are constrained to produce designs
-    which are copies of the communication structures of these organizations
-*** Microservice Definition
-    "Microservices are small, autonomous services that work together" \cite{Newman-BuildingMicroservices}
-
 ** Integrationsstrategien
 *** Integration über eine gemeinsame (relationale) Datenbank
     #+BEGIN_QUOTE
@@ -158,16 +186,35 @@
 
 
 * Der Prototyp
-  - Annäherung an ein realistisches Szenario
-  - Services haben unterschiedliche Modelle für die selbe Entität (Domain Model)
-  - Topics mit Ownern (Producern) und Consumern
-  - Kommunikation zwischen Services über Kafka Message Broker
-  - Der Prototyp braucht eine Story für Dinge wie Deployment oder Monitoring
+  Um die Tauglichkeit von Docker untersuchen zu können und kritische Fragen
+  bereits frühzeitig aufdecken zu können, haben wir uns dafür entschieden einen
+  Prototyp zu entwicklen, der sich der aktuellen Systemstruktur annähert und
+  eine breite Menge an bekannten Szenarien und Schwierigkeiten abdeckt.
+
+  Es sollen zwei Services implementiert werden, die per Messaging integriert und
+  vollständig unabhängig voneinander in Docekr Containern deployed werden
+  sollen. Weiterhin müssen sie unabhängig voneinander skalierbar sein und der
+  Ausfall des einen Services darf den anderen Service nicht mitreißen.
+
+  Inhaltlich sollen die Services sich mit einer gemeinsamen Entität
+  beschäftigen, auf die sie jedoch unterschiedliche Sichten haben. Im Kafka wird
+  diese Entität als ein Topic abgebildet, welcher von einem der Services als
+  "Owner" oder Producer und von dem anderen Service als Consumer konsumiert
+  wird.
+
+  Services haben unterschiedliche Modelle für die selbe Entität (Domain Model) um
+  das Prinzip der Bounded Contexts im Sinne des Domain Driven Design abzubilden.
+
+  Der Prototyp braucht eine Story für Dinge wie Deployment oder Monitoring um
+  Anforderungen an realen Services zu genügen.
   
 ** Produktservice
    Der Produktservice ist Owner des Produkt Topics. Er stellt eine API zur
-   Verfügung, die es erlaubt Produktdaten zu ändern. In unserem Protoyp werden
-   diese Änderungen zufällig generiert.
+   Verfügung, die es erlaubt Produktdaten zu ändern. Hier könnten in der
+   Realität mehrere Anwendungen Produktdaten ändern. Beispiele wären eine
+   Webanwendung, in der Fachmitarbeiter Änderungen durchführen, sowie ein
+   regelmäßiger Dienst, der die neuesten Angebote und Rabattaktionen automatisch
+   einspielt. In unserem Protoyp werden diese Änderungen zufällig generiert.
 
 *** Modell
     Der Produktservice hat folgende Sicht auf die Produktentität:
@@ -319,16 +366,70 @@ Preise) und Rabattaktionen beinhaltet.
    - Docker Container
 
 *** Infrastruktur versionierbar machen
-**** Dockerfiles
-    In Docker verwendet man sogenannte Dockerfiles um das Erzeugen von
-    Images in reproduzierbaren Schritten festzuhalten. Dieses Dockerfile liegt
-    in Textform vor, und lässt sich damit in ein Version Control System wie GIT
+    In Docker verwendet man sogenannte Dockerfiles um das Erzeugen von Images in
+    reproduzierbaren Schritten festzuhalten. Diese Dockerfiles liegen in
+    Textform vor, und lassen sich damit in ein Version Control System wie GIT
     einchecken und versionieren.
 
-**** Tags
-    Einzelne Images können, analog zu Git, mit Tags versehen werden, sodass
-    getaggte Versionen eines Dockerimages leicht referenziert und als Bausteine
-    für weitere Images verwendet werden können.
+    Als Beispiel soll hier einmal das, mit Kommentaren versehene, Dockerfile für
+    den Runtime Container dienen:
+
+#+BEGIN_SRC Dockerfile
+# Es wird das fpco/stack-run base image verwendet, welches alle nötigen
+# Laufzeitabhängigkeiten für kompilierte Haskell binaries enthält.
+FROM fpco/stack-run:lts-5
+
+# Da Kafka Client Bibliothek librdkafka nicht in den offiziellen Ubuntu
+# repositories verfügbar ist, müssen wir sie selbst kompilieren und
+# installieren mit build-essential tools wie 'gcc' und 'make'
+
+# curl benötigen wir, um den Quellcode für die Bibliothek herunterzuladen
+RUN apt-get update && \
+    apt-get install -y \
+      curl build-essential
+
+# Hier laden wir ein mit 'tar' komprimiertes Archiv herunter, welches 
+# den Quellcode für librdkafka enthält.
+RUN curl -o /root/librdkafka-0.9.0.99.tar.gz -SL \
+      https://github.com/edenhill/librdkafka/archive/0.9.0.99.tar.gz && \
+
+# Wir entpacken das Archiv
+    tar -xzf /root/librdkafka-0.9.0.99.tar.gz -C /root && \
+    cd /root/librdkafka-0.9.0.99 && \
+
+# Jetzt kompilieren wir librdkafka und installieren die entstandene
+# Bibliothek mit 'make install' nach '/usr/lib wo sie für unsere 
+# Binaries verfübar ist
+    ./configure && \
+    make && \
+    make install && \
+    cd / && \
+
+# Hier cachen wir das anfänglich heruntergeladene Archiv um es bei
+# zukünftigen Durchläufen nicht mehr herunterladen zu müssen.
+    tar czf librdkafka-0.9.0.99.tar.gz \
+      usr/local/include/librdkafka usr/local/lib/librdkafka*
+#+END_SRC
+
+   Dieses Dockerfile kann nun verwendet werden um das Laufzeitimage neu zu
+   bauen.
+
+   Einzelne Images können, analog zu Git, mit Tags versehen werden, sodass
+   getagte Versionen eines Dockerimages leicht referenziert und als Bausteine
+   für weitere Images verwendet werden können.
+
+   Weiterhin lassen sich mit einem Tag versehene Images in eine /Docker
+   Registry/ pushen. Von dort können sie dann herunterladen und ausgeführt
+   werden, ohne sie erneut bauen zu müssen.
+
+*** Image Hierarchie
+    Die Docker Container, die die fertigen Services enthalten, werden aus
+    folgenden Images zusammengebaut.
+
+    #+ATTR_LATEX: :width 8cm
+    #+CAPTION: Docker Images
+    [[./bilder/infrastruktur.png]]
+
 *** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
 *** Nachteile:
    - Benötigt im großen Stil Service Discovery
