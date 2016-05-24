@@ -23,7 +23,7 @@
                  ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
 
     (setq org-latex-pdf-process
-    '("latexmk -xelatex -shell-escape -interaction=nonstopmode -pdf %f"))
+      '("latexmk -xelatex -shell-escape -interaction=nonstopmode -f -pdf %f"))
     (setq org-latex-listings 'minted)
 #+END_SRC
 
@@ -379,8 +379,8 @@ Preise) und Rabattaktionen beinhaltet.
 # Laufzeitabhängigkeiten für kompilierte Haskell binaries enthält.
 FROM fpco/stack-run:lts-5
 
-# Da Kafka Client Bibliothek librdkafka nicht in den offiziellen Ubuntu
-# repositories verfügbar ist, müssen wir sie selbst kompilieren und
+# Da die Kafka Client Bibliothek librdkafka nicht in den offiziellen
+# Ubuntu repositories verfügbar ist, müssen wir sie selbst kompilieren und
 # installieren mit build-essential tools wie 'gcc' und 'make'
 
 # curl benötigen wir, um den Quellcode für die Bibliothek herunterzuladen
@@ -391,24 +391,24 @@ RUN apt-get update && \
 # Hier laden wir ein mit 'tar' komprimiertes Archiv herunter, welches 
 # den Quellcode für librdkafka enthält.
 RUN curl -o /root/librdkafka-0.9.0.99.tar.gz -SL \
-      https://github.com/edenhill/librdkafka/archive/0.9.0.99.tar.gz && \
+      https://github.com/edenhill/librdkafka/archive/0.9.0.99.tar.gz
 
 # Wir entpacken das Archiv
-    tar -xzf /root/librdkafka-0.9.0.99.tar.gz -C /root && \
-    cd /root/librdkafka-0.9.0.99 && \
+RUN tar -xzf /root/librdkafka-0.9.0.99.tar.gz -C /root && \
+    cd /root/librdkafka-0.9.0.99
 
 # Jetzt kompilieren wir librdkafka und installieren die entstandene
 # Bibliothek mit 'make install' nach '/usr/lib wo sie für unsere 
 # Binaries verfübar ist
-    ./configure && \
+RUN ./configure && \
     make && \
-    make install && \
-    cd / && \
+    make install
 
 # Hier cachen wir das anfänglich heruntergeladene Archiv um es bei
 # zukünftigen Durchläufen nicht mehr herunterladen zu müssen.
+RUN cd / && \
     tar czf librdkafka-0.9.0.99.tar.gz \
-      usr/local/include/librdkafka usr/local/lib/librdkafka*
+    usr/local/include/librdkafka usr/local/lib/librdkafka*
 #+END_SRC
 
    Dieses Dockerfile kann nun verwendet werden um das Laufzeitimage neu zu
@@ -423,10 +423,12 @@ RUN curl -o /root/librdkafka-0.9.0.99.tar.gz -SL \
    werden, ohne sie erneut bauen zu müssen.
 
 *** Image Hierarchie
-    Die Docker Container, die die fertigen Services enthalten, werden aus
-    folgenden Images zusammengebaut.
 
-    #+ATTR_LATEX: :width 8cm
+    Die Docker Container, die die fertigen Services enthalten, werden aus den in
+    [[fig:docker-images]] dargestellten Images zusammengebaut.
+
+    #+ATTR_LATEX: :width 6cm
+    #+LABEL: fig:docker-images
     #+CAPTION: Docker Images
     [[./bilder/infrastruktur.png]]
 

@@ -19,7 +19,7 @@ infrastruktur :: Diagram B
 infrastruktur =
   let
     images = map (\(text, label, name) -> dockerImage text label # named name)
-             [ ("ubuntu-base", "", "ub")
+             [ ("ubuntu", "", "ub")
              , ("fpco/stack-run", "Laufzeitbibliotheken", "fpsr")
              , ("kritzcreeek/stack-kafka-run", "Kafka Client Bibliothek", "kcsr")
              , ("kritzcreeek/produktservice", "Kompilierter Service", "rt")
@@ -34,6 +34,8 @@ infrastruktur =
     # arr "ub" "fpsr"
     # arr "fpsr" "kcsr"
     # arr "kcsr" "rt"
+    ===
+    strutY 0.5
 
 dockerImage :: String -> String -> Diagram B
 dockerImage s "" = text' 20 s # translate (r2 (0, -0.8)) <> rect 35.0 8.0 # fc azure
