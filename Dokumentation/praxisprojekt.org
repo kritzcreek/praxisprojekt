@@ -89,11 +89,11 @@ Fortschritte sowie Rückschläge dokumentieren.
 ** Microservice Architektur
 *** Microservices
 #+BEGIN_QUOTE
-Microservices are small, autonomous services that work together 
+Microservices are small, autonomous services that work together
 
 -- \textsc{Sam Newman}\cite{Newman-BuildingMicroservices}
 #+END_QUOTE
-    
+
     Auf kleinen Services lässt sich schnell iterieren. Sollte sich
     herausstellen, dass die falsche Herangehensweise gewählt wurde, kann ein
     bereits geschriebener Microservice in vertretbarem Zeitaufwand neu
@@ -109,7 +109,7 @@ which are copies of the communication structures of these organizations.
 
 -- Melvin E. Conway
 #+END_QUOTE
-*** Domain Driven Design 
+*** Domain Driven Design
     Eric Evans \cite{Evans-DomainDrivenDesign}
 ** Integrationsstrategien
 *** Integration über eine gemeinsame (relationale) Datenbank
@@ -142,8 +142,8 @@ which are copies of the communication structures of these organizations.
       Inkompatibilitäten zwischen den Services und Missverständnisse bei der
       Modellierung des Datenmodelles gefunden und geklärt werden.
 
-    In einer Microservice Architektur wird die geteilte Datenbank jedoch von
-    Nachteilen und Problemen geplagt. 
+    In einer Microservice Architektur birgt die geteilte Datenbank jedoch viele
+    Nachteilen.
 
     - Ein gemeinsames Datenmodell
 
@@ -190,7 +190,7 @@ which are copies of the communication structures of these organizations.
     - +Partition Tolerance+
 *** RabbitMQ/ActiveMQ
 
-    
+
 * Der Prototyp
   Um die Tauglichkeit von Docker zu untersuchen und kritische Fragen
   bereits frühzeitig aufdecken zu können, haben wir uns dafür entschieden einen
@@ -209,7 +209,7 @@ which are copies of the communication structures of these organizations.
   wird.
 
 ** Bounded Context
-  
+
     Dass die Services eine unterschiedliche Sicht auf dieselbe Entität, und damit
     auch unterschiedliche Datenmodelle haben, bildet einen der wichtigsten
     Begriffe des Domain Driven Design's ab. Der /Bounded Context/ beschreibt
@@ -224,7 +224,7 @@ which are copies of the communication structures of these organizations.
 #+BEGIN_QUOTE
 As you try to model a larger domain, it gets progressively harder to build a
 single unified model. Different groups of people will use subtly different
-vocabularies in different parts of a large organization. 
+vocabularies in different parts of a large organization.
 
 -- \textsc{Martin Fowler}\cite{Fowler-BoundedContext}
 #+END_QUOTE
@@ -324,14 +324,19 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
   Flexibilität der Teams nicht untermauert sondern unterstützt.
 
 ** Anforderungen an die Infrastruktur
-   TODO: noch sehr auf Kafka bezogen, sollte mehr auf MicroService Architektur
+   TODO: noch sehr auf Kafka bezogen, sollte mehr auf Microservice Architektur
    abzielen
 *** Elastizität
+    Einer der wesentlichen Vorteile von Microservices ist es, dass durch die
+    strikte Trennung zwischen den Services möglich ist Services unabhängig
+    voneinander zu skalieren und der aktuellen Last anzupassen.
+
     Ein Message Broker wie Kafka kann zu verschiedenen Zeiten unter variierender
     Last arbeiten haben. Zu Stoßzeiten werden sehr viele Services Messages
     produzieren und abrufen. Um diesen sich ändernden Anforderungen gerecht zu
     werden, muss Kafka so aufgesetzt werden, dass dynamisch neue Broker
     hinzugefügt oder heruntergefahren werden können.
+
 *** Automatisierung
     Die Provisionierung einer Maschine mit einem Kafka Broker muss vollständig
     automatisch ablaufen. Dies steht in direktem Bezug zu /Elastizität/ und dem
@@ -348,7 +353,7 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
 
    #+CAPTION: Außensicht Systemlandschaft
    #+LABEL: fig:infra-schaubild
-   [[./bilder/infra-schaubild.jpg]]
+   [[./bilder/architektur.eps]]
 
 ** Docker/Container Technologie
 *** Warum Docker?
@@ -370,7 +375,7 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
    - Docker Client
 
      Ein Docker Client ist ein Programm mit dessen Hilfe der Nutzer Befehle an
-     einen Docker Daemon senden kann. Üblicherweise verwendet man einen CLI 
+     einen Docker Daemon senden kann. Üblicherweise verwendet man einen CLI
      (Command Line Interface) Client, es gibt aber auch bereits Clients mit
      einer graphischen Nutzeroberfläche (Kitematic).
 
@@ -433,7 +438,7 @@ RUN apt-get update && \
     apt-get install -y \
       curl build-essential
 
-# Hier laden wir ein mit 'tar' komprimiertes Archiv herunter, welches 
+# Hier laden wir ein mit 'tar' komprimiertes Archiv herunter, welches
 # den Quellcode für librdkafka enthält.
 RUN curl -o /root/librdkafka-0.9.0.99.tar.gz -SL \
       https://github.com/edenhill/librdkafka/archive/0.9.0.99.tar.gz
@@ -443,7 +448,7 @@ RUN tar -xzf /root/librdkafka-0.9.0.99.tar.gz -C /root && \
     cd /root/librdkafka-0.9.0.99
 
 # Jetzt kompilieren wir librdkafka und installieren die entstandene
-# Bibliothek mit 'make install' nach '/usr/lib wo sie für unsere 
+# Bibliothek mit 'make install' nach '/usr/lib wo sie für unsere
 # Binaries verfübar ist
 RUN ./configure && \
     make && \
@@ -466,7 +471,7 @@ RUN cd / && \
    Weiterhin lassen sich mit einem Tag versehene Images in eine /Docker
    Registry/ pushen. Von dort können sie dann herunterladen und ausgeführt
    werden, ohne sie erneut bauen zu müssen.
-   
+
 *** Image Hierarchie
 
     Die Docker Container, die die fertigen Services enthalten, werden aus den in
@@ -479,7 +484,7 @@ RUN cd / && \
 
     Die ~ubuntu~ und ~fpco/stack-run~ Images sind bereits vorhanden, und können
     so wie sie sind, als Grundlage verwendet werden. Das ~stack-kafka-run~ image
-    wird durch das in 
+    wird durch das in
 
 *** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
 *** Nachteile:
@@ -489,21 +494,21 @@ RUN cd / && \
 ** Haskell Services und Docker
 *** librdkafka
 *** Die verwendeten Images
-   - Build image für Haskell Projekte 
+   - Build image für Haskell Projekte
 
      Base Image: fpco/stack-build
 
      Beinhaltet Haskell Compiler und build tools + librdkafka dependency kritzcreeek/stack-kafka-build
    - Run image für Haskell Projekte
      Base Image fpco/stack-run
-     
+
      Beinhaltet Laufzeitabhängigkeiten für Haskell Projekte. Das sind zum
      Beispiel Systembibliotheken die dynamisch gegen die Executable gelinkt
      sind.
        + buildtools (gcc etc.)
        + eventuell weitere Abhängigkeiten (openssl)
        + librdkafka dependency kritzcreeek/stack-kafka-run
-         
+
    - Docker Konfiguration für Services geschieht in ~stack.yaml~
      - Gebaut werden die Projekte innerhalb des Build Containers
        (kritzcreeek/stack-kafka-build). Kommando: ~stack build~
@@ -513,6 +518,7 @@ RUN cd / && \
        produktservice~ gestartet werden.
      - Services können nun mit in docker-compose aufgenommen und leichter
        konfiguriert werden.
+
 
 * Fazit
 \printbibliography
