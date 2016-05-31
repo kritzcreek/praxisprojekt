@@ -28,7 +28,6 @@
 #+END_SRC
 
 #+AUTHOR: Christoph Hegemann
-# #+TITLE: Messaging -- Entkopplung von Microservices
 #+TITLE: Isolation & Virtualisierung von Services mit Docker
 #+LATEX_CLASS: kc-report
 # #+LATEX_CLASS_OPTIONS: [a4paper, oneside, abstract=true, BCOR=11pt, fontsize=11pt, draft=true, titlepage=false, headsepline=true]
@@ -38,6 +37,8 @@
 #+LATEX_HEADER: \usepackage[normalem]{ulem}
 #+LATEX_HEADER: \usepackage[ngerman]{babel}
 #+LATEX_HEADER: \usepackage{csquotes}
+#+LATEX_HEADER: \usepackage{epigraph}
+#+LATEX_HEADER: \setlength{\epigraphwidth}{0.8\textwidth}
 #+LATEX_HEADER: \usepackage{minted}
 #+LATEX_HEADER: \usemintedstyle{emacs}
 #+LATEX_HEADER: \setcounter{tocdepth}{1}
@@ -75,6 +76,10 @@ Fortschritte sowie Rückschläge dokumentieren.
 
 * Motivation
 
+#+BEGIN_LATEX
+\epigraph{Move fast and break things. Unless you are breaking stuff, you are not moving fast enough.}
+{\textsc{Mark Zuckerberg}}
+#+END_LATEX
 ** Großes Software Projekt bei der REWE Digital
 *** Mehr als 20 Teams, je 5-7 Mitarbeiter
 *** Hoher Featuredruck, kaum Maintenanceaufwand
@@ -83,8 +88,11 @@ Fortschritte sowie Rückschläge dokumentieren.
 *** Rapid Prototyping
 ** Microservice Architektur
 *** Microservices
-    "Microservices are small, autonomous services that work together"
-    \cite{Newman-BuildingMicroservices}
+#+BEGIN_QUOTE
+Microservices are small, autonomous services that work together 
+
+-- \textsc{Sam Newman}\cite{Newman-BuildingMicroservices}
+#+END_QUOTE
     
     Auf kleinen Services lässt sich schnell iterieren. Sollte sich
     herausstellen, dass die falsche Herangehensweise gewählt wurde, kann ein
@@ -95,14 +103,12 @@ Fortschritte sowie Rückschläge dokumentieren.
     vielen Stellen iterieren ohne sich gegenseitig zu behindern.
 
 *** Korrelation Kommmunikationsstruktur -- Softwarestruktur
-    #+BEGIN_QUOTE
+#+BEGIN_QUOTE
+Organizations which design systems ... are constrained to produce designs
+which are copies of the communication structures of these organizations.
 
-    Organizations which design systems ... are constrained to produce designs
-    which are copies of the communication structures of these organizations.
-
-    -- Melvin E. Conway
-
-    #+END_QUOTE
+-- Melvin E. Conway
+#+END_QUOTE
 *** Domain Driven Design 
     Eric Evans \cite{Evans-DomainDrivenDesign}
 ** Integrationsstrategien
@@ -153,7 +159,7 @@ Fortschritte sowie Rückschläge dokumentieren.
       Ein Schema in einer Datenbank ist als eine API zu sehen, da jeder Client
       der Datenbank auf das Schema zugreifen kann. "The DB is effectively a very
       large, shared API that is also quite brittle."
-      \cite{Newman-BuildingMicroservices})
+      \cite{Newman-BuildingMicroservices}
 
       Ein Service legt also mit seinem Datenmodell einen großen Teil seiner
       Implementierung offen. Dies sorgt für Kopplung zwischen den Services und
@@ -184,9 +190,9 @@ Fortschritte sowie Rückschläge dokumentieren.
     - +Partition Tolerance+
 *** RabbitMQ/ActiveMQ
 
-
+    
 * Der Prototyp
-  Um die Tauglichkeit von Docker untersuchen zu können und kritische Fragen
+  Um die Tauglichkeit von Docker zu untersuchen und kritische Fragen
   bereits frühzeitig aufdecken zu können, haben wir uns dafür entschieden einen
   Prototyp zu entwicklen, der sich der aktuellen Systemstruktur annähert und
   eine breite Menge an bekannten Szenarien und Schwierigkeiten abdeckt.
@@ -197,17 +203,37 @@ Fortschritte sowie Rückschläge dokumentieren.
   Ausfall des einen Services darf den anderen Service nicht mitreißen.
 
   Inhaltlich sollen die Services sich mit einer gemeinsamen Entität
-  beschäftigen, auf die sie jedoch unterschiedliche Sichten haben. Im Kafka wird
+  beschäftigen, auf die sie jedoch unterschiedliche Sichten haben. In Kafka wird
   diese Entität als ein Topic abgebildet, welcher von einem der Services als
   "Owner" oder Producer und von dem anderen Service als Consumer konsumiert
   wird.
 
-  Services haben unterschiedliche Modelle für die selbe Entität (Domain Model) um
-  das Prinzip der Bounded Contexts im Sinne des Domain Driven Design abzubilden.
-
-  Der Prototyp braucht eine Story für Dinge wie Deployment oder Monitoring um
-  Anforderungen an realen Services zu genügen.
+** Bounded Context
   
+    Dass die Services eine unterschiedliche Sicht auf dieselbe Entität, und damit
+    auch unterschiedliche Datenmodelle haben, bildet einen der wichtigsten
+    Begriffe des Domain Driven Design's ab. Der /Bounded Context/ beschreibt
+    fachliche Bereiche innerhalb einer Domäne, in denen ein gemeinsames
+    Verständnis für bestimmte Objekte und Entitäten besteht. Als Beispiel könnte
+    man hier die Produktion der Lagerung innerhalb einer Fabrik gegenüberstellen.
+    Beide Bereiche beschäftigen sich mit Produkten, innerhalb der Produktion sind
+    jedoch Eigenschaften wie Fertigungsdauer und Rohmaterialien interessant,
+    während sich das Lager mit Eigenschaften wie Gewicht, Größe und
+    Haltbarkeitsdauer beschäftigt.
+
+#+BEGIN_QUOTE
+As you try to model a larger domain, it gets progressively harder to build a
+single unified model. Different groups of people will use subtly different
+vocabularies in different parts of a large organization. 
+
+-- \textsc{Martin Fowler}\cite{Fowler-BoundedContext}
+#+END_QUOTE
+
+    Um diese Situation auch in unserem Prototypen abzubilden, müssen die beiden
+    gewählten Services, /Produktservice/ und /Warenkorbservice/ ein
+    unterschiedliches Datenmodell für die selbe Entität, das *Produkt*, haben und an den
+    Servicegrenzen zwischen den Repräsentationen konvertieren können.
+
 ** Produktservice
    Der Produktservice ist Owner des Produkt Topics. Er stellt eine API zur
    Verfügung, die es erlaubt Produktdaten zu ändern. Hier könnten in der
@@ -272,7 +298,6 @@ Preise) und Rabattaktionen beinhaltet.
 *** API
     Der Warenkorbservice bietet die folgenden Operationen für das Bearbeiten von
     Warenkörben an.
-     
 
 **** Warenkorb anlegen
      Legt einen neuen Warenkorb an und gibt die ~id~ des Warenkorbes zurück
@@ -287,7 +312,20 @@ Preise) und Rabattaktionen beinhaltet.
 
 
 * Infrastruktur und Provisionierung
-** Anforderungen
+
+#+BEGIN_LATEX
+\epigraph{Ownership extends to all aspects of the service, from sourcing requirements to
+building, deploying, and maintaining the application. \cite{Newman-BuildingMicroservices}}
+{\textsc{Sam Newman}}
+#+END_LATEX
+
+  Um den Herausforderungen bei der Umsetzung einer Microservicearchitektur
+  gerecht zu werden, ist es wichtig, dass die Infrastruktur die Autonomie und
+  Flexibilität der Teams nicht untermauert sondern unterstützt.
+
+** Anforderungen an die Infrastruktur
+   TODO: noch sehr auf Kafka bezogen, sollte mehr auf MicroService Architektur
+   abzielen
 *** Elastizität
     Ein Message Broker wie Kafka kann zu verschiedenen Zeiten unter variierender
     Last arbeiten haben. Zu Stoßzeiten werden sehr viele Services Messages
@@ -305,6 +343,12 @@ Preise) und Rabattaktionen beinhaltet.
     müssen Fallback Instanzen provisioniert werden, die einspringen wenn
     Ausfälle auftreten. Weiterhin müssen ausgefallene Instanzen automatisch
     neugestartet und provisioniert werden.
+
+** Infrastruktur Landschaft
+
+   #+CAPTION: Außensicht Systemlandschaft
+   #+LABEL: fig:infra-schaubild
+   [[./bilder/infra-schaubild.jpg]]
 
 ** Docker/Container Technologie
 *** Warum Docker?
@@ -374,6 +418,7 @@ Preise) und Rabattaktionen beinhaltet.
     Als Beispiel soll hier einmal das, mit Kommentaren versehene, Dockerfile für
     den Runtime Container dienen:
 
+#+ATTR_LATEX: :caption dockerfile
 #+BEGIN_SRC Dockerfile
 # Es wird das fpco/stack-run base image verwendet, welches alle nötigen
 # Laufzeitabhängigkeiten für kompilierte Haskell binaries enthält.
@@ -421,28 +466,27 @@ RUN cd / && \
    Weiterhin lassen sich mit einem Tag versehene Images in eine /Docker
    Registry/ pushen. Von dort können sie dann herunterladen und ausgeführt
    werden, ohne sie erneut bauen zu müssen.
-
+   
 *** Image Hierarchie
 
     Die Docker Container, die die fertigen Services enthalten, werden aus den in
     [[fig:docker-images]] dargestellten Images zusammengebaut.
 
-    #+ATTR_LATEX: :width 6cm
+    #+ATTR_LATEX: :width 10cm
     #+LABEL: fig:docker-images
     #+CAPTION: Docker Images
-    [[./bilder/infrastruktur.png]]
+    [[./bilder/infrastruktur.eps]]
+
+    Die ~ubuntu~ und ~fpco/stack-run~ Images sind bereits vorhanden, und können
+    so wie sie sind, als Grundlage verwendet werden. Das ~stack-kafka-run~ image
+    wird durch das in 
 
 *** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
 *** Nachteile:
    - Benötigt im großen Stil Service Discovery
    - Verleitet dazu Security Updates nicht einzuspielen
-** Infrastruktur Landschaft
 
-   #+CAPTION: Außensicht Systemlandschaft
-   #+LABEL: fig:infra-schaubild
-   [[./bilder/infra-schaubild.jpg]]
-
-** Container für Services
+** Haskell Services und Docker
 *** librdkafka
 *** Die verwendeten Images
    - Build image für Haskell Projekte 
@@ -469,8 +513,6 @@ RUN cd / && \
        produktservice~ gestartet werden.
      - Services können nun mit in docker-compose aufgenommen und leichter
        konfiguriert werden.
-** Monitoring?
-
 
 * Fazit
 \printbibliography

@@ -243,6 +243,8 @@
     CLOSED: [2016-05-12 Thu 13:16]
 *** TODO Laptop Tasche besorgen
     Ticket erstellt, sollte am Dienstag erledigt sein
+
+    Neuer Status: Tasche ist bestellt
 ** <2016-05-17 Tue>
 *** DONE Gespräch mit Prof. Kohls
     CLOSED: [2016-05-20 Fri 10:05]
@@ -250,22 +252,30 @@
     - Docker als Containertechnologie, Unterscheidung von Virtualisierung
     - Fokus auf Entwicklung und Integration von Microservices
 ** <2016-05-20 Fri>
+*** DONE Grafiken für die Container Hierarchie
+    CLOSED: [2016-05-24 Tue 09:37]
+*** DONE Dockerfile dokumentieren
+    CLOSED: [2016-05-24 Tue 09:38]
+*** DONE Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
+    CLOSED: [2016-05-24 Tue 09:38]
+    Topics werden angelegt wenn sie das erste mal beschrieben werden
+*** TODO Den Aufbau des Prototypen beschreiben                :Dokumentation:
+** <2016-05-24 Tue>
+** <2016-05-25 Wed>
+* Offene TODOs
+** Aufsetzen Kafka Cluster
+** Haskell Produktservice
+** Haskell Warenkorbservice
 *** TODO Umgebungsvariablen von Host -> Container
 *** TODO Umgebungsvariablen für die Services bestimmen :Haskell_Produktservice:Haskell_Warenkorbservice:
 **** KAFKA_ADVERTISED_HOST
 **** POSTGRES Variablen
    
-* Offene TODOs
-** Aufsetzen Kafka Cluster
-*** TODO Skript zum initialen befüllen von Kafka mit Topics anlegen :Aufsetzen_Kafka:
-** Haskell Produktservice
-** Haskell Warenkorbservice
 *** TODO REST Interface für API calls              :Haskell_Warenkorbservice:
 *** TODO Warenkorbservice Transstack mit STM State :Haskell_Warenkorbservice:
 ** Dokumentation schreiben
 *** TODO Abstrakt schreiben, dass den praktischen Teil einfängt :Dokumentation:
 *** TODO Bibtex Datei mit Referenzen befüllen                 :Dokumentation:
-*** TODO Den Aufbau des Prototypen beschreiben                :Dokumentation:
     Besonders cool wären hier Grafiken/Komponentendiagramme
 *** TODO Den Produktservice beschreiben                       :Dokumentation:
 *** TODO Den Warenkorbservice beschreiben                     :Dokumentation:
