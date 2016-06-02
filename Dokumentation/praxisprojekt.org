@@ -112,6 +112,15 @@ which are copies of the communication structures of these organizations.
 *** Domain Driven Design
     Eric Evans \cite{Evans-DomainDrivenDesign}
 ** Integrationsstrategien
+   Eine der wichtigsten Herausforderungen, die eine Microservice Architektur mit
+   sich bringt, ist es verschiedene Services miteinander zu integrieren. Es muss
+   sichergestellt werden, dass Services Daten austauschen können, untereinander
+   konsistent sind und dennoch nicht zu eng gekoppelt sind. Es gibt verschiedene
+   Integrationsstrategien, die man verfolgen kann.
+
+   Ich werde im folgenden die /Integation über eine gemeinsame Datenbank/
+   analysieren und anschließend die letztendlich gewählte Strategie des
+   Messaging beschreiben.
 *** Integration über eine gemeinsame (relationale) Datenbank
     #+BEGIN_QUOTE
 
@@ -143,7 +152,7 @@ which are copies of the communication structures of these organizations.
       Modellierung des Datenmodelles gefunden und geklärt werden.
 
     In einer Microservice Architektur birgt die geteilte Datenbank jedoch viele
-    Nachteilen.
+    Nachteile.
 
     - Ein gemeinsames Datenmodell
 
@@ -178,35 +187,52 @@ which are copies of the communication structures of these organizations.
       werden können, kann ein einziger Service der viel Last auf der Datenbank
       erzeugt, alle anderen Services mit "ausbremsen".
 *** Messaging
-** Message Broker
-*** Apache Kafka
-  A high-throughput distributed messaging system
+#+BEGIN_QUOTE
+Messaging makes applications loosely coupled by communicating asynchronously
+-- Gregor Hohpe cite:Hohpe-EnterpriseIntegrationPatterns
+#+END_QUOTE
+    Bei Messaging senden sich verschiedene Systeme kleine Datenpakete über einen
+    Messagebus. Dieser Messagebus, oder auch Messagebroker genannt, sorgt dafür
+    das Nachrichten an die richtigen Empfänger zugestellt werden. Hierfür
+    benötigt der Messagebus einige Funktionalitäten.
 
-  - Partitionierter Commit Log
-  - Verteilt. Also mehrere Instanzen
-  - CAP Theorem
-    - Consistency
-    - Availability
-    - +Partition Tolerance+
-*** RabbitMQ/ActiveMQ
+    - Er muss eine Queue von eingegangenen Messages verwalten
+    - Er muss, falls das Empfängersystem nicht erreichbar ist, Nachrichten
+      verwahren und zu einem späteren Zeitpunkt zustellen
+    - Er muss gesendete Nachrichten auch nach der Zustellung aufbewahren und
+      wieder abspielen können, um neu hinzugekommene Systeme auf den aktuellsten
+      Stand bringen zu können.
+
+    Bei der REWE digital hat man sich für das Messaging System *Apache Kafka*
+    entschieden. Kafka wird auf seiner Website als /A high-throughput
+    distributed messaging system/ angepriesen und hat einige interessante
+    Charakteristiken, mit welchen ich mich in meiner Bachelorarbeit noch einmal
+    genauer auseinander setzen werde. Für unsere Zwecke reicht es zunächst
+    festzustellen, dass Kafka alle Anforderungen an einen Messagebus für die
+    Systemintegration erfüllt.
 
 
 * Der Prototyp
-  Um die Tauglichkeit von Docker zu untersuchen und kritische Fragen
+  Um die Tauglichkeit von Docker und Kafka zu untersuchen und kritische Fragen
   bereits frühzeitig aufdecken zu können, haben wir uns dafür entschieden einen
   Prototyp zu entwicklen, der sich der aktuellen Systemstruktur annähert und
   eine breite Menge an bekannten Szenarien und Schwierigkeiten abdeckt.
 
-  Es sollen zwei Services implementiert werden, die per Messaging integriert und
-  vollständig unabhängig voneinander in Docekr Containern deployed werden
-  sollen. Weiterhin müssen sie unabhängig voneinander skalierbar sein und der
-  Ausfall des einen Services darf den anderen Service nicht mitreißen.
+  Es sollen zwei Services implementiert werden, die per Messaging über Kafka
+  integriert und vollständig unabhängig voneinander in Docker Containern
+  ausgerollt werden sollen. Weiterhin müssen sie unabhängig skalierbar sein und
+  der Ausfall des einen Services darf den anderen Service nicht beeinflussen.
 
   Inhaltlich sollen die Services sich mit einer gemeinsamen Entität
   beschäftigen, auf die sie jedoch unterschiedliche Sichten haben. In Kafka wird
   diese Entität als ein Topic abgebildet, welcher von einem der Services als
   "Owner" oder Producer und von dem anderen Service als Consumer konsumiert
-  wird.
+  wird. Der generelle Aufbau des Prototypen wird in [[fig:architektur-schaubild]]
+  dargestellt.
+
+  #+CAPTION: Aufbau Prototyp
+  #+LABEL: fig:architektur-schaubild
+  [[./bilder/architektur.eps]]
 
 ** Bounded Context
 
@@ -256,15 +282,49 @@ vocabularies in different parts of a large organization.
     #+END_SRC
     #+CAPTION: Produkt Modell des Produktservices
     Updates, die der Produktservice an Kafka schickt, enthalten eine Payload in
-    dieser Form.
+    dieser Form. Eine Entität vom Typ ~Produkt~ wird hierfür in das JSON Format
+    /enkodiert/, im ~Message~ Wrapper eingepackt und an Kafka weitergereicht.
+
+#+BEGIN_SRC haskell
+  sendRandomProduct =
+    produceMessage topic (KafkaSpecifiedPartition partition)  -- (4)
+    . KafkaProduceMessage -- (4)
+    . BSL.toStrict -- (3)
+    . encode -- (2)
+    =<< produkt -- (1)
+#+END_SRC
+    Der Operator für Komposition in Haskell ist der Punkt. Weil Komposition in
+    der Mathematik "rückwärts" funktioniert, lässt sich der Code leichter
+    rückwärts erklären.
+
+    (1) Die ~produkt~ Methode ist im Prototypen als ein Generator definiert, der
+    ~QuickCheck~ verwendet um zufällige Messages zu generieren, die Produkte
+    enthalten.
+#+BEGIN_SRC haskell
+produkt :: IO (Message Produkt)
+produkt = QC.generate QC.arbitrary
+#+END_SRC
+
+    ~QuickCheck~ arbeitet typgetrieben, und kann anhand der Typsignatur
+    inferieren, dass es einen Generator für ~Message Produkt~ verwenden muss,
+    den ich an anderer Stelle definiert habe.
+
+    (2) Nachdem eine Message mit Produkt Inhalt generiert wurde, reichen wir es an
+    ~encode~ weiter und enkodieren die Message damit in JSON.
+
+    (3) Weil Haskell's Evaluierungsstrategie Lazy ist, die Kafka Bibliothek
+    jedoch mit strikt evaluierten Werten arbeitet, müssen wir mit ~BSL.toStrict~
+    die vollständige Evaluierungs unseres JSON Wertes erzwingen, bevor wir es an
+    Kafka weiterreichen.
+
+    (4) ~produceMessage~ ist eine Funktion aus der Kafka Client Bibliothek, die
+    eine Nachricht für ein gegebenes Topic, an eine gegebene Partition schickt.
 
 ** Warenkorbservice
 
    Der Warenkorbservice ist Owner für kein Topic. Stattdessen verwaltet er die
    Warenkörbe der Kunden, die für die restlichen Services nicht zur Verfügung
    stehen.
-
-   [[fig:infra-schaubild][Infra Schaubild]]
 
 *** Modell
     Der Warenkorbservice hat folgende Sicht auf die Produktentität:
@@ -286,6 +346,24 @@ vocabularies in different parts of a large organization.
     ein Modell, das der Domäne des Warenkorbes[fn:artikel] entspricht,
     transformiert.
 
+    Das /deserialisieren/ und /transformieren/ sieht im Code wie folgt aus:
+#+BEGIN_SRC haskell
+instance FromJSON Produkt where
+  parseJSON = withObject "Produkt" $ \o ->
+    Produkt
+    <$> o .: "id"
+    <*> o .: "name"
+    <*> (berechnePreis <$> o .: "preis" <*> o.: "rabatt")
+    where
+      berechnePreis :: (Integral a) => a -> Double -> a
+      berechnePreis preis rabatt = floor $ fromIntegral preis * (1 - rabatt / 100)
+#+END_SRC
+
+    Die vielen ~<$>~ und ~<*>~ sorgen für das automatische Propagieren von
+    Fehlern beim deserialisieren der JSON Felder. Mithilfe der ~berechnePreis~
+    Funktion fassen wir die ~preis~ und ~rabatt~ Felder des Produktes aus dem
+    Produktservice zusammen.
+
 [fn:artikel]
 In Wirklichkeit ist der Begriff des *Preises* im E-Commerce noch
 deutlich komplexer. Einem *Produkt* ist zunächst einmal gar kein Preis
@@ -295,20 +373,6 @@ Einen Preis hingegen weist man einem *Artikel* zu, der Elemente wie Art (zB.
 Farbe), Region (Produkte haben in unterschiedlichen Regionen unterschiedliche
 Preise) und Rabattaktionen beinhaltet.
 
-*** API
-    Der Warenkorbservice bietet die folgenden Operationen für das Bearbeiten von
-    Warenkörben an.
-
-**** Warenkorb anlegen
-     Legt einen neuen Warenkorb an und gibt die ~id~ des Warenkorbes zurück
-
-**** Artikel hinzufügen
-     Fügt einem bestehenden Warenkorb einen Artikel in der angegebenen Quantität
-     hinzu.
-**** Bestellung erstellen
-     Weist den Warenkorbservice an, eine Bestellung aus einem bestehenden
-     Warenkorb zu erstellen und an einen eventuellen Checkoutservice
-     weiterzureichen.
 
 
 * Infrastruktur und Provisionierung
@@ -324,8 +388,6 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
   Flexibilität der Teams nicht untermauert sondern unterstützt.
 
 ** Anforderungen an die Infrastruktur
-   TODO: noch sehr auf Kafka bezogen, sollte mehr auf Microservice Architektur
-   abzielen
 *** Elastizität
     Einer der wesentlichen Vorteile von Microservices ist es, dass durch die
     strikte Trennung zwischen den Services möglich ist Services unabhängig
@@ -338,33 +400,37 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
     hinzugefügt oder heruntergefahren werden können.
 
 *** Automatisierung
-    Die Provisionierung einer Maschine mit einem Kafka Broker muss vollständig
-    automatisch ablaufen. Dies steht in direktem Bezug zu /Elastizität/ und dem
-    Prinzip der Automatisierung von Microservices.
+    Die Provisionierung und das Ausrollen von Services und dem Kafka Broker muss
+    vollständig automatisiert werden. Dies ist notwendig um /Elastizität/
+    überhaupt realisieren zu können. Weiterhin garantiert vollständige
+    Automatisierung, dass auch andere Teams den Service für Integrationstests
+    hochfahren können.
 *** Resilienz
     Die Message Queue stellt einen /Single Point of Failure/ dar. Sollte sie
     ausfallen können die Services nicht miteinander kommunizieren und die
     Verfügbarkeit des Gesamtsystems kann nicht sichergestellt werden. Daher
     müssen Fallback Instanzen provisioniert werden, die einspringen wenn
     Ausfälle auftreten. Weiterhin müssen ausgefallene Instanzen automatisch
-    neugestartet und provisioniert werden.
-
-** Infrastruktur Landschaft
-
-   #+CAPTION: Außensicht Systemlandschaft
-   #+LABEL: fig:infra-schaubild
-   [[./bilder/architektur.eps]]
+    neugestartet und provisioniert werden. Mit dem Thema der Resilienz werde ich
+    mich im Zuge der Bachelorarbeit noch ausführlicher beschäftigen.
 
 ** Docker/Container Technologie
+   Um die Anforderungen erfüllen zu können muss eine leichtgewichtige
+   Virtualisierungslösung gefunden werden. Die Entscheidung fällt hierbei für
+   mein Projekt auf Docker.
+#+BEGIN_QUOTE
+Docker is being used in production by multiple companies. It provides many
+of the benefits of lightweight containers in terms of efficiency and speed
+of provisioning, together with the tools to avoid many of the
+downsides. cite:Newman-BuildingMicroservices 
+
+-- Sam Newman
+#+END_QUOTE
 *** Warum Docker?
     "Docker aims to reduce the cycle time between code being written and code being
     tested, deployed, and used. It aims to make your applications portable, easy to
     build, and easy to collaborate on."\cite{Turnbull-TheDockerBook}
 
-    "Docker is being used in production by multiple companies. It provides many
-    of the benefits of lightweight containers in terms of efficiency and speed
-    of provisioning, together with the tools to avoid many of the
-    downsides."\cite{Newman-BuildingMicroservices}
 *** Terminologie und Bausteine von Docker
    - Docker Daemon
 
@@ -484,14 +550,37 @@ RUN cd / && \
 
     Die ~ubuntu~ und ~fpco/stack-run~ Images sind bereits vorhanden, und können
     so wie sie sind, als Grundlage verwendet werden. Das ~stack-kafka-run~ image
-    wird durch das in
-
-*** docker-compose koordiniert zusammengehörige Container (Bsp. n-Services + 1 Datenbank)
-*** Nachteile:
-   - Benötigt im großen Stil Service Discovery
-   - Verleitet dazu Security Updates nicht einzuspielen
+    wird durch das in [[Infrastruktur versionierbar machen]] gezeigte Dockerfile
+    gebaut.
 
 ** Haskell Services und Docker
+   Haskell's am weitesten verbreitete Buildtool /stack/ bringt bereits von Haus
+   Docker Integration mit, und macht es einem als Entwickler sehr einfach.
+   Hierbei können Einstellungen gemacht werden, mit denen das betroffene Haskell
+   Projekt in einem *Build Container* gebaut und anschließend in einem viel
+   kleineren *Run Container* verpackt wird.
+
+#+NAME: stack.yaml
+#+BEGIN_SRC yaml
+docker:
+  enable: true
+  image: "kritzcreeek/stack-kafka-build"
+
+image:
+  container:
+    name: "kritzcreeek/produktservice"
+    base: "kritzcreeek/stack-kafka-run"
+#+END_SRC
+
+    Als Beispiel sehen wir hier die nötigen Einstellungen um den Produktservice
+    vollständig mithilfe von docker und dem "kritzcreeek/stack-kafka-build"
+    Image zu bauen.
+
+    Der ~image~ Eintrag gibt dann an, dass wir aufbauend auf dem
+    "kritzcreeek/stack-kafka-run" Image unsere kompilierten Build Artefakte in
+    einem Image mit dem Namem "kritzcreeek/produktservice" zusammenfassen
+    wollen.
+
 *** librdkafka
 *** Die verwendeten Images
    - Build image für Haskell Projekte
