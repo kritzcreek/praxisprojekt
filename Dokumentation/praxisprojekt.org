@@ -39,7 +39,7 @@
 #+LATEX_HEADER: \usepackage{csquotes}
 #+LATEX_HEADER: \usepackage{epigraph}
 #+LATEX_HEADER: \setlength{\epigraphwidth}{0.8\textwidth}
-#+LATEX_HEADER: \usepackage{minted}
+#+LATEX_HEADER: \usepackage[cache=false]{minted}
 #+LATEX_HEADER: \usemintedstyle{emacs}
 #+LATEX_HEADER: \setcounter{tocdepth}{1}
 #+LATEX_HEADER: \setcounter{secnumdepth}{1}
