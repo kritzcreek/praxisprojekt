@@ -57,7 +57,6 @@
 #+OPTIONS: H:4 ':t
 
 #+BEGIN_abstract
-
 Bei der REWE Digital wird ein großes Softwareprojekt umgesetzt. Um die große
 Anzahl an Teams, Entwicklern und Systemen zu bändigen hat man sich für eine
 Microservice Architektur entschieden. Das Aufteilen der Domäne in viele kleine,
@@ -71,7 +70,6 @@ wie die derzeit verbreiteste Lösung, das von der gleichnamigen Firma entwickelt
 Docker. In diesem Praxisprojekt werde ich mit der Implementierung von
 Microservices und ihrem Deployment mithilfe von Docker beschäftigen und meine
 Fortschritte sowie Rückschläge dokumentieren.
-
 #+END_abstract
 
 * Motivation
@@ -80,7 +78,7 @@ Fortschritte sowie Rückschläge dokumentieren.
 \epigraph{Move fast and break things. Unless you are breaking stuff, you are not moving fast enough.}
 {\textsc{Mark Zuckerberg}}
 #+END_LATEX
-** Ausgangssituation
+** Projektumfeld
    Bei der REWE digital arbeiten mehr als 20 autonome Teams mit jeweils 5-9
    Mitarbeitern an über 100 verschiedenen Services. Es werden laufend neue
    Features implementiert und möglichst schnell an den Kunden weitergereicht.
@@ -90,33 +88,42 @@ Fortschritte sowie Rückschläge dokumentieren.
    voneinander zu ermöglichen verfolgt man die Strategie der Microservice
    Architektur.
 ** Microservice Architektur
-*** Microservices
-#+BEGIN_QUOTE
-Microservices are small, autonomous services that work together
+*** Microservices - Was & Warum?
+    #+BEGIN_QUOTE
+    Microservices are small, autonomous services that work together
 
--- \textsc{Sam Newman}\cite{Newman-BuildingMicroservices}
-#+END_QUOTE
+    -- Sam Newman cite:Newman-BuildingMicroservices 
+    #+END_QUOTE
 
-    Auf kleinen Services lässt sich schnell iterieren. Sollte sich
-    herausstellen, dass die falsche Herangehensweise gewählt wurde, kann ein
-    bereits geschriebener Microservice in vertretbarem Zeitaufwand neu
-    geschrieben werden.
+    Die zentrale Idee hinter Microservices ist es, große Systeme, auch gerne
+    /Monolithen/ genannt, in kleinere lose gekoppelte System zu zerlegen. Viel
+    wichtiger als die "Definition" von Microservices sind jedoch die Vorteile
+    und Herausforderungen die sie mit sich bringen.
 
-    Durch die lose Kopplung der Services können Teams parallel arbeiten und an
-    Services unabhängig voneinander weiterentwickeln, ohne sich gegenseitig zu
-    blocken oder auszubremsen.
+    Kleine Services lassen sich schneller ändern. Sollte sich herausstellen,
+    dass die falsche Herangehensweise gewählt wurde, kann ein bereits
+    geschriebener Microservice in vertretbarem Zeitaufwand sogar komplett neu
+    geschrieben werden. Durch die lose Kopplung der Services können Teams
+    parallel arbeiten und an Services unabhängig voneinander weiterentwickeln,
+    ohne sich gegenseitig zu blocken oder auszubremsen. Dies erlaubt es eine
+    große Anzahl von Entwicklern in einem agilen Stil arbeiten zu lassen und
+    effektive Teamgrößen (5 -- 7 Mitglieder) einzusetzen.
 
-*** Korrelation Kommmunikationsstruktur -- Softwarestruktur
+    Ein weiterer wichtiger Vorteil von Microservices ergibt sich aus der
+    Korrelation von Organisationsstruktur und Softwarestruktur. Da ein Service
+    von genau einem Team betreut wird, besagt /Conways Law/ cite:Conway-Commitees, dass innerhalb
+    dieses Services eine hohe Kohäsion zu erwarten ist, während Services die von
+    unterschiedlichen Teams entwickelt werden lose gekoppelt sein werden.
+    #+BEGIN_QUOTE
+    Organizations which design systems ... are constrained to produce designs
+    which are copies of the communication structures of these organizations.
 
-#+BEGIN_QUOTE
-Organizations which design systems ... are constrained to produce designs
-which are copies of the communication structures of these organizations.
+    -- Melvin E. Conway cite:Conway-Commitees 
+    #+END_QUOTE
 
--- Melvin E. Conway
-#+END_QUOTE
-*** Domain Driven Design
-    Eric Evans \cite{Evans-DomainDrivenDesign}
-** Integration
+# *** Domain Driven Design
+#     Eric Evans \cite{Evans-DomainDrivenDesign}
+** Problemstellung Integration
    Eine der wichtigsten Herausforderungen, die eine Microservice Architektur mit
    sich bringt, ist es verschiedene Services miteinander zu integrieren. Es muss
    sichergestellt werden, dass Services Daten austauschen können, untereinander
@@ -170,46 +177,47 @@ which are copies of the communication structures of these organizations.
     Eine besondere Schwierigkeit, die sich im Hinblick auf die Integration in
     einer Microservice Architektur ergibt, ist dass durch die Autonomität und
     Anzahl der Services viele bewegende Teile zusammengehalten werden müssen.
-    Jeder Service muss unabhängig von anderen Services deployt werden können, was
-    auch beinhaltet, dass jedes Team in der Lage sein muss seinen Service gegen
-    den aktuellen Entwicklungsstand anderer Services testen zu können. Um diese
-    sogenannten Integrationstests durchführen zu können, gibt es mehrere
+    Jeder Service muss unabhängig von anderen Services deployt werden können,
+    was auch beinhaltet, dass jedes Team in der Lage sein muss seinen Service
+    gegen den aktuellen Entwicklungsstand anderer Services testen zu können. Um
+    diese sogenannten Integrationstests durchführen zu können, gibt es mehrere
     Umgebungen in welche Services deployt werden können.
 
-   1. DEV
+    1. DEV
       
-      Development Umgebung. Hier sollten Tests durchgeführt werden, die nur
-      den betroffenen Service und eventuelle benötigte Infrastruktur (Datenbank)
-      benutzen. Continuous Integration Systeme nutzen diese Umgebung um Unit
-      Tests auszuführen.
-   2. TEST/INT
+       Development Umgebung. Hier sollten Tests durchgeführt werden, die nur den
+       betroffenen Service und eventuelle benötigte Infrastruktur (Datenbank)
+       benutzen. Continuous Integration Systeme nutzen diese Umgebung um Unit
+       Tests auszuführen.
+    2. TEST/INT
+    
+       Umgebung für Integrationstests zwischen mehreren Services. Hier sollte
+       der aktuellste Release Candidate eines Services deployt sein. Auf diese
+       Weise soll verhindert werden, dass Services zu weit von ihrem
+       Produktionsstand abweichen und erst in Produktion wieder aufeinander
+       treffen.
+    3. PRE
+       
+       Spiegelt die Produktionsumgebung möglichst genau. Die letzte Möglichkeit
+       um kritische Bugs zu finden.
+    4. PROD
+       
+       Die Produktionsumgebung. Wenn ein Service hier angekommen ist, wird er
+       von Kunden genutzt und erzeugt Umsatz.
 
-      Umgebung für Integrationstests zwischen mehreren Services. Hier sollte der
-      aktuellste Release Candidate eines Services deployt sein. Auf diese Weise
-      soll verhindert werden, dass Services zu weit von ihrem Produktionsstand
-      abweichen und erst in Produktion wieder aufeinander treffen.
-   3. PREPROD
-      
-      Spiegelt die Produktionsumgebung möglichst genau. Die letzte Möglichkeit
-      um kritische Bugs zu finden.
-   4. PROD
-      
-      Die Produktionsumgebung. Wenn ein Service hier angekommen ist, wird er von
-      Kunden genutzt und erzeugt Umsatz.
+    Um Integrations- und Servicetests effizient umsetzen zu können, müssen die
+    Testumgebungen der Produktionsumgebung so ähnlich wie möglich sein.
 
-   Um Integrations- und Servicetests effizient umsetzen zu können, müssen die
-   Testumgebungen der Produktionsumgebung so ähnlich wie möglich sein.
+    #+BEGIN_QUOTE
+    These differences in environments can introduce a few problems.
 
-#+BEGIN_QUOTE
-These differences in environments can introduce a few problems.
+    -- Sam Newman (Building Microservices S.114) cite:Newman-BuildingMicroservices
+    #+END_QUOTE
 
--- Sam Newman (Building Microservices S.114) cite:Newman-BuildingMicroservices
-#+END_QUOTE
-
-   In diesem Praxisprojekt werde ich mich mit der Virtualisierungstechnologie
-   Docker beschäftigen, die es ermöglichen soll die Unterschiede zwischen
-   Umgebungen klein zu halten und Microservices somit leichter entwickeln zu
-   können.
+    In diesem Praxisprojekt werde ich mich mit der Virtualisierungstechnologie
+    Docker beschäftigen, die es ermöglichen soll die Unterschiede zwischen
+    Umgebungen klein zu halten und Microservices somit leichter entwickeln zu
+    können.
 
 
 * Der Prototyp
@@ -240,12 +248,22 @@ These differences in environments can introduce a few problems.
   #+LABEL: fig:architektur-schaubild
   [[./bilder/architektur.eps]]
 
+** Programmiersprache -- Haskell
+   Bei der Frage nach der zu verwendenden Programmiersprache haben wir uns für
+   /Haskell/ entschieden. Die Motivation für diese Wahl ist primär, dass ich am
+   schnellsten und leichtesten in Haskell entwickeln kann. Die Sprache in der
+   ein Microservice implementiert ist, ist prinzipiell ein
+   Implementierungsdetail und kann von Service zu Service unterschiedlich sein.
+
+   Haskell ist eine rein funktionale, statisch getypte Programmiersprache, die
+   es dem Entwickler erlaubt einen hohen Grad an Sicherheit im Bezug auf die
+   Korrektheit seines Programmes zu haben.
 
 ** Kommunikation & Protokoll
-  Die Messages, mit denen die Services kommunizieren, sind in JSON enkodiert.
-  Der JSON Standard (JavaScript Object Notation) ist ein weit verbreitetes,
-  simples und menschenlesbares Austauschformat, welches vor allem im Bereich der
-  Webentwicklung eingesetzt wird.
+   Die Messages, mit denen die Services kommunizieren, sind in JSON enkodiert.
+   Der JSON Standard (JavaScript Object Notation) ist ein weit verbreitetes,
+   simples und menschenlesbares Austauschformat, welches vor allem im Bereich
+   der Webentwicklung eingesetzt wird.
 
 *** Message Wrapper
     Die in JSON serialisierten Entitäten werden in einen Message Wrapper
