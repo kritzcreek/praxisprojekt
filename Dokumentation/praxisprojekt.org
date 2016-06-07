@@ -80,12 +80,15 @@ Fortschritte sowie Rückschläge dokumentieren.
 \epigraph{Move fast and break things. Unless you are breaking stuff, you are not moving fast enough.}
 {\textsc{Mark Zuckerberg}}
 #+END_LATEX
-** Großes Software Projekt bei der REWE Digital
-*** Mehr als 20 Teams, je 5-7 Mitarbeiter
-*** Hoher Featuredruck, kaum Maintenanceaufwand
-*** Schnell wachsen
-*** Agiles Vorgehen
-*** Rapid Prototyping
+** Ausgangssituation
+   Bei der REWE digital arbeiten mehr als 20 autonome Teams mit jeweils 5-9
+   Mitarbeitern an über 100 verschiedenen Services. Es werden laufend neue
+   Features implementiert und möglichst schnell an den Kunden weitergereicht.
+   Das Unternehmen wächst, ähnlich wie seine Codebase, schnell und braucht ein
+   agiles Entwicklungsmodell, das auf die sich rapide ändernde Entwicklerzahl
+   reagieren kann. Um die Entwicklung der Services parallel und unabhängig
+   voneinander zu ermöglichen verfolgt man die Strategie der Microservice
+   Architektur.
 ** Microservice Architektur
 *** Microservices
 #+BEGIN_QUOTE
@@ -99,10 +102,12 @@ Microservices are small, autonomous services that work together
     bereits geschriebener Microservice in vertretbarem Zeitaufwand neu
     geschrieben werden.
 
-    Durch die hohe Autonomie der Services können Teams parallel arbeiten und an
-    vielen Stellen iterieren ohne sich gegenseitig zu behindern.
+    Durch die lose Kopplung der Services können Teams parallel arbeiten und an
+    Services unabhängig voneinander weiterentwickeln, ohne sich gegenseitig zu
+    blocken oder auszubremsen.
 
 *** Korrelation Kommmunikationsstruktur -- Softwarestruktur
+
 #+BEGIN_QUOTE
 Organizations which design systems ... are constrained to produce designs
 which are copies of the communication structures of these organizations.
@@ -111,38 +116,100 @@ which are copies of the communication structures of these organizations.
 #+END_QUOTE
 *** Domain Driven Design
     Eric Evans \cite{Evans-DomainDrivenDesign}
-** Problemstellung der Integration
+** Integration
    Eine der wichtigsten Herausforderungen, die eine Microservice Architektur mit
    sich bringt, ist es verschiedene Services miteinander zu integrieren. Es muss
    sichergestellt werden, dass Services Daten austauschen können, untereinander
    konsistent sind und dennoch nicht zu eng gekoppelt sind.
 
-   Die besondere Schwierigkeit die sich im Hinblick auf die Integration in einer
-   Microservice Architektur ergibt, ist dass durch die Autonomität und Anzahl
-   der Services viele bewegende Teile zusammengehalten werden müssen. Jeder
-   Service muss unabhängig von anderen Services deployt sein, was auch
-   beinhaltet, dass jedes Team in der Lage sein muss seinen Service gegen den
-   aktuellen Entwicklungsstand anderer Services testen zu können. Um diese
-   Integrationstests durchführen zu können, gibt es mehrere Umgebungen in welche
-   Services deployt werden können.
+*** Integrationsstrategien
+
+    Um den Datenaustausch zwischen Services zu ermöglichen, gibt es verschiedene
+    Integationsstrategien. Ich werde diese hier nur anreißen, und stattdessen
+    das Thema in meiner Bachelorarbeit noch einmal aufgreifen.
+
+    1. Integration über eine gemeinsame (relationale) Datenbank
+
+       Eine weit verbreitete Strategie ist die Integration über eine gemeinsame
+       Datenbank, bei der mehrere Services dasselbe Schema in einer Datenbank
+       verwenden und Daten austauschen, indem sie in die Datenbank Datensätze
+       speichern. Dieser Ansatz bietet hohe Konsistenzgarantien.
+       #+BEGIN_QUOTE
+       If a family of integrated applications all rely on
+       the same database, then you can be pretty sure that they are always
+       consistent all of the time
+       -- Gregor Hohpe cite:Hohpe-EnterpriseIntegrationPatterns 
+       #+END_QUOTE
+       Im Kontext einer Microservice Architektur hat die gemeinsame Datenbank
+       jedoch auch viele Nachteile, die sich vor allem auf die Autonomität und
+       lose Kopplung der Services auswirken. Aus diesen Gründen ist die
+       empfohlene und bei REWE verwendetete Strategie /Messaging/.
+
+    2. Messaging
+       #+BEGIN_QUOTE
+       Messaging makes applications loosely coupled by communicating asynchronously
+       -- Gregor Hohpe cite:Hohpe-EnterpriseIntegrationPatterns
+       #+END_QUOTE
+       Bei Messaging senden sich verschiedene Systeme kleine Datenpakete über
+       einen Messagebus. Dieser Messagebus, oder auch Messagebroker genannt,
+       sorgt dafür das Nachrichten an die richtigen Empfänger zugestellt werden.
+       
+       Bei REWE digital hat man sich für das Messaging System /Apache Kafka/
+       entschieden, dass sich selbst als /A high-throughput distributed
+       messaging system/[fn:kafka] beschreibt.
+
+       In diesem Praxisprojekt werde ich evaluieren wie sich Apachae Kafka für die
+       Integration von Microservices eignet und ob es sich mithilfe von Docker
+       deployen und in eine Umgebung einbetten lässt.
+
+       
+[fn:kafka]
+[[http://kafka.apache.org/][Kafka Homepage - http://kafka.apache.org/]]
+
+*** Umgebungen
+    Eine besondere Schwierigkeit, die sich im Hinblick auf die Integration in
+    einer Microservice Architektur ergibt, ist dass durch die Autonomität und
+    Anzahl der Services viele bewegende Teile zusammengehalten werden müssen.
+    Jeder Service muss unabhängig von anderen Services deployt werden können, was
+    auch beinhaltet, dass jedes Team in der Lage sein muss seinen Service gegen
+    den aktuellen Entwicklungsstand anderer Services testen zu können. Um diese
+    sogenannten Integrationstests durchführen zu können, gibt es mehrere
+    Umgebungen in welche Services deployt werden können.
 
    1. DEV
-
+      
       Development Umgebung. Hier sollten Tests durchgeführt werden, die nur
       den betroffenen Service und eventuelle benötigte Infrastruktur (Datenbank)
       benutzen. Continuous Integration Systeme nutzen diese Umgebung um Unit
       Tests auszuführen.
-   2. INT
-      Kurz für Integration. Umgebung für Integrationstests zwischen mehreren
-      Services.
-   3. PREPROD
+   2. TEST/INT
 
+      Umgebung für Integrationstests zwischen mehreren Services. Hier sollte der
+      aktuellste Release Candidate eines Services deployt sein. Auf diese Weise
+      soll verhindert werden, dass Services zu weit von ihrem Produktionsstand
+      abweichen und erst in Produktion wieder aufeinander treffen.
+   3. PREPROD
+      
       Spiegelt die Produktionsumgebung möglichst genau. Die letzte Möglichkeit
       um kritische Bugs zu finden.
    4. PROD
+      
       Die Produktionsumgebung. Wenn ein Service hier angekommen ist, wird er von
       Kunden genutzt und erzeugt Umsatz.
 
+   Um Integrations- und Servicetests effizient umsetzen zu können, müssen die
+   Testumgebungen der Produktionsumgebung so ähnlich wie möglich sein.
+
+#+BEGIN_QUOTE
+These differences in environments can introduce a few problems.
+
+-- Sam Newman (Building Microservices S.114) cite:Newman-BuildingMicroservices
+#+END_QUOTE
+
+   In diesem Praxisprojekt werde ich mich mit der Virtualisierungstechnologie
+   Docker beschäftigen, die es ermöglichen soll die Unterschiede zwischen
+   Umgebungen klein zu halten und Microservices somit leichter entwickeln zu
+   können.
 
 
 * Der Prototyp
