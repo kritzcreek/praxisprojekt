@@ -218,21 +218,52 @@ Messaging makes applications loosely coupled by communicating asynchronously
   Prototyp zu entwicklen, der sich der aktuellen Systemstruktur annähert und
   eine breite Menge an bekannten Szenarien und Schwierigkeiten abdeckt.
 
+** Aufbau
   Es sollen zwei Services implementiert werden, die per Messaging über Kafka
   integriert und vollständig unabhängig voneinander in Docker Containern
-  ausgerollt werden sollen. Weiterhin müssen sie unabhängig skalierbar sein und
+  ausgerollt werden können. Weiterhin müssen sie unabhängig skalierbar sein und
   der Ausfall des einen Services darf den anderen Service nicht beeinflussen.
 
   Inhaltlich sollen die Services sich mit einer gemeinsamen Entität
   beschäftigen, auf die sie jedoch unterschiedliche Sichten haben. In Kafka wird
   diese Entität als ein Topic abgebildet, welcher von einem der Services als
   "Owner" oder Producer und von dem anderen Service als Consumer konsumiert
-  wird. Der generelle Aufbau des Prototypen wird in [[fig:architektur-schaubild]]
+  wird. Für den Prototypen wurde sich für einen /Produktservice/ und einen
+  /Warenkorbservice/ entschieden. Beide dieser Services, natürlich in
+  komplexerer Form, finden sich auch in der tatsächlichen Anwendung bei REWE
+  wieder.
+
+  Der generelle Aufbau des Prototypen wird in [[fig:architektur-schaubild]]
   dargestellt.
 
   #+CAPTION: Aufbau Prototyp
   #+LABEL: fig:architektur-schaubild
   [[./bilder/architektur.eps]]
+
+
+** Kommunikation & Protokoll
+  Die Messages, mit denen die Services kommunizieren, sind in JSON enkodiert.
+  Der JSON Standard (JavaScript Object Notation) ist ein weit verbreitetes,
+  simples und menschenlesbares Austauschformat, welches vor allem im Bereich der
+  Webentwicklung eingesetzt wird.
+
+*** Message Wrapper
+    Die in JSON serialisierten Entitäten werden in einen Message Wrapper
+    eingepackt, der für die technische Umsetzung relevante Metadaten enthält.
+
+#+BEGIN_SRC haskell
+data Message a =
+  Message
+  { id      :: UUID -- identifiziert die Nachricht
+  , key     :: Text -- identifiziert die Entität
+  , time    :: UTCTime
+  , type    :: Text -- Art der Änderung ("created", "modified", "deleted")
+  , payload :: a
+  }
+#+END_SRC
+    Der /Typparameter/ ~a~ lässt sich mit Java's Generics vergleichen. Er gibt
+    an welchen Typ von Entität die Nachricht beinhaltet. Im Prototypen kann dies
+    Beispielsweise ein ~Message Produkt~ ergeben.
 
 ** Bounded Context
 
@@ -385,7 +416,7 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
 
   Um den Herausforderungen bei der Umsetzung einer Microservicearchitektur
   gerecht zu werden, ist es wichtig, dass die Infrastruktur die Autonomie und
-  Flexibilität der Teams nicht untermauert sondern unterstützt.
+  Flexibilität der Teams nicht untergräbt sondern unterstützt.
 
 ** Anforderungen an die Infrastruktur
 *** Elastizität
@@ -417,7 +448,7 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
 ** Docker/Container Technologie
    Um die Anforderungen erfüllen zu können muss eine leichtgewichtige
    Virtualisierungslösung gefunden werden. Die Entscheidung fällt hierbei für
-   mein Projekt auf Docker.
+   mein Praxisprojekt auf Docker.
 #+BEGIN_QUOTE
 Docker is being used in production by multiple companies. It provides many
 of the benefits of lightweight containers in terms of efficiency and speed
@@ -581,7 +612,6 @@ image:
     einem Image mit dem Namem "kritzcreeek/produktservice" zusammenfassen
     wollen.
 
-*** librdkafka
 *** Die verwendeten Images
    - Build image für Haskell Projekte
 
