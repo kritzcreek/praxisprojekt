@@ -111,105 +111,38 @@ which are copies of the communication structures of these organizations.
 #+END_QUOTE
 *** Domain Driven Design
     Eric Evans \cite{Evans-DomainDrivenDesign}
-** Integrationsstrategien
+** Problemstellung der Integration
    Eine der wichtigsten Herausforderungen, die eine Microservice Architektur mit
    sich bringt, ist es verschiedene Services miteinander zu integrieren. Es muss
    sichergestellt werden, dass Services Daten austauschen können, untereinander
-   konsistent sind und dennoch nicht zu eng gekoppelt sind. Es gibt verschiedene
-   Integrationsstrategien, die man verfolgen kann.
+   konsistent sind und dennoch nicht zu eng gekoppelt sind.
 
-   Ich werde im folgenden die /Integation über eine gemeinsame Datenbank/
-   analysieren und anschließend die letztendlich gewählte Strategie des
-   Messaging beschreiben.
-*** Integration über eine gemeinsame (relationale) Datenbank
-    #+BEGIN_QUOTE
+   Die besondere Schwierigkeit die sich im Hinblick auf die Integration in einer
+   Microservice Architektur ergibt, ist dass durch die Autonomität und Anzahl
+   der Services viele bewegende Teile zusammengehalten werden müssen. Jeder
+   Service muss unabhängig von anderen Services deployt sein, was auch
+   beinhaltet, dass jedes Team in der Lage sein muss seinen Service gegen den
+   aktuellen Entwicklungsstand anderer Services testen zu können. Um diese
+   Integrationstests durchführen zu können, gibt es mehrere Umgebungen in welche
+   Services deployt werden können.
 
-    "If a family of integrated applications all rely on
-    the same database, then you can be pretty sure that they are always
-    consistent all of the time" \cite{Hohpe-EnterpriseIntegrationPatterns}
+   1. DEV
 
-    #+END_QUOTE
+      Development Umgebung. Hier sollten Tests durchgeführt werden, die nur
+      den betroffenen Service und eventuelle benötigte Infrastruktur (Datenbank)
+      benutzen. Continuous Integration Systeme nutzen diese Umgebung um Unit
+      Tests auszuführen.
+   2. INT
+      Kurz für Integration. Umgebung für Integrationstests zwischen mehreren
+      Services.
+   3. PREPROD
 
-    Klassischerweise integriert man verschiedene Applikationen und Services
-    mithilfe einer geteilten relationen Datenbank. Diese Herangehensweise hat
-    viele Vorteile:
+      Spiegelt die Produktionsumgebung möglichst genau. Die letzte Möglichkeit
+      um kritische Bugs zu finden.
+   4. PROD
+      Die Produktionsumgebung. Wenn ein Service hier angekommen ist, wird er von
+      Kunden genutzt und erzeugt Umsatz.
 
-    - Hohe Konsistenzgarantien
-
-      Als einzige Quelle der Wahrheit, kann eine Datenbank mithilfe von
-      Transaktionen dafür sorgen, dass niemals ein inkonsistenter Datenbestand
-      abgespeichert werden kann.
-
-    - Breite Unterstützung von SQL
-
-      Es gibt für nahezu alle Sprachen und Frameworks hochwertige SQL
-      Bibliotheken die sich seit vielen Jahren in der Industrie bewährt haben.
-
-    - Ein gemeinsames Datenmodell
-
-      Da alle Dienste mit dem selben Schema arbeiten, können schon früh
-      Inkompatibilitäten zwischen den Services und Missverständnisse bei der
-      Modellierung des Datenmodelles gefunden und geklärt werden.
-
-    In einer Microservice Architektur birgt die geteilte Datenbank jedoch viele
-    Nachteile.
-
-    - Ein gemeinsames Datenmodell
-
-      Alle Services müssen mit demselben Datenmodell arbeiten. Dies widerspricht
-      ganz deutlich dem Prinzip der "Bounded Contexts" aus Domain Driven Design.
-      Nicht jeder Service hat dieselbe Sicht auf eine Entität. Hier einen
-      gemeinsamen Nenner zu finden, erfordert dass sich alle Teams einigen und
-      jede Änderung am Datenmodell ist ein potentieller Breaking Change für
-      jeden Service.
-
-    - Implementierungsdetails liegen offen
-
-      Ein Schema in einer Datenbank ist als eine API zu sehen, da jeder Client
-      der Datenbank auf das Schema zugreifen kann. "The DB is effectively a very
-      large, shared API that is also quite brittle."
-      \cite{Newman-BuildingMicroservices}
-
-      Ein Service legt also mit seinem Datenmodell einen großen Teil seiner
-      Implementierung offen. Dies sorgt für Kopplung zwischen den Services und
-      widerspricht damit eindeutig der Zielsetzung der Microservice Architektur.
-
-    - Single Point of Failure
-
-      In einer Architektur, die darauf ausgelegt ist, einzelne Services
-      unabhängig voneinander zu machen um Ausfälle lokal zu halten und
-      Fehlertolerant zu sein hat eine von allen Services verwendete Datenbank
-      keinen Platz. Wenn diese ausfällt ist das gesamte System ausgefallen.
-
-    - Performanz Probleme
-
-      Da Konsistenzgarantien nur durch Locking und Transaktionen gewährleistet
-      werden können, kann ein einziger Service der viel Last auf der Datenbank
-      erzeugt, alle anderen Services mit "ausbremsen".
-*** Messaging
-#+BEGIN_QUOTE
-Messaging makes applications loosely coupled by communicating asynchronously
--- Gregor Hohpe cite:Hohpe-EnterpriseIntegrationPatterns
-#+END_QUOTE
-    Bei Messaging senden sich verschiedene Systeme kleine Datenpakete über einen
-    Messagebus. Dieser Messagebus, oder auch Messagebroker genannt, sorgt dafür
-    das Nachrichten an die richtigen Empfänger zugestellt werden. Hierfür
-    benötigt der Messagebus einige Funktionalitäten.
-
-    - Er muss eine Queue von eingegangenen Messages verwalten
-    - Er muss, falls das Empfängersystem nicht erreichbar ist, Nachrichten
-      verwahren und zu einem späteren Zeitpunkt zustellen
-    - Er muss gesendete Nachrichten auch nach der Zustellung aufbewahren und
-      wieder abspielen können, um neu hinzugekommene Systeme auf den aktuellsten
-      Stand bringen zu können.
-
-    Bei der REWE digital hat man sich für das Messaging System *Apache Kafka*
-    entschieden. Kafka wird auf seiner Website als /A high-throughput
-    distributed messaging system/ angepriesen und hat einige interessante
-    Charakteristiken, mit welchen ich mich in meiner Bachelorarbeit noch einmal
-    genauer auseinander setzen werde. Für unsere Zwecke reicht es zunächst
-    festzustellen, dass Kafka alle Anforderungen an einen Messagebus für die
-    Systemintegration erfüllt.
 
 
 * Der Prototyp
