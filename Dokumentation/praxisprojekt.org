@@ -57,7 +57,7 @@
 #+OPTIONS: H:4 ':t
 
 #+BEGIN_abstract
-Bei der REWE Digital wird ein großes Softwareprojekt umgesetzt. Um die große
+Bei der REWE digital wird ein großes Softwareprojekt umgesetzt. Um die große
 Anzahl an Teams, Entwicklern und Systemen zu bändigen hat man sich für eine
 Microservice Architektur entschieden. Das Aufteilen der Domäne in viele kleine,
 unabhängige Bereiche erlaubt es Komplexität auf der Software Ebene gering zu
@@ -222,7 +222,7 @@ Fortschritte sowie Rückschläge dokumentieren.
 
 * Der Prototyp
   Um die Tauglichkeit von Docker und Kafka zu untersuchen und kritische Fragen
-  bereits frühzeitig aufdecken zu können, haben wir uns dafür entschieden einen
+  bereits frühzeitig aufdecken zu können, wurde sich dafür entschieden einen
   Prototyp zu entwicklen, der sich der aktuellen Systemstruktur annähert und
   eine breite Menge an bekannten Szenarien und Schwierigkeiten abdeckt.
 
@@ -249,7 +249,7 @@ Fortschritte sowie Rückschläge dokumentieren.
   [[./bilder/architektur.eps]]
 
 ** Programmiersprache -- Haskell
-   Bei der Frage nach der zu verwendenden Programmiersprache haben wir uns für
+   Bei der Frage nach der zu verwendenden Programmiersprache wurde sich für
    /Haskell/ entschieden. Die Motivation für diese Wahl ist primär, dass ich am
    schnellsten und leichtesten in Haskell entwickeln kann. Die Sprache in der
    ein Microservice implementiert ist, ist prinzipiell ein
@@ -257,13 +257,18 @@ Fortschritte sowie Rückschläge dokumentieren.
 
    Haskell ist eine rein funktionale, statisch getypte Programmiersprache, die
    es dem Entwickler erlaubt einen hohen Grad an Sicherheit im Bezug auf die
-   Korrektheit seines Programmes zu haben.
+   Korrektheit seines Programmes zu haben. Ein weiterer wichtiger Punkt, ist
+   dass das ausdrucksstarke Typsystem umfangreiche Metaprogrammierung zur
+   Kompilierzeit zulässt und ich somit in der Lage war einen großen Teil der En-
+   und Dekodierungsfunktionen generieren zu lassen.
 
 ** Kommunikation & Protokoll
-   Die Messages, mit denen die Services kommunizieren, sind in JSON enkodiert.
-   Der JSON Standard (JavaScript Object Notation) ist ein weit verbreitetes,
+   Die Messages, mit denen die Services kommunizieren, werden in JSON enkodiert.
+   Der JSON Standard (JavaScript Object Notation)[fn:json] ist ein weit verbreitetes,
    simples und menschenlesbares Austauschformat, welches vor allem im Bereich
    der Webentwicklung eingesetzt wird.
+   
+[fn:json] http://www.json.org/
 
 *** Message Wrapper
     Die in JSON serialisierten Entitäten werden in einen Message Wrapper
@@ -285,29 +290,28 @@ data Message a =
 
 ** Bounded Context
 
-    Dass die Services eine unterschiedliche Sicht auf dieselbe Entität, und damit
-    auch unterschiedliche Datenmodelle haben, bildet einen der wichtigsten
-    Begriffe des Domain Driven Design's ab. Der /Bounded Context/ beschreibt
+    Dass die Services eine unterschiedliche Sicht auf dieselbe Entität und damit
+    auch unterschiedliche Datenmodelle haben, spiegelt eines der wichtigsten
+    Konzepte des Domain Driven Design's wieder. Der /Bounded Context/ beschreibt
     fachliche Bereiche innerhalb einer Domäne, in denen ein gemeinsames
     Verständnis für bestimmte Objekte und Entitäten besteht. Als Beispiel könnte
-    man hier die Produktion der Lagerung innerhalb einer Fabrik gegenüberstellen.
-    Beide Bereiche beschäftigen sich mit Produkten, innerhalb der Produktion sind
-    jedoch Eigenschaften wie Fertigungsdauer und Rohmaterialien interessant,
-    während sich das Lager mit Eigenschaften wie Gewicht, Größe und
-    Haltbarkeitsdauer beschäftigt.
+    man hier die Produktion der Lagerung innerhalb einer Fabrik
+    gegenüberstellen. Beide Bereiche beschäftigen sich mit Produkten, innerhalb
+    der Produktion sind jedoch Eigenschaften wie Fertigungsdauer und
+    Rohmaterialien interessant, während sich das Lager mit Eigenschaften wie
+    Gewicht, Größe und Haltbarkeitdauer beschäftigt.
 
-#+BEGIN_QUOTE
-As you try to model a larger domain, it gets progressively harder to build a
-single unified model. Different groups of people will use subtly different
-vocabularies in different parts of a large organization.
+    #+BEGIN_QUOTE
+    As you try to model a larger domain, it gets progressively harder to build a
+    single unified model. Different groups of people will use subtly different
+    vocabularies in different parts of a large organization. cite:Fowler-BoundedContext
+    -- Martin Fowler
+    #+END_QUOTE
 
--- \textsc{Martin Fowler}\cite{Fowler-BoundedContext}
-#+END_QUOTE
-
-    Um diese Situation auch in unserem Prototypen abzubilden, müssen die beiden
-    gewählten Services, /Produktservice/ und /Warenkorbservice/ ein
-    unterschiedliches Datenmodell für die selbe Entität, das *Produkt*, haben und an den
-    Servicegrenzen zwischen den Repräsentationen konvertieren können.
+    Um diese Situation in dem zu entwickelnded Prototypen abzubilden, müssen die
+    beiden gewählten Services, /Produktservice/ und /Warenkorbservice/ ein
+    unterschiedliches Datenmodell für die selbe Entität *Produkt* haben und an
+    den Servicegrenzen zwischen den Repräsentationen konvertieren können.
 
 ** Produktservice
    Der Produktservice ist Owner des Produkt Topics. Er stellt eine API zur
@@ -315,7 +319,7 @@ vocabularies in different parts of a large organization.
    Realität mehrere Anwendungen Produktdaten ändern. Beispiele wären eine
    Webanwendung, in der Fachmitarbeiter Änderungen durchführen, sowie ein
    regelmäßiger Dienst, der die neuesten Angebote und Rabattaktionen automatisch
-   einspielt. In unserem Protoyp werden diese Änderungen zufällig generiert.
+   einspielt. Im Protoyp werden diese Änderungen zufällig generiert.
 
 *** Modell
     Der Produktservice hat folgende Sicht auf die Produktentität:
@@ -329,10 +333,13 @@ vocabularies in different parts of a large organization.
         , rabatt       :: Prozent
         }
     #+END_SRC
+
+*** Enkodieren
     #+CAPTION: Produkt Modell des Produktservices
-    Updates, die der Produktservice an Kafka schickt, enthalten eine Payload in
-    dieser Form. Eine Entität vom Typ ~Produkt~ wird hierfür in das JSON Format
-    /enkodiert/, im ~Message~ Wrapper eingepackt und an Kafka weitergereicht.
+    Updates, die der Produktservice an Kafka schickt, enthalten eine Payload die
+    ein Produkt enthält. Eine Entität vom Typ ~Produkt~ wird hierfür in das JSON
+    Format /enkodiert/, im ~Message~ Wrapper eingepackt und an Kafka
+    weitergereicht.
 
 #+BEGIN_SRC haskell
   sendRandomProduct =
@@ -362,9 +369,9 @@ produkt = QC.generate QC.arbitrary
     ~encode~ weiter und enkodieren die Message damit in JSON.
 
     (3) Weil Haskell's Evaluierungsstrategie Lazy ist, die Kafka Bibliothek
-    jedoch mit strikt evaluierten Werten arbeitet, müssen wir mit ~BSL.toStrict~
-    die vollständige Evaluierungs unseres JSON Wertes erzwingen, bevor wir es an
-    Kafka weiterreichen.
+    jedoch mit strikt evaluierten Werten arbeitet, müssen mit ~BSL.toStrict~
+    die vollständige Evaluierung des JSON Wertes erzwungen werden, bevor es an
+    Kafka weitergereicht werden kann.
 
     (4) ~produceMessage~ ist eine Funktion aus der Kafka Client Bibliothek, die
     eine Nachricht für ein gegebenes Topic, an eine gegebene Partition schickt.
@@ -386,32 +393,35 @@ produkt = QC.generate QC.arbitrary
         }
     #+END_SRC
     #+CAPTION: Produkt Modell des Warenkorbservices
-    Hierbei fällt auf, dass der Warenkorb nur an einem Subset der Felder der
-    Produktservice Produktentität Kafka interessiert ist. Weiterhin beschreibt
-    das ~preis~ Attribut den Preis, auf den der Rabatt bereits angewendet wurde.
 
-    Es wird also eine /Selektion/ auf die vorhandenen Felder angewendet, und die
-    verbleibenden Felder werden weiter durch /Transformation/ & /Aggregation/ in
-    ein Modell, das der Domäne des Warenkorbes[fn:artikel] entspricht,
-    transformiert.
+    Es fällt auf, dass der Warenkorb nur an einem Subset der Felder der
+    Produktservice Produktentität Kafka interessiert ist. Das Attribut ~preis~
+    beschreibt den Preis, auf den der Rabatt bereits angewendet wurde.
+    
+*** Dekodieren
+    Um die Produktentität des Produktservices in das Modell des
+    Warenkorbservices zu konvertieren, wird eine /Selektion/ auf die vorhandenen
+    Felder angewendet, und die verbleibenden Felder werden weiter durch
+    /Transformation/ & /Aggregation/ in ein Modell, das der Domäne des
+    Warenkorbes[fn:artikel] entspricht, transformiert.
 
-    Das /deserialisieren/ und /transformieren/ sieht im Code wie folgt aus:
-#+BEGIN_SRC haskell
-instance FromJSON Produkt where
-  parseJSON = withObject "Produkt" $ \o ->
-    Produkt
-    <$> o .: "id"
-    <*> o .: "name"
-    <*> (berechnePreis <$> o .: "preis" <*> o.: "rabatt")
-    where
-      berechnePreis :: (Integral a) => a -> Double -> a
-      berechnePreis preis rabatt = floor $ fromIntegral preis * (1 - rabatt / 100)
-#+END_SRC
+    Das /dekodieren/ und /transformieren/ sieht im Code wie folgt aus:
+    #+BEGIN_SRC haskell
+    instance FromJSON Produkt where
+      parseJSON = withObject "Produkt" $ \o ->
+        Produkt
+        <$> o .: "id"
+        <*> o .: "name"
+        <*> (berechnePreis <$> o .: "preis" <*> o.: "rabatt")
+        where
+          berechnePreis :: (Integral a) => a -> Double -> a
+          berechnePreis preis rabatt = floor $ fromIntegral preis * (1 - rabatt / 100)
+    #+END_SRC
 
     Die vielen ~<$>~ und ~<*>~ sorgen für das automatische Propagieren von
     Fehlern beim deserialisieren der JSON Felder. Mithilfe der ~berechnePreis~
-    Funktion fassen wir die ~preis~ und ~rabatt~ Felder des Produktes aus dem
-    Produktservice zusammen.
+    Funktion werden die ~preis~ und ~rabatt~ Felder des Produktes aus dem
+    Produktservice zusammengefasst.
 
 [fn:artikel]
 In Wirklichkeit ist der Begriff des *Preises* im E-Commerce noch
@@ -432,7 +442,7 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
 {\textsc{Sam Newman}}
 #+END_LATEX
 
-  Um den Herausforderungen bei der Umsetzung einer Microservicearchitektur
+  Um den Herausforderungen bei der Umsetzung einer Microservice Architektur
   gerecht zu werden, ist es wichtig, dass die Infrastruktur die Autonomie und
   Flexibilität der Teams nicht untergräbt sondern unterstützt.
 
@@ -452,33 +462,51 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
     Die Provisionierung und das Ausrollen von Services und dem Kafka Broker muss
     vollständig automatisiert werden. Dies ist notwendig um /Elastizität/
     überhaupt realisieren zu können. Weiterhin garantiert vollständige
-    Automatisierung, dass auch andere Teams den Service für Integrationstests
-    hochfahren können.
+    Automatisierung des Provisionierens, dass auch andere Teams den Service für
+    Integrationstests hochfahren können.
 *** Resilienz
     Die Message Queue stellt einen /Single Point of Failure/ dar. Sollte sie
     ausfallen können die Services nicht miteinander kommunizieren und die
     Verfügbarkeit des Gesamtsystems kann nicht sichergestellt werden. Daher
-    müssen Fallback Instanzen provisioniert werden, die einspringen wenn
+    müssen Fallback Instanzen provisioniert werden, welche einspringen wenn
     Ausfälle auftreten. Weiterhin müssen ausgefallene Instanzen automatisch
-    neugestartet und provisioniert werden. Mit dem Thema der Resilienz werde ich
-    mich im Zuge der Bachelorarbeit noch ausführlicher beschäftigen.
+    neugestartet und gegebenenfalls provisioniert werden. Mit dem Thema der
+    Resilienz werde ich mich im Zuge der Bachelorarbeit noch ausführlicher
+    beschäftigen.
 
 ** Docker/Container Technologie
    Um die Anforderungen erfüllen zu können muss eine leichtgewichtige
    Virtualisierungslösung gefunden werden. Die Entscheidung fällt hierbei für
    mein Praxisprojekt auf Docker.
-#+BEGIN_QUOTE
-Docker is being used in production by multiple companies. It provides many
-of the benefits of lightweight containers in terms of efficiency and speed
-of provisioning, together with the tools to avoid many of the
-downsides. cite:Newman-BuildingMicroservices 
+   #+BEGIN_QUOTE
+   Docker is being used in production by multiple companies. It provides many
+   of the benefits of lightweight containers in terms of efficiency and speed
+   of provisioning, together with the tools to avoid many of the
+   downsides. cite:Newman-BuildingMicroservices 
+   
+     -- Sam Newman
+   #+END_QUOTE
+*** Was ist Docker?
 
--- Sam Newman
-#+END_QUOTE
-*** Warum Docker?
-    "Docker aims to reduce the cycle time between code being written and code being
+    Auf seiner Website beantwortet Docker diese Frage mit folgendem Sales Pitch:
+    "Docker allows you to package an application with all of its dependencies
+    into a standardized unit for software development."[fn:docker-site]
+
+    In seinem sogenannten "Docker Book" fasst James Turnbull die Vorteile und
+    Ziele von Docker zu drei wesentlichen Punkten zusammen.
+
+    #+BEGIN_QUOTE
+    Docker aims to reduce the cycle time between code being written and code being
     tested, deployed, and used. It aims to make your applications portable, easy to
-    build, and easy to collaborate on."\cite{Turnbull-TheDockerBook}
+    build, and easy to collaborate on. cite:Turnbull-TheDockerBook 
+    -- James Turnbull
+    #+END_QUOTE
+
+    1. Docker macht es leichter Software zu deployen
+    2. Docker macht es leichter Software zu portieren
+    3. Docker macht es leichter gemeinsam Software zu entwickeln
+
+[fn:docker-site] https://www.docker.com/what-docker
 
 *** Terminologie und Bausteine von Docker
    - Docker Daemon
@@ -490,14 +518,14 @@ downsides. cite:Newman-BuildingMicroservices
    - Docker Client
 
      Ein Docker Client ist ein Programm mit dessen Hilfe der Nutzer Befehle an
-     einen Docker Daemon senden kann. Üblicherweise verwendet man einen CLI
-     (Command Line Interface) Client, es gibt aber auch bereits Clients mit
-     einer graphischen Nutzeroberfläche (Kitematic).
+     einen Docker Daemon senden kann. Üblicherweise verwendet man ein CLI
+     (Command Line Interface), es gibt aber auch bereits Clients mit einer
+     graphischen Nutzeroberfläche (Kitematic).
 
    - Docker Images
 
-     Ein Image ist der kleinste Building Block in der Docker Welt. Images werden
-     aufeinander aufgesetzt und lassen sich in verschiedenen Projekten und
+     Ein Image ist der kleinste Building Block in der Docker Welt. Images bauen
+     aufeinander auf und lassen sich in verschiedenen Projekten und
      Applikationen wiederverwenden. Ein Image beinhaltet dabei immer einen
      Befehl, wie zum Beispiel:
      1. Füge eine Datei hinzu
@@ -510,7 +538,7 @@ downsides. cite:Newman-BuildingMicroservices
 
      Eine Docker Registry ist ein Registry, bei der Nutzer ihre Images
      hochladen, versionieren und für andere Nutzer verfügbar machen können. Eine
-     Docker Registry ist vergleichbar mit einem Git Server auf dem Entwickler
+     Docker Registry ist vergleichbar mit einem Git Server, auf dem Entwickler
      ihren Source Code hochladen, versionieren und für andere Nutzer verfügbar
      machen können.
 
@@ -520,7 +548,7 @@ downsides. cite:Newman-BuildingMicroservices
      wollen für Geld nutzbar.
 
      Weiterhin gibt es die Möglichkeit eine Registry selbst zu betreiben, wie es
-     bei der REWE Digital der Fall ist. Hierfür sprechen einige Gründe:
+     bei der REWE digital der Fall ist. Hierfür sprechen einige Gründe:
      1. Mehr Kontrolle
      2. Keine Abhängigkeit von (Docker Macher)
      3. Images sind häufig mehrere 100MB groß und es ist daher schneller wenn
@@ -528,11 +556,18 @@ downsides. cite:Newman-BuildingMicroservices
         werden.
 
    - Docker Container
+     
+     Ein Docker Container ist eine konkrete Instanz eines Docker Images. Wenn
+     ein Docker Image auf einen Host mit einem Docker Daemon deployt wird, kann
+     das Image als Container gestartet werden. Es können gleichzeitig mehrere
+     Container von demselben Image erzeugen. Ein Docker Container ist dabei ein
+     vollständig eigenständiges System, das über Mittel wie Ports mit anderen
+     Containern und Systemen kommuniziert.
 
 *** Infrastruktur versionierbar machen
     In Docker verwendet man sogenannte Dockerfiles um das Erzeugen von Images in
     reproduzierbaren Schritten festzuhalten. Diese Dockerfiles liegen in
-    Textform vor, und lassen sich damit in ein Version Control System wie GIT
+    Textform vor, und lassen sich damit in ein Version Control System wie Git
     einchecken und versionieren.
 
     Als Beispiel soll hier einmal das, mit Kommentaren versehene, Dockerfile für
@@ -545,26 +580,26 @@ downsides. cite:Newman-BuildingMicroservices
 FROM fpco/stack-run:lts-5
 
 # Da die Kafka Client Bibliothek librdkafka nicht in den offiziellen
-# Ubuntu repositories verfügbar ist, müssen wir sie selbst kompilieren und
-# installieren mit build-essential tools wie 'gcc' und 'make'
+# Ubuntu repositories verfügbar ist, muss sie mit build-essential
+# tools wie 'gcc' und 'make' selbst kompiliert und installiert werden.
 
-# curl benötigen wir, um den Quellcode für die Bibliothek herunterzuladen
+# curl wird benötigt, um den Quellcode für die Bibliothek herunterzuladen.
 RUN apt-get update && \
     apt-get install -y \
       curl build-essential
 
-# Hier laden wir ein mit 'tar' komprimiertes Archiv herunter, welches
+# Hier wird ein mit 'tar' komprimiertes Archiv heruntergeladen, welches
 # den Quellcode für librdkafka enthält.
 RUN curl -o /root/librdkafka-0.9.0.99.tar.gz -SL \
       https://github.com/edenhill/librdkafka/archive/0.9.0.99.tar.gz
 
-# Wir entpacken das Archiv
+# Das Archiv wird entpackt
 RUN tar -xzf /root/librdkafka-0.9.0.99.tar.gz -C /root && \
     cd /root/librdkafka-0.9.0.99
 
-# Jetzt kompilieren wir librdkafka und installieren die entstandene
-# Bibliothek mit 'make install' nach '/usr/lib wo sie für unsere
-# Binaries verfübar ist
+# Jetzt wird librdkafka kompiliert und die entstandene Bibliothek mit 
+# 'make install' nach '/usr/lib' installiert wo sie für die Binaries
+# der Services vefügbar ist
 RUN ./configure && \
     make && \
     make install
@@ -576,86 +611,176 @@ RUN cd / && \
     usr/local/include/librdkafka usr/local/lib/librdkafka*
 #+END_SRC
 
-   Dieses Dockerfile kann nun verwendet werden um das Laufzeitimage neu zu
-   bauen.
-
-   Einzelne Images können, analog zu Git, mit Tags versehen werden, sodass
-   getagte Versionen eines Dockerimages leicht referenziert und als Bausteine
-   für weitere Images verwendet werden können.
+   Dieses Dockerfile kann nun verwendet werden, um das Laufzeitimage neu zu
+   bauen. Einzelne Images können, analog zu Git, mit Tags versehen werden,
+   sodass getagte Versionen eines Dockerimages leicht referenziert und als
+   Bausteine für weitere Images verwendet werden können.
 
    Weiterhin lassen sich mit einem Tag versehene Images in eine /Docker
    Registry/ pushen. Von dort können sie dann herunterladen und ausgeführt
    werden, ohne sie erneut bauen zu müssen.
 
-*** Image Hierarchie
-
-    Die Docker Container, die die fertigen Services enthalten, werden aus den in
-    [[fig:docker-images]] dargestellten Images zusammengebaut.
-
-    #+ATTR_LATEX: :width 10cm
-    #+LABEL: fig:docker-images
-    #+CAPTION: Docker Images
-    [[./bilder/infrastruktur.eps]]
-
-    Die ~ubuntu~ und ~fpco/stack-run~ Images sind bereits vorhanden, und können
-    so wie sie sind, als Grundlage verwendet werden. Das ~stack-kafka-run~ image
-    wird durch das in [[Infrastruktur versionierbar machen]] gezeigte Dockerfile
-    gebaut.
-
 ** Haskell Services und Docker
-   Haskell's am weitesten verbreitete Buildtool /stack/ bringt bereits von Haus
-   Docker Integration mit, und macht es einem als Entwickler sehr einfach.
-   Hierbei können Einstellungen gemacht werden, mit denen das betroffene Haskell
-   Projekt in einem *Build Container* gebaut und anschließend in einem viel
-   kleineren *Run Container* verpackt wird.
+*** Run- und Buildtimecontainer
+    Im Laufe des Projektes wurden verschiedene Images verwendet. Diese lassen
+    in Runtimecontainer und Buildtimecontainer aufteilen.
+**** Buildtimeimage
+     Um die Haskell Services zu kompilieren und bauen, wurde ein Docker Image
+     aufgesetzt. Es enthält folgende Toolchain:
 
-#+NAME: stack.yaml
-#+BEGIN_SRC yaml
-docker:
-  enable: true
-  image: "kritzcreeek/stack-kafka-build"
+     - stack (Ein Haskell build tool)
+     - GHC (Glorious Haskell Compiler)
+     - librdkafka (Kafka Client Bibliothek, in C geschrieben)
 
-image:
-  container:
-    name: "kritzcreeek/produktservice"
-    base: "kritzcreeek/stack-kafka-run"
-#+END_SRC
+     Als Base Image wurde ~fpco/stack-build~ verwendet. Nachdem die Kafka
+     Bibliothek und ein paar Systembibliotheken hinzugefügt wurden ist das Image
+     jetzt unter ~kritzcreeek/stack-kafka-build~ verfügbar.
 
-    Als Beispiel sehen wir hier die nötigen Einstellungen um den Produktservice
-    vollständig mithilfe von docker und dem "kritzcreeek/stack-kafka-build"
-    Image zu bauen.
+**** Runtimeimage
+     Weil der Buildtimecontainer für Haskell Projekte für einen
+     Laufzeitcontainer zu groß ist, wurde ein dediziertes Runtimeimage
+     aufgesetzt. Es enthält die minimal notwendigen Abhängigkeiten um Services
+     mit der Kafka Client Bibliothek anzusprechen. Diese werden bei der
+     Kompiierung dynamisch gelinkt und müssen daher auf dem Laufzeitsystem
+     verfügbar sein. Weiterhin wurden folgende Bibliotheken installiert:
 
-    Der ~image~ Eintrag gibt dann an, dass wir aufbauend auf dem
-    "kritzcreeek/stack-kafka-run" Image unsere kompilierten Build Artefakte in
-    einem Image mit dem Namem "kritzcreeek/produktservice" zusammenfassen
-    wollen.
+     - openssl (Ermöglicht verschlüsselte Kommunikation mit Kafka)
+     - libtinfo (Haskell binaries benötigen diese Bibliothek)
 
-*** Die verwendeten Images
-   - Build image für Haskell Projekte
+     Als Base Image wurde ~fpco/stack-run~ verwendet. Nachdem die zusätzlichen
+     Bibliotheken installiert und konfiguriert wurden ist das Image unter
+     ~kritzcreeek/stack-kafka-run~ verfügbar.
 
-     Base Image: fpco/stack-build
+*** Laufzeitimages
+   Die Docker Container, die die fertigen Services enthalten, werden aus den in
+   [[fig:docker-images]] dargestellten Images zusammengebaut.
 
-     Beinhaltet Haskell Compiler und build tools + librdkafka dependency kritzcreeek/stack-kafka-build
-   - Run image für Haskell Projekte
-     Base Image fpco/stack-run
+   #+ATTR_LATEX: :width 10cm
+   #+LABEL: fig:docker-images
+   #+CAPTION: Docker Images
+   [[./bilder/infrastruktur.eps]]
 
-     Beinhaltet Laufzeitabhängigkeiten für Haskell Projekte. Das sind zum
-     Beispiel Systembibliotheken die dynamisch gegen die Executable gelinkt
-     sind.
-       + buildtools (gcc etc.)
-       + eventuell weitere Abhängigkeiten (openssl)
-       + librdkafka dependency kritzcreeek/stack-kafka-run
+   Die Images ~ubuntu~ und ~fpco/stack-run~ sind bereits vorhanden, und können
+   so wie sie sind, als Grundlage verwendet werden. Das ~stack-kafka-run~ image
+   wird durch das in [[Infrastruktur versionierbar machen]] gezeigte Dockerfile
+   gebaut.
 
-   - Docker Konfiguration für Services geschieht in ~stack.yaml~
-     - Gebaut werden die Projekte innerhalb des Build Containers
-       (kritzcreeek/stack-kafka-build). Kommando: ~stack build~
-     - Run Container für die Services werden auf das Run Image aufgesetzt.
-       Kommando: ~stack image container~
-     - Services können mittels ~docker run -d kritzcreeek/produktservice
-       produktservice~ gestartet werden.
-     - Services können nun mit in docker-compose aufgenommen und leichter
-       konfiguriert werden.
+*** Docker Konfiguration mittels stack
+    Haskell's am weitesten verbreitete Buildtool /stack/ bringt bereits von Haus
+    Docker Integration mit, und macht es einem als Entwickler sehr einfach.
+    Hierbei können Einstellungen gemacht werden, mit denen das betroffene Haskell
+    Projekt in einem *Build Container* gebaut und anschließend in einem viel
+    kleineren *Run Container* verpackt wird.
+
+    Die Docker Konfiguration für Services geschieht in ~stack.yaml~, einer
+    Konfigurationsdatei die im Wurzelverzeichnis jedes mit ~stack~ gebauten
+    Haskell Projektes zu finden ist.
+
+    #+NAME: stack.yaml
+    #+BEGIN_SRC yaml
+    docker:
+      enable: true
+      image: "kritzcreeek/stack-kafka-build"
+
+    image:
+      container:
+        name: "kritzcreeek/produktservice"
+        base: "kritzcreeek/stack-kafka-run"
+    #+END_SRC
+    Als Beispiel werden hier die nötigen Einstellungen, um den Produktservice
+    vollständig mithilfe von Docker und dem ~kritzcreeek/stack-kafka-build~
+    Image zu bauen, abgebildet.
+
+    Mit ~docker enable: true~ wird angegeben, dass Docker verwendet wird um
+    dieses Projekt zu bauen. Weiterhin wird angegeben, dass das
+    ~kritzcreeek/stack-kafka-build~ Image verwendet wird um das Projekt zu
+    bauen. Wird nun ~stack build~ im Wurzelverzeichnis des Service Projektes
+    ausgeführt, geschehen folgende, für den User nicht sichtbare, Schritte:
+
+    1. Es wird ein neuer Docker Container auf Basis des
+       ~kritzcreeek/stack-kafka-build~ Images gestartet.
+
+    2. ~stack~ verwendet einen Symlink, um das Projektverzeichnis in dem
+       Container erreichbar zu machen.
+
+    3. Der Haskell Compiler kompiliert das Projekt innerhalb des Containers.
+
+    4. Die fertig kompilierten Build Artefakte werden in einem ~.stack~ Ordner
+       im Wurzelverzeichnis des Projektes abgelegt.
+
+    5. Der Build Container wird wieder gestoppt.
+
+    Der ~image~ Eintrag in der ~stack.yaml~ Datei gibt an, dass aufbauend auf
+    dem ~kritzcreeek/stack-kafka-run~ Image die zuvor kompilierten Build
+    Artefakte in einem Image mit dem Namem ~kritzcreeek/produktservice~ abgelegt
+    werden sollen. Hierfür das ~stack image container~ Kommando ausgeführt.
+    ~stack~ führt nun folgende Schritte aus:
+
+    1. Ein neuer Docker Container wird basierend auf dem
+       ~kritzcreeek/stack-kafka-run~ Image gestartet.
+    2. Die sich in ~.stack~ befindlichen Buildartefakte werden in den ~/usr/bin~
+       Ordner des Containers kopiert.
+    3. Der neue Zustand des Containers wird als Image unter dem Namen
+       ~kritzcreeek/produktservice~ abgespeichert.
+    4. Der Container wird gestoppt.
+
+    Der Produkservice kann nun mittels ~docker run -d kritzcreeek/produktservice
+    produktservice~ gestartet werden. Die ~-d~ Option besagt dabei, dass der
+    Container als "Daemon" gestartet werden soll, was bedeutet dass der
+    Container im Hintergrund läuft und nicht die aktuelle Shell Session belegt.
+
+** Probleme unter OSX
+   Die Entwicklung des Prototypen wurde zu großen Teilen unter Apple's
+   Betriebssystem OSX entwickelt. Es gibt zwei Arten Docker unter OSX zu
+   betreiben. Das "normale" Vorgehen ist eine Virtual Machine mit einem Linux
+   Betriebssystem zu betreiben und von OSX als Hostsystem mit dem Docker Daemon
+   zu kommunizieren. Das andere Vorgehen ist das Verwenden der Docker Beta, die
+   native Docker Funktionalität für OSX mitbringt. Leider musste bei der
+   Entwicklung des Prototypen festgestellt werden, dass sich die Kafka Client
+   Bibliothek jedoch nicht in der Docker Beta kompilieren ließ.
+
+   Dieses Problem wurde gelöst, indem eine Virtual Machine mit Arch Linux
+   verwendet wurde um die Docker Deployments zu testen.
 
 
 * Fazit
+
+In [[Motivation][Motivation (Kapitel 1)]] wurden die Ausgangslage und die Gründe für die
+Entwicklung des Docker & Kafka Prototypen erläutert. In [[Microservice Architektur][Microservice Architektur
+(1.1)]] wurde festgestellt, dass die Umsetzung einer Microservicearchitektur nicht
+nur technische, sondern auch organisatorische Herausforderungen mit sich bringt.
+Um die Autonomie von agilen Teams zu gewährleisten benötigt man eine
+leichtgewichtige Virtualisierungslösung die jedes Team selbst betreiben kann. Um
+die Microservices weiter zu entkoppeln, wurde sich in [[Problemstellung Integration][Problemstellung
+Integration (1.2)]] für die Integrationsstrategie /Messaging/ entschieden, und
+Apache Kafka als der zu verwendende Message Broker festgelegt.
+
+In [[Der Prototyp][Der Prototyp (Kapitel 2)]] wurde das Design für den zu entwickelnden Prototypen
+entwickelt. Die benötigten Komponenten wurden in [[Aufbau][Aufbau (2.1)]] aufgezeigt und
+ihre Kommunikationswege definiert. Für die Entwicklung der Services wurde sich
+für die [[Programmiersprache -- Haskell][Programmiersprache Haskell (2.2)]] entschieden. Wie die Services Daten
+austauschen wurde in [[Kommunikation & Protokoll][Kommunikation & Protokoll (2.3)]] designed und sich für das
+Austauschformat JSON entschieden. Nach einem kurzen Abstecher in das Konzept des
+[[Bounded Context][Bounded Context (2.4)]], aus dem Domain Driven Design, wurde sich dann der
+Implementierung des [[Produktservice][Produktservices (2.5)]] und des [[Warenkorbservice][Warenkorbservices (2.6)]]
+zugewandt.
+
+In [[Infrastruktur und Provisionierung][Infrastruktur und Provisionierung (Kapitel 3)]] wurde sich damit beschäftigt,
+wie die entwickelten Services deployt und betrieben werden können. Zunächst
+wurden einige [[Anforderungen an die Infrastruktur][Anforderungen an die Infrastruktur (3.1)]] ermittelt. Um diese
+Anforderungen zu erfüllen wurde sich für [[Docker/Container Technologie][Docker/Container Technologie (3.2)]]
+entschieden und die nötige Terminologie und Herausforderungen für den Einsatz
+von Docker erläutert. Es wurde untersucht wie [[Haskell Services und Docker][Haskell Services und Docker (3.3)]]
+miteinander zusammenspielen und festgestellt, dass Haskell's Buildtooling
+bereits die wichtigsten Features mitbringt. Bei der Entwicklung gab es zwar
+wenige [[Probleme unter OSX][Probleme unter OSX (3.4)]], diese ließen sich jedoch leicht umgehen und
+zusammenfassend verlief das Arbeiten mit Docker überraschend reibungslos.
+
+Der Prototyp war ein Erfolg. Es ist ein System aus mehreren Microservices
+entstanden, das den Anforderungen des Domain Driven Design genügt, leicht
+portierbar ist (dank Docker) und problemlos mit weiteren in Docker verpackten
+Services erweitert werden könnte. Apache Kafka hat mit dem Prototypen seine
+erste Prüfung bestanden, wird aber in der folgenden Bachelorarbeit nocheinmal
+genauer unter die Lupe genommen werden.
+
 \printbibliography
