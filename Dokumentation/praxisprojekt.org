@@ -57,19 +57,19 @@
 #+OPTIONS: H:4 ':t
 
 #+BEGIN_abstract
-Bei der REWE digital wird ein großes Softwareprojekt umgesetzt. Um die große
-Anzahl an Teams, Entwicklern und Systemen zu bändigen hat man sich für eine
-Microservice Architektur entschieden. Das Aufteilen der Domäne in viele kleine,
-unabhängige Bereiche erlaubt es Komplexität auf der Software Ebene gering zu
-halten, bringt jedoch neue Schwierigkeiten im Bereich von Operations, Deployment
-und Integration mit sich.
+Bei der REWE digital wird ein großes eCommerce-Softwareprojekt umgesetzt. Um die
+große Anzahl an Teams, Entwicklern und Systemen zu bändigen, hat man sich für
+eine Microservice Architektur entschieden. Das Aufteilen der Domäne in viele
+kleine, unabhängige Bereiche erlaubt es Komplexität auf der Software Ebene
+gering zu halten, bringt jedoch neue Schwierigkeiten im Bereich von Operations,
+Deployment und Integration mit sich.
 
 Ein Ansatz um die gestiegene Komplexität von Provisionierung und Integration von
-Microservices anzugehen ist Virtualisierung mithilfe von Containertechnologie,
-wie die derzeit verbreiteste Lösung, das von der gleichnamigen Firma entwickelte
-Docker. In diesem Praxisprojekt werde ich mit der Implementierung von
-Microservices und ihrem Deployment mithilfe von Docker beschäftigen und meine
-Fortschritte sowie Rückschläge dokumentieren.
+Microservices anzugehen ist Virtualisierung mithilfe von Containertechnologie.
+Die derzeit verbreiteste Lösung ist das, von der gleichnamigen Firma
+entwickelte, Docker. In diesem Praxisprojekt werde ich mich mit der
+Implementierung von Microservices und ihrem Deployment mithilfe von Docker
+beschäftigen und meine Fortschritte sowie Rückschläge dokumentieren.
 #+END_abstract
 
 * Motivation
@@ -105,15 +105,16 @@ Fortschritte sowie Rückschläge dokumentieren.
     geschriebener Microservice in vertretbarem Zeitaufwand sogar komplett neu
     geschrieben werden. Durch die lose Kopplung der Services können Teams
     parallel arbeiten und an Services unabhängig voneinander weiterentwickeln,
-    ohne sich gegenseitig zu blocken oder auszubremsen. Dies erlaubt es eine
+    ohne sich gegenseitig zu blockieren oder auszubremsen. Dies erlaubt es eine
     große Anzahl von Entwicklern in einem agilen Stil arbeiten zu lassen und
-    effektive Teamgrößen (5 -- 7 Mitglieder) einzusetzen.
+    effektive Teamgrößen (fünf bis sieben Mitglieder) einzusetzen.
 
     Ein weiterer wichtiger Vorteil von Microservices ergibt sich aus der
     Korrelation von Organisationsstruktur und Softwarestruktur. Da ein Service
-    von genau einem Team betreut wird, besagt /Conways Law/ cite:Conway-Commitees, dass innerhalb
-    dieses Services eine hohe Kohäsion zu erwarten ist, während Services die von
-    unterschiedlichen Teams entwickelt werden lose gekoppelt sein werden.
+    von genau einem Team betreut wird, besagt /Conways Law/
+    cite:Conway-Commitees, dass innerhalb dieses Services eine hohe Kohäsion zu
+    erwarten ist, während Services, die von unterschiedlichen Teams entwickelt
+    werden, lose gekoppelt sein werden.
     #+BEGIN_QUOTE
     Organizations which design systems ... are constrained to produce designs
     which are copies of the communication structures of these organizations.
@@ -132,8 +133,8 @@ Fortschritte sowie Rückschläge dokumentieren.
 *** Integrationsstrategien
 
     Um den Datenaustausch zwischen Services zu ermöglichen, gibt es verschiedene
-    Integationsstrategien. Ich werde diese hier nur anreißen, und stattdessen
-    das Thema in meiner Bachelorarbeit noch einmal aufgreifen.
+    Integationsstrategien. Ich werde diese hier nur anreißen und stattdessen das
+    Thema in meiner Bachelorarbeit noch einmal aufgreifen.
 
     1. Integration über eine gemeinsame (relationale) Datenbank
 
@@ -159,7 +160,8 @@ Fortschritte sowie Rückschläge dokumentieren.
        #+END_QUOTE
        Bei Messaging senden sich verschiedene Systeme kleine Datenpakete über
        einen Messagebus. Dieser Messagebus, oder auch Messagebroker genannt,
-       sorgt dafür das Nachrichten an die richtigen Empfänger zugestellt werden.
+       sorgt dafür, dass Nachrichten an die richtigen Empfänger zugestellt
+       werden.
        
        Bei REWE digital hat man sich für das Messaging System /Apache Kafka/
        entschieden, dass sich selbst als /A high-throughput distributed
@@ -176,7 +178,7 @@ Fortschritte sowie Rückschläge dokumentieren.
 *** Umgebungen
     Eine besondere Schwierigkeit, die sich im Hinblick auf die Integration in
     einer Microservice Architektur ergibt, ist dass durch die Autonomität und
-    Anzahl der Services viele bewegende Teile zusammengehalten werden müssen.
+    Anzahl der Services viele bewegliche Teile zusammengehalten werden müssen.
     Jeder Service muss unabhängig von anderen Services deployt werden können,
     was auch beinhaltet, dass jedes Team in der Lage sein muss seinen Service
     gegen den aktuellen Entwicklungsstand anderer Services testen zu können. Um
@@ -187,19 +189,22 @@ Fortschritte sowie Rückschläge dokumentieren.
       
        Development Umgebung. Hier sollten Tests durchgeführt werden, die nur den
        betroffenen Service und eventuelle benötigte Infrastruktur (Datenbank)
-       benutzen. Continuous Integration Systeme nutzen diese Umgebung um Unit
-       Tests auszuführen.
+       benutzen. Continuous Integration Systeme nutzen diese Umgebung um Tests
+       auszuführen. Die Entwickler führen hier explorative Tests aus.
+
     2. TEST/INT
     
        Umgebung für Integrationstests zwischen mehreren Services. Hier sollte
        der aktuellste Release Candidate eines Services deployt sein. Auf diese
-       Weise soll verhindert werden, dass Services zu weit von ihrem
+       Weise soll verhindert werden, dass Services bei Tests zu weit von ihrem
        Produktionsstand abweichen und erst in Produktion wieder aufeinander
        treffen.
+
     3. PRE
        
        Spiegelt die Produktionsumgebung möglichst genau. Die letzte Möglichkeit
        um kritische Bugs zu finden.
+
     4. PROD
        
        Die Produktionsumgebung. Wenn ein Service hier angekommen ist, wird er
@@ -222,9 +227,9 @@ Fortschritte sowie Rückschläge dokumentieren.
 
 * Der Prototyp
   Um die Tauglichkeit von Docker und Kafka zu untersuchen und kritische Fragen
-  bereits frühzeitig aufdecken zu können, wurde sich dafür entschieden einen
+  bereits frühzeitig aufdecken zu können, hat man sich dafür entschieden einen
   Prototyp zu entwicklen, der sich der aktuellen Systemstruktur annähert und
-  eine breite Menge an bekannten Szenarien und Schwierigkeiten abdeckt.
+  eine große Menge an bekannten Szenarien und Schwierigkeiten abdeckt.
 
 ** Aufbau
   Es sollen zwei Services implementiert werden, die per Messaging über Kafka
@@ -234,22 +239,21 @@ Fortschritte sowie Rückschläge dokumentieren.
 
   Inhaltlich sollen die Services sich mit einer gemeinsamen Entität
   beschäftigen, auf die sie jedoch unterschiedliche Sichten haben. In Kafka wird
-  diese Entität als ein Topic abgebildet, welcher von einem der Services als
-  "Owner" oder Producer und von dem anderen Service als Consumer konsumiert
-  wird. Für den Prototypen wurde sich für einen /Produktservice/ und einen
+  diese Entität als ein Topic abgebildet, welches von einem der Services als
+  "Owner" oder Producer und von dem anderen Service als Consumer verwendet
+  wird. Für den Prototypen hat man sich für einen /Produktservice/ und einen
   /Warenkorbservice/ entschieden. Beide dieser Services, natürlich in
   komplexerer Form, finden sich auch in der tatsächlichen Anwendung bei REWE
   wieder.
 
-  Der generelle Aufbau des Prototypen wird in [[fig:architektur-schaubild]]
-  dargestellt.
+  Der generelle Aufbau des Prototypen wird in [[fig:architektur-schaubild][Abbildung 2.1]] dargestellt.
 
   #+CAPTION: Aufbau Prototyp
   #+LABEL: fig:architektur-schaubild
   [[./bilder/architektur.eps]]
 
 ** Programmiersprache -- Haskell
-   Bei der Frage nach der zu verwendenden Programmiersprache wurde sich für
+   Für die Entwicklung des Prototypen wurde sich für die Programmiersprache
    /Haskell/ entschieden. Die Motivation für diese Wahl ist primär, dass ich am
    schnellsten und leichtesten in Haskell entwickeln kann. Die Sprache in der
    ein Microservice implementiert ist, ist prinzipiell ein
@@ -315,11 +319,11 @@ data Message a =
 
 ** Produktservice
    Der Produktservice ist Owner des Produkt Topics. Er stellt eine API zur
-   Verfügung, die es erlaubt Produktdaten zu ändern. Hier könnten in der
+   Verfügung, welche es erlaubt, Produktdaten zu ändern. Hier könnten in der
    Realität mehrere Anwendungen Produktdaten ändern. Beispiele wären eine
    Webanwendung, in der Fachmitarbeiter Änderungen durchführen, sowie ein
    regelmäßiger Dienst, der die neuesten Angebote und Rabattaktionen automatisch
-   einspielt. Im Protoyp werden diese Änderungen zufällig generiert.
+   einspielt. Im Prototyp werden diese Änderungen zufällig generiert.
 
 *** Modell
     Der Produktservice hat folgende Sicht auf die Produktentität:
@@ -349,17 +353,17 @@ data Message a =
     . encode -- (2)
     =<< produkt -- (1)
 #+END_SRC
-    Der Operator für Komposition in Haskell ist der Punkt. Weil Komposition in
+    Der Operator für Komposition [fn:komposition] in Haskell ist der Punkt. Weil Komposition in
     der Mathematik "rückwärts" funktioniert, lässt sich der Code leichter
     rückwärts erklären.
 
-    (1) Die ~produkt~ Methode ist im Prototypen als ein Generator definiert, der
-    ~QuickCheck~ verwendet um zufällige Messages zu generieren, die Produkte
+    (1) Die ~produkt~ Funktion ist im Prototypen als ein Generator definiert,
+    der ~QuickCheck~ verwendet um zufällige Messages zu generieren, die Produkte
     enthalten.
-#+BEGIN_SRC haskell
-produkt :: IO (Message Produkt)
-produkt = QC.generate QC.arbitrary
-#+END_SRC
+    #+BEGIN_SRC haskell
+    produkt :: IO (Message Produkt)
+    produkt = QC.generate QC.arbitrary
+    #+END_SRC
 
     ~QuickCheck~ arbeitet typgetrieben, und kann anhand der Typsignatur
     inferieren, dass es einen Generator für ~Message Produkt~ verwenden muss,
@@ -368,13 +372,16 @@ produkt = QC.generate QC.arbitrary
     (2) Nachdem eine Message mit Produkt Inhalt generiert wurde, reichen wir es an
     ~encode~ weiter und enkodieren die Message damit in JSON.
 
-    (3) Weil Haskell's Evaluierungsstrategie Lazy ist, die Kafka Bibliothek
+    (3) Weil Haskell's Evaluierungsstrategie Lazy [fn:lazy] ist, die Kafka Bibliothek
     jedoch mit strikt evaluierten Werten arbeitet, müssen mit ~BSL.toStrict~
     die vollständige Evaluierung des JSON Wertes erzwungen werden, bevor es an
     Kafka weitergereicht werden kann.
 
     (4) ~produceMessage~ ist eine Funktion aus der Kafka Client Bibliothek, die
     eine Nachricht für ein gegebenes Topic, an eine gegebene Partition schickt.
+
+[fn:komposition] $(g \circ f) x = g(f(x))$
+[fn:lazy] https://wiki.haskell.org/Lazy_evaluation 
 
 ** Warenkorbservice
 
@@ -418,21 +425,22 @@ produkt = QC.generate QC.arbitrary
           berechnePreis preis rabatt = floor $ fromIntegral preis * (1 - rabatt / 100)
     #+END_SRC
 
-    Die vielen ~<$>~ und ~<*>~ sorgen für das automatische Propagieren von
-    Fehlern beim deserialisieren der JSON Felder. Mithilfe der ~berechnePreis~
-    Funktion werden die ~preis~ und ~rabatt~ Felder des Produktes aus dem
-    Produktservice zusammengefasst.
+    ~<$>~ und ~<*>~ sind Operatoren für ~map~ und ~apply~, und nutzen die
+    Applikative[fn:applicative] Struktur von Parsern um Fehler beim
+    deserialisieren der JSON-Felder automatisch zu propagieren. Mithilfe der
+    ~berechnePreis~ Funktion werden die ~preis~ und ~rabatt~ Felder des
+    Produktes aus dem Produktservice zusammengefasst.
 
 [fn:artikel]
-In Wirklichkeit ist der Begriff des *Preises* im E-Commerce noch
-deutlich komplexer. Einem *Produkt* ist zunächst einmal gar kein Preis
-zugewiesen. Stattdessen ist ein Produkt eine Einheit, die für die
-Präsentation verwendet wird (zB. Kaffetasse). \\
-Einen Preis hingegen weist man einem *Artikel* zu, der Elemente wie Art (zB.
+In Wirklichkeit ist der Begriff des *Preises* im E-Commerce noch deutlich
+komplexer. Einem *Produkt* ist zunächst einmal gar kein Preis zugewiesen.
+Stattdessen ist ein Produkt eine Einheit, die für die Präsentation verwendet
+wird (z.B. Kaffetasse). \\
+Einen Preis hingegen weist man einem *Artikel* zu, der Elemente wie Art (z.B.
 Farbe), Region (Produkte haben in unterschiedlichen Regionen unterschiedliche
 Preise) und Rabattaktionen beinhaltet.
 
-
+[fn:applicative] https://wiki.haskell.org/Applicative_functor
 
 * Infrastruktur und Provisionierung
 
@@ -448,18 +456,18 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
 
 ** Anforderungen an die Infrastruktur
 *** Elastizität
-    Einer der wesentlichen Vorteile von Microservices ist es, dass durch die
+    Einer der wesentlichen Vorteile von Microservices ist, dass es durch die
     strikte Trennung zwischen den Services möglich ist Services unabhängig
     voneinander zu skalieren und der aktuellen Last anzupassen.
 
     Ein Message Broker wie Kafka kann zu verschiedenen Zeiten unter variierender
-    Last arbeiten haben. Zu Stoßzeiten werden sehr viele Services Messages
-    produzieren und abrufen. Um diesen sich ändernden Anforderungen gerecht zu
-    werden, muss Kafka so aufgesetzt werden, dass dynamisch neue Broker
-    hinzugefügt oder heruntergefahren werden können.
+    Last stehen. Zu Stoßzeiten werden sehr viele Services Messages produzieren
+    und abrufen. Um diesen sich ändernden Anforderungen gerecht zu werden, muss
+    Kafka so aufgesetzt werden, dass dynamisch neue Broker hinzugefügt oder
+    heruntergefahren werden können.
 
 *** Automatisierung
-    Die Provisionierung und das Ausrollen von Services und dem Kafka Broker muss
+    Die Provisionierung und das Ausrollen der Services und des Kafka Broker muss
     vollständig automatisiert werden. Dies ist notwendig um /Elastizität/
     überhaupt realisieren zu können. Weiterhin garantiert vollständige
     Automatisierung des Provisionierens, dass auch andere Teams den Service für
@@ -470,8 +478,8 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
     Verfügbarkeit des Gesamtsystems kann nicht sichergestellt werden. Daher
     müssen Fallback Instanzen provisioniert werden, welche einspringen wenn
     Ausfälle auftreten. Weiterhin müssen ausgefallene Instanzen automatisch
-    neugestartet und gegebenenfalls provisioniert werden. Mit dem Thema der
-    Resilienz werde ich mich im Zuge der Bachelorarbeit noch ausführlicher
+    neugestartet und gegebenenfalls provisioniert werden. Mit dem Thema
+    "Resilienz" werde ich mich im Zuge der Bachelorarbeit noch ausführlicher
     beschäftigen.
 
 ** Docker/Container Technologie
@@ -513,7 +521,7 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
 
      Ein Hintergrundprozess, der die laufenden Docker Container verwaltet und
      auf Kommandos des Nutzer reagiert. Dieser Daemon kann auf der gleichen
-     Maschine wie der Nutzer ausgeführt werden, oder remote auf einem Server.
+     Maschine wie der Client ausgeführt werden, oder remote auf einem Server.
 
    - Docker Client
 
@@ -550,7 +558,7 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
      Weiterhin gibt es die Möglichkeit eine Registry selbst zu betreiben, wie es
      bei der REWE digital der Fall ist. Hierfür sprechen einige Gründe:
      1. Mehr Kontrolle
-     2. Keine Abhängigkeit von (Docker Macher)
+     2. Keine Abhängigkeit von Unternehmen Docker
      3. Images sind häufig mehrere 100MB groß und es ist daher schneller wenn
         die Registry nah bzw. im selben Datencenter wie die Container betrieben
         werden.
@@ -570,8 +578,8 @@ building, deploying, and maintaining the application. \cite{Newman-BuildingMicro
     Textform vor, und lassen sich damit in ein Version Control System wie Git
     einchecken und versionieren.
 
-    Als Beispiel soll hier einmal das, mit Kommentaren versehene, Dockerfile für
-    den Runtime Container dienen:
+    Als Beispiel soll hier das, mit Kommentaren versehene, Dockerfile für den
+    Runtime Container dienen:
 
 #+ATTR_LATEX: :caption dockerfile
 #+BEGIN_SRC Dockerfile
@@ -623,7 +631,7 @@ RUN cd / && \
 ** Haskell Services und Docker
 *** Run- und Buildtimecontainer
     Im Laufe des Projektes wurden verschiedene Images verwendet. Diese lassen
-    in Runtimecontainer und Buildtimecontainer aufteilen.
+    sich in Runtimecontainer und Buildtimecontainer aufteilen.
 **** Buildtimeimage
      Um die Haskell Services zu kompilieren und bauen, wurde ein Docker Image
      aufgesetzt. Es enthält folgende Toolchain:
@@ -633,8 +641,9 @@ RUN cd / && \
      - librdkafka (Kafka Client Bibliothek, in C geschrieben)
 
      Als Base Image wurde ~fpco/stack-build~ verwendet. Nachdem die Kafka
-     Bibliothek und ein paar Systembibliotheken hinzugefügt wurden ist das Image
-     jetzt unter ~kritzcreeek/stack-kafka-build~ verfügbar.
+     Bibliothek und einige Systembibliotheken, mithilfe eines Dockerfiles
+     hinzugefügt wurden, ist das Image jetzt unter
+     ~kritzcreeek/stack-kafka-build~ auf DockerHub verfügbar.
 
 **** Runtimeimage
      Weil der Buildtimecontainer für Haskell Projekte für einen
@@ -649,7 +658,7 @@ RUN cd / && \
 
      Als Base Image wurde ~fpco/stack-run~ verwendet. Nachdem die zusätzlichen
      Bibliotheken installiert und konfiguriert wurden ist das Image unter
-     ~kritzcreeek/stack-kafka-run~ verfügbar.
+     ~kritzcreeek/stack-kafka-run~ auf DockerHub verfügbar.
 
 *** Laufzeitimages
    Die Docker Container, die die fertigen Services enthalten, werden aus den in
@@ -661,7 +670,7 @@ RUN cd / && \
    [[./bilder/infrastruktur.eps]]
 
    Die Images ~ubuntu~ und ~fpco/stack-run~ sind bereits vorhanden, und können
-   so wie sie sind, als Grundlage verwendet werden. Das ~stack-kafka-run~ image
+   so wie sie sind als Grundlage verwendet werden. Das ~stack-kafka-run~ Image
    wird durch das in [[Infrastruktur versionierbar machen]] gezeigte Dockerfile
    gebaut.
 
@@ -728,20 +737,43 @@ RUN cd / && \
     produktservice~ gestartet werden. Die ~-d~ Option besagt dabei, dass der
     Container als "Daemon" gestartet werden soll, was bedeutet dass der
     Container im Hintergrund läuft und nicht die aktuelle Shell Session belegt.
-
-** Probleme unter OSX
+** Probleme unter OS X
    Die Entwicklung des Prototypen wurde zu großen Teilen unter Apple's
-   Betriebssystem OSX entwickelt. Es gibt zwei Arten Docker unter OSX zu
+   Betriebssystem OS X entwickelt. Es gibt zwei Arten Docker unter OS X zu
    betreiben. Das "normale" Vorgehen ist eine Virtual Machine mit einem Linux
-   Betriebssystem zu betreiben und von OSX als Hostsystem mit dem Docker Daemon
+   Betriebssystem zu betreiben und von OS X als Hostsystem mit dem Docker Daemon
    zu kommunizieren. Das andere Vorgehen ist das Verwenden der Docker Beta, die
-   native Docker Funktionalität für OSX mitbringt. Leider musste bei der
+   native Docker Funktionalität für OS X mitbringt. Leider musste bei der
    Entwicklung des Prototypen festgestellt werden, dass sich die Kafka Client
    Bibliothek jedoch nicht in der Docker Beta kompilieren ließ.
 
    Dieses Problem wurde gelöst, indem eine Virtual Machine mit Arch Linux
    verwendet wurde um die Docker Deployments zu testen.
 
+** Ausführen des Prototypen
+
+   Der Protoyp wird mit folgenden Schritten in 3 verschiedenen Terminals
+   gestartet:
+
+  #+BEGIN_SRC sh
+
+  # Terminal #1
+  # Wechselt in den Ordner mit der Kafka Konfiguration
+  cd kafka-docker
+  docker-compose up # Startet zwei Kafka Broker und einen Zookeeper
+
+  # Terminal #2
+  docker run -t kritzcreeek/warenkorbservice warenkorbservice # Startet den Consumer
+
+  # Terminal #3
+  docker run -t kritzcreeek/produktservice produktservice # Startet den Producer
+  
+  #+END_SRC 
+
+  Nun verschickt der Produktservice zufällig generierte Produktupdates, welche
+  im Terminal des Warenkorbservice's verarbeitet als Logausgaben ausgegeben
+  werden. An dieser Stelle könnten die Daten statt in Logs natürlich auch in
+  eine Datenbank geschrieben oder dem Endnutzer präsentiert werden.
 
 * Fazit
 
@@ -757,24 +789,25 @@ Apache Kafka als der zu verwendende Message Broker festgelegt.
 
 In [[Der Prototyp][Der Prototyp (Kapitel 2)]] wurde das Design für den zu entwickelnden Prototypen
 entwickelt. Die benötigten Komponenten wurden in [[Aufbau][Aufbau (2.1)]] aufgezeigt und
-ihre Kommunikationswege definiert. Für die Entwicklung der Services wurde sich
+ihre Kommunikationswege definiert. Für die Entwicklung der Services hat man sich
 für die [[Programmiersprache -- Haskell][Programmiersprache Haskell (2.2)]] entschieden. Wie die Services Daten
-austauschen wurde in [[Kommunikation & Protokoll][Kommunikation & Protokoll (2.3)]] designed und sich für das
+austauschen wurde in [[Kommunikation & Protokoll][Kommunikation & Protokoll (2.3)]] entworfen und sich für das
 Austauschformat JSON entschieden. Nach einem kurzen Abstecher in das Konzept des
-[[Bounded Context][Bounded Context (2.4)]], aus dem Domain Driven Design, wurde sich dann der
+[[Bounded Context][Bounded Context (2.4)]] aus dem Domain Driven Design wurde sich dann der
 Implementierung des [[Produktservice][Produktservices (2.5)]] und des [[Warenkorbservice][Warenkorbservices (2.6)]]
 zugewandt.
 
 In [[Infrastruktur und Provisionierung][Infrastruktur und Provisionierung (Kapitel 3)]] wurde sich damit beschäftigt,
 wie die entwickelten Services deployt und betrieben werden können. Zunächst
 wurden einige [[Anforderungen an die Infrastruktur][Anforderungen an die Infrastruktur (3.1)]] ermittelt. Um diese
-Anforderungen zu erfüllen wurde sich für [[Docker/Container Technologie][Docker/Container Technologie (3.2)]]
+Anforderungen zu erfüllen hat man sich für [[Docker/Container Technologie][Docker/Container Technologie (3.2)]]
 entschieden und die nötige Terminologie und Herausforderungen für den Einsatz
 von Docker erläutert. Es wurde untersucht wie [[Haskell Services und Docker][Haskell Services und Docker (3.3)]]
 miteinander zusammenspielen und festgestellt, dass Haskell's Buildtooling
 bereits die wichtigsten Features mitbringt. Bei der Entwicklung gab es zwar
-wenige [[Probleme unter OSX][Probleme unter OSX (3.4)]], diese ließen sich jedoch leicht umgehen und
-zusammenfassend verlief das Arbeiten mit Docker überraschend reibungslos.
+wenige [[Probleme unter OS X][Probleme unter OS X (3.4)]], diese ließen sich jedoch leicht umgehen und
+zusammenfassend verlief das Arbeiten mit Docker überraschend reibungslos, hier
+wurde mit mehr Problemen gerechnet.
 
 Der Prototyp war ein Erfolg. Es ist ein System aus mehreren Microservices
 entstanden, das den Anforderungen des Domain Driven Design genügt, leicht
